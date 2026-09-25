@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Steal a Brainrot Database - Income & Stats | BloxTools</title>
+<title>Steal a Brainrot Database - Income, Rarities & Stats | BloxTools</title>
 
 <meta name="description"
-content="Search the BloxTools Steal a Brainrot database. Browse Brainrots by name and rarity and check base income, stats and calculators.">
+content="Search the BloxTools Steal a Brainrot database. Compare Brainrot base income, rarities and stats and open the free income calculator.">
 
 <meta name="robots" content="index, follow">
 
@@ -22,6 +22,10 @@ margin:0;
 padding:0;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 font-family:Arial,Helvetica,sans-serif;
 background:#0b0d12;
@@ -34,9 +38,12 @@ height:70px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 8%;
+padding:0 7%;
 border-bottom:1px solid #252936;
 background:#10131a;
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .logo{
@@ -50,17 +57,27 @@ text-decoration:none;
 color:#7c5cff;
 }
 
-nav a{
+.links{
+display:flex;
+align-items:center;
+}
+
+.links a{
 color:#b8bdca;
 text-decoration:none;
 margin-left:22px;
 font-size:14px;
+transition:.2s;
+}
+
+.links a:hover{
+color:white;
 }
 
 main{
-width:min(1100px,90%);
+width:min(1200px,92%);
 margin:auto;
-padding:70px 0 100px;
+padding:65px 0 100px;
 }
 
 .badge{
@@ -75,44 +92,78 @@ margin-bottom:20px;
 }
 
 h1{
-font-size:clamp(38px,6vw,62px);
+font-size:clamp(38px,6vw,64px);
+line-height:1.05;
 margin-bottom:18px;
+}
+
+.gradient{
+background:linear-gradient(90deg,#ffffff,#9b87ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .intro{
 color:#9ba2b1;
 font-size:17px;
-line-height:1.6;
-max-width:700px;
+line-height:1.7;
+max-width:760px;
 margin-bottom:35px;
 }
 
+.quick-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:40px;
+}
+
+.stat{
+background:#12151d;
+border:1px solid #292e3b;
+border-radius:14px;
+padding:20px;
+}
+
+.stat-label{
+color:#858d9d;
+font-size:11px;
+font-weight:bold;
+letter-spacing:1px;
+margin-bottom:7px;
+}
+
+.stat-value{
+font-size:25px;
+font-weight:800;
+}
+
+.purple{
+color:#a996ff;
+}
+
+.green{
+color:#72e6a5;
+}
+
+.toolbar{
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:18px;
+padding:20px;
+margin-bottom:25px;
+}
+
 .controls{
-display:flex;
+display:grid;
+grid-template-columns:1fr 210px 130px;
 gap:12px;
-margin-bottom:30px;
-flex-wrap:wrap;
 }
 
-.search{
-flex:1;
-min-width:240px;
-padding:16px 18px;
-background:#12151d;
-border:1px solid #303645;
-border-radius:10px;
-color:white;
-font-size:16px;
-outline:none;
-}
-
-.search:focus{
-border-color:#7c5cff;
-}
-
-select{
-padding:16px;
-background:#12151d;
+.search,
+.sort{
+padding:15px 17px;
+background:#0d1016;
 border:1px solid #303645;
 border-radius:10px;
 color:white;
@@ -120,58 +171,124 @@ font-size:15px;
 outline:none;
 }
 
-.results{
+.search:focus,
+.sort:focus{
+border-color:#7c5cff;
+}
+
+.reset{
+border:1px solid #303645;
+background:#171b25;
+color:white;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+}
+
+.reset:hover{
+background:#252a38;
+}
+
+.filters{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:16px;
+}
+
+.filter{
+border:1px solid #303645;
+background:#141821;
+color:#aeb4c2;
+padding:9px 13px;
+border-radius:100px;
+cursor:pointer;
+font-size:12px;
+font-weight:bold;
+transition:.2s;
+}
+
+.filter:hover{
+border-color:#7c5cff;
+color:white;
+}
+
+.filter.active{
+background:#7c5cff;
+border-color:#7c5cff;
+color:white;
+}
+
+.database-info{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+margin-bottom:20px;
 color:#858d9d;
 font-size:14px;
-margin-bottom:20px;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:18px;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:17px;
 }
 
 .card{
+position:relative;
 background:#12151d;
 border:1px solid #292e3b;
 border-radius:16px;
-padding:24px;
+padding:22px;
 transition:.2s;
+overflow:hidden;
 }
 
 .card:hover{
 transform:translateY(-4px);
-border-color:#7c5cff;
+border-color:#6f5ce7;
+box-shadow:0 12px 30px rgba(0,0,0,.2);
+}
+
+.card-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:17px;
 }
 
 .rarity{
-display:inline-block;
+display:inline-flex;
+align-items:center;
 padding:5px 9px;
 border-radius:100px;
+font-size:10px;
+font-weight:800;
+letter-spacing:.5px;
+}
+
+.rank{
+color:#646b79;
 font-size:11px;
 font-weight:bold;
-margin-bottom:15px;
 }
 
-.og{
-background:#3a1830;
-color:#ff8fc8;
+.common{
+background:#20252e;
+color:#cbd0da;
 }
 
-.secret{
-background:#271d42;
-color:#bba6ff;
+.rare{
+background:#142c3b;
+color:#75d6ff;
 }
 
-.god{
-background:#3c3015;
-color:#ffd86b;
-}
-
-.mythic{
-background:#381b28;
-color:#ff91b4;
+.epic{
+background:#301d42;
+color:#d39cff;
 }
 
 .legendary{
@@ -179,38 +296,89 @@ background:#3b2c13;
 color:#ffc760;
 }
 
+.mythic{
+background:#381b28;
+color:#ff91b4;
+}
+
+.god{
+background:#3c3015;
+color:#ffd86b;
+}
+
+.secret{
+background:#271d42;
+color:#bba6ff;
+}
+
+.og{
+background:#3a1830;
+color:#ff8fc8;
+}
+
 .icon{
-font-size:38px;
-margin-bottom:14px;
+font-size:34px;
+margin-bottom:13px;
 }
 
 .card h2{
-font-size:21px;
-margin-bottom:10px;
+font-size:19px;
+line-height:1.3;
+min-height:49px;
+margin-bottom:14px;
 }
 
 .income-label{
-color:#858d9d;
-font-size:12px;
-margin-top:15px;
+color:#737b8b;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1px;
 }
 
 .income{
-font-size:20px;
-font-weight:bold;
+font-size:21px;
+font-weight:800;
 color:#72e6a5;
-margin-top:4px;
+margin-top:5px;
+}
+
+.card-actions{
+display:flex;
+gap:8px;
+margin-top:19px;
 }
 
 .card a{
-display:inline-block;
-margin-top:20px;
-color:#9c87ff;
+display:inline-flex;
+align-items:center;
+justify-content:center;
 text-decoration:none;
+font-size:12px;
 font-weight:bold;
+border-radius:9px;
+padding:10px 12px;
+transition:.2s;
 }
 
-.card a:hover{
+.calculate{
+background:#211d35;
+color:#aa99ff;
+border:1px solid #39304f;
+}
+
+.calculate:hover{
+background:#7c5cff;
+color:white;
+}
+
+.guide{
+background:#183126;
+color:#72e6a5;
+border:1px solid #28513d;
+}
+
+.guide:hover{
+background:#24533d;
 color:white;
 }
 
@@ -218,18 +386,57 @@ color:white;
 display:none;
 background:#12151d;
 border:1px solid #292e3b;
-padding:30px;
-border-radius:14px;
+padding:50px 25px;
+border-radius:16px;
 color:#9ba2b1;
 text-align:center;
 }
 
+.no-results strong{
+display:block;
+color:white;
+font-size:20px;
+margin-bottom:8px;
+}
+
+.note{
+margin-top:45px;
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:16px;
+padding:24px;
+color:#9299a8;
+line-height:1.7;
+font-size:14px;
+}
+
+.note strong{
+color:white;
+}
+
 footer{
 border-top:1px solid #252936;
-padding:30px;
+padding:35px 20px;
 text-align:center;
 color:#747b89;
 font-size:13px;
+line-height:1.6;
+}
+
+@media(max-width:800px){
+
+.quick-stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.controls{
+grid-template-columns:1fr;
+}
+
+.reset{
+padding:14px;
+}
+
 }
 
 @media(max-width:600px){
@@ -238,12 +445,34 @@ nav{
 padding:0 5%;
 }
 
-nav .links a{
-margin-left:10px;
+.links a{
+margin-left:12px;
+font-size:12px;
 }
 
 main{
-padding-top:45px;
+padding-top:40px;
+}
+
+.quick-stats{
+grid-template-columns:1fr 1fr;
+}
+
+.stat{
+padding:16px;
+}
+
+.stat-value{
+font-size:20px;
+}
+
+.database-info{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.grid{
+grid-template-columns:1fr;
 }
 
 }
@@ -268,321 +497,355 @@ Blox<span>Tools</span>
 
 <main>
 
-<div class="badge">
-🧠 STEAL A BRAINROT DATABASE
-</div>
+<div class="badge">🧠 BLOXTOOLS DATABASE</div>
 
-<h1>Brainrot Database</h1>
+<h1>
+<span class="gradient">Steal a Brainrot</span><br>
+Database
+</h1>
 
 <p class="intro">
-Search Steal a Brainrot characters and quickly check
-their rarity and listed base income. Click Calculate Income
-to automatically load that Brainrot into the calculator.
+Search and compare Brainrots by rarity and base income.
+Use the filters and sorting tools to explore the database,
+then open any Brainrot in the BloxTools income calculator.
 </p>
+
+<div class="quick-stats">
+
+<div class="stat">
+<div class="stat-label">BRAINROTS LISTED</div>
+<div class="stat-value purple" id="totalCount">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">RARITIES</div>
+<div class="stat-value">8</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">HIGHEST INCOME</div>
+<div class="stat-value green">$1B/s</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">DATABASE</div>
+<div class="stat-value">FREE</div>
+</div>
+
+</div>
+
+<div class="toolbar">
 
 <div class="controls">
 
 <input
 id="search"
 class="search"
-type="text"
-placeholder="Search Brainrots..."
-oninput="filterBrainrots()"
+type="search"
+placeholder="🔎 Search Brainrots..."
+autocomplete="off"
 >
 
-<select id="rarity" onchange="filterBrainrots()">
-
-<option value="all">All Rarities</option>
-<option value="OG">OG</option>
-<option value="Secret">Secret</option>
-<option value="Brainrot God">Brainrot God</option>
-<option value="Mythic">Mythic</option>
-<option value="Legendary">Legendary</option>
-
+<select id="sort" class="sort">
+<option value="income-high">Income: High → Low</option>
+<option value="income-low">Income: Low → High</option>
+<option value="az">Name: A → Z</option>
+<option value="za">Name: Z → A</option>
+<option value="rarity">Rarity</option>
 </select>
+
+<button class="reset" id="reset">
+Reset
+</button>
 
 </div>
 
-<div class="results" id="results"></div>
+<div class="filters" id="filters">
+
+<button class="filter active" data-rarity="all">All</button>
+<button class="filter" data-rarity="OG">OG</button>
+<button class="filter" data-rarity="Secret">Secret</button>
+<button class="filter" data-rarity="Brainrot God">Brainrot God</button>
+<button class="filter" data-rarity="Mythic">Mythic</button>
+<button class="filter" data-rarity="Legendary">Legendary</button>
+<button class="filter" data-rarity="Epic">Epic</button>
+<button class="filter" data-rarity="Rare">Rare</button>
+<button class="filter" data-rarity="Common">Common</button>
+
+</div>
+
+</div>
+
+<div class="database-info">
+
+<div id="results">
+Loading database...
+</div>
+
+<div>
+Base income • before mutations & traits
+</div>
+
+</div>
 
 <div class="grid" id="grid"></div>
 
 <div class="no-results" id="noResults">
-No Brainrots found. Try another search.
+<strong>No Brainrots found</strong>
+Try another search or reset your filters.
+</div>
+
+<div class="note">
+<strong>About the data:</strong>
+BloxTools lists base income before mutations, traits and
+other multipliers. Game data can change after updates,
+so values may be updated as new information becomes available.
 </div>
 
 </main>
 
 <footer>
-BloxTools is an independent fan-made website and is not
-affiliated with Roblox or the creators of Steal a Brainrot.
+BloxTools is an independent fan-made website and is not affiliated
+with Roblox or the creators of Steal a Brainrot.
 </footer>
 
 <script>
 
 const brainrots = [
 
-{
-name:"Spyder Elephant",
-rarity:"OG",
-income:1000000000,
-icon:"🕷️🐘",
-page:"spyder-elephant.html"
-},
+/* =========================
+   OG
+========================= */
 
-{
-name:"Strawberry Elephant",
-rarity:"OG",
-income:750000000,
-icon:"🍓🐘",
-page:"strawberry-elephant.html"
-},
+{name:"Spyder Elephant",rarity:"OG",income:1000000000,icon:"🕷️🐘",page:"spyder-elephant.html"},
+{name:"Strawberry Elephant",rarity:"OG",income:750000000,icon:"🍓🐘",page:"strawberry-elephant.html"},
+{name:"Headless Horseman",rarity:"OG",income:600000000,icon:"🎃🐎"},
+{name:"Meowl",rarity:"OG",income:600000000,icon:"🐱"},
+{name:"John Pork",rarity:"OG",income:500000000,icon:"🐷"},
+{name:"Skibidi Toilet",rarity:"OG",income:450000000,icon:"🚽"},
 
-{
-name:"Headless Horseman",
-rarity:"OG",
-income:600000000,
-icon:"🎃🐎",
-page:""
-},
+/* =========================
+   SECRET
+========================= */
 
-{
-name:"Meowl",
-rarity:"OG",
-income:600000000,
-icon:"🐱",
-page:""
-},
+{name:"Celestial Pegasus",rarity:"Secret",income:175000000,icon:"🪽"},
+{name:"La Secret Combinasion",rarity:"Secret",income:125000000,icon:"❓"},
+{name:"Spaghetti Tualetti",rarity:"Secret",income:60000000,icon:"🍝"},
+{name:"Esok Sekolah",rarity:"Secret",income:30000000,icon:"🎒"},
+{name:"Pot Hotspot",rarity:"Secret",income:2500000,icon:"🍲"},
+{name:"Las Vaquitas Saturnitas",rarity:"Secret",income:750000,icon:"🐄"},
+{name:"Torrtuginni Dragonfrutini",rarity:"Secret",income:350000,icon:"🐢"},
 
-{
-name:"John Pork",
-rarity:"OG",
-income:500000000,
-icon:"🐷",
-page:""
-},
+/* =========================
+   BRAINROT GOD
+========================= */
 
-{
-name:"Skibidi Toilet",
-rarity:"OG",
-income:450000000,
-icon:"🚽",
-page:""
-},
+{name:"Pretzo Robo",rarity:"Brainrot God",income:320000,icon:"🤖"},
+{name:"Tenini Ballini",rarity:"Brainrot God",income:320000,icon:"⚽"},
+{name:"Robo Grafito",rarity:"Brainrot God",income:318000,icon:"🤖"},
+{name:"Tortuginni Sandcastlini",rarity:"Brainrot God",income:318000,icon:"🐢"},
+{name:"Flippo Marino",rarity:"Brainrot God",income:316000,icon:"🌊"},
+{name:"Beavo Potto",rarity:"Brainrot God",income:315000,icon:"🐝"},
+{name:"Dumborino Miracello",rarity:"Brainrot God",income:315000,icon:"✨"},
+{name:"Eggdin Egg Egg Dun",rarity:"Brainrot God",income:310000,icon:"🥚"},
+{name:"Clovkur Kurkur",rarity:"Brainrot God",income:305000,icon:"🍀"},
+{name:"Appelini",rarity:"Brainrot God",income:300000,icon:"🍎"},
+{name:"Pop Pop Sahur",rarity:"Brainrot God",income:295000,icon:"🥁"},
+{name:"Mastodontico Telepiedone",rarity:"Brainrot God",income:275000,icon:"🐘"},
+{name:"Bulbito Bandito Traktorito",rarity:"Brainrot God",income:205000,icon:"🚜"},
+{name:"Orcalero Orcala",rarity:"Brainrot God",income:100000,icon:"🐋"},
+{name:"Tigroligre Frutonni",rarity:"Brainrot God",income:60000,icon:"🐯"},
 
-{
-name:"Celestial Pegasus",
-rarity:"Secret",
-income:175000000,
-icon:"🪽",
-page:""
-},
+/* =========================
+   MYTHIC — FULL TIER
+========================= */
 
-{
-name:"La Secret Combinasion",
-rarity:"Secret",
-income:125000000,
-icon:"❓",
-page:""
-},
+{name:"Tic Tic Ribbit",rarity:"Mythic",income:18800,icon:"🐸"},
+{name:"Orbi Mochi",rarity:"Mythic",income:18500,icon:"🍡"},
+{name:"Bucketoro",rarity:"Mythic",income:18300,icon:"🪣"},
+{name:"Berenjello Angello",rarity:"Mythic",income:18000,icon:"🍆"},
+{name:"Fizzy Soda",rarity:"Mythic",income:17300,icon:"🥤"},
+{name:"Tree Tree Tree Sahur",rarity:"Mythic",income:17000,icon:"🌳"},
+{name:"Bananito Bandito",rarity:"Mythic",income:16500,icon:"🍌"},
+{name:"Jacko Spaventosa",rarity:"Mythic",income:16300,icon:"🎃"},
+{name:"Toiletto Focaccino",rarity:"Mythic",income:16000,icon:"🚽"},
+{name:"Centrucci Nuclucci",rarity:"Mythic",income:15500,icon:"☢️"},
+{name:"Carrotini Brainini",rarity:"Mythic",income:15000,icon:"🥕"},
+{name:"Cocoteddy",rarity:"Mythic",income:15000,icon:"🧸"},
+{name:"Harpuccino",rarity:"Mythic",income:14000,icon:"☕"},
+{name:"Bee Loco",rarity:"Mythic",income:13500,icon:"🐝"},
+{name:"Carloo",rarity:"Mythic",income:13500,icon:"🧍"},
+{name:"Cachorrito Melonito",rarity:"Mythic",income:13000,icon:"🍉"},
+{name:"Spongini Quackini",rarity:"Mythic",income:13000,icon:"🦆"},
+{name:"Los Noobinis",rarity:"Mythic",income:12500,icon:"👥"},
+{name:"Jingle Jingle Sahur",rarity:"Mythic",income:12300,icon:"🔔"},
+{name:"Tracoducotulu Delapeladustuz",rarity:"Mythic",income:12000,icon:"🌀"},
+{name:"Magi Ribbitini",rarity:"Mythic",income:11500,icon:"🪄"},
+{name:"Rhino Helicopterino",rarity:"Mythic",income:11000,icon:"🦏"},
+{name:"Te Te Te Sahur",rarity:"Mythic",income:9500,icon:"🥁"},
+{name:"Ganganzelli Trulala",rarity:"Mythic",income:9000,icon:"🎵"},
+{name:"Lerulerulerule",rarity:"Mythic",income:8750,icon:"🌀"},
+{name:"Tob Tobi Tobi",rarity:"Mythic",income:8500,icon:"🐦"},
+{name:"Gorillo Watermelondrillo",rarity:"Mythic",income:8000,icon:"🦍"},
+{name:"Stoppo Luminino",rarity:"Mythic",income:8000,icon:"💡"},
+{name:"Gorillo Subwoofero",rarity:"Mythic",income:7750,icon:"🔊"},
+{name:"Cavallo Virtuoso",rarity:"Mythic",income:7500,icon:"🐴"},
+{name:"Avocadorilla",rarity:"Mythic",income:7000,icon:"🥑"},
+{name:"Tigrilini Watermelini",rarity:"Mythic",income:6500,icon:"🍉"},
+{name:"Zibra Zubra Zibralini",rarity:"Mythic",income:6000,icon:"🦓"},
+{name:"Bombombini Gusini",rarity:"Mythic",income:5000,icon:"💣"},
+{name:"Spioniro Golubiro",rarity:"Mythic",income:3500,icon:"🕵️"},
+{name:"Brutto Gialutto",rarity:"Mythic",income:3000,icon:"🟡"},
+{name:"Bombardiro Crocodilo",rarity:"Mythic",income:2500,icon:"🐊"},
+{name:"Rhino Toasterino",rarity:"Mythic",income:2150,icon:"🦏"},
+{name:"Orangutini Ananassini",rarity:"Mythic",income:2100,icon:"🍍"},
 
-{
-name:"Spaghetti Tualetti",
-rarity:"Secret",
-income:60000000,
-icon:"🍝",
-page:""
-},
+/* =========================
+   LEGENDARY — FULL TIER
+========================= */
 
-{
-name:"Esok Sekolah",
-rarity:"Secret",
-income:30000000,
-icon:"🎒",
-page:""
-},
+{name:"Seraphino Gruyero",rarity:"Legendary",income:1900,icon:"🧀"},
+{name:"Buho de Fuego",rarity:"Legendary",income:1850,icon:"🔥🦉"},
+{name:"Electro Quacko",rarity:"Legendary",income:1850,icon:"⚡🦆"},
+{name:"Sealo Regalo",rarity:"Legendary",income:1820,icon:"🦭"},
+{name:"Sigma Girl",rarity:"Legendary",income:1800,icon:"👧"},
+{name:"Puffaball",rarity:"Legendary",income:1500,icon:"🐡"},
+{name:"Chocco Bunny",rarity:"Legendary",income:1400,icon:"🐰"},
+{name:"Buho del Cielo",rarity:"Legendary",income:1350,icon:"🦉"},
+{name:"Sigma Boy",rarity:"Legendary",income:1350,icon:"👦"},
+{name:"Quackula",rarity:"Legendary",income:1270,icon:"🦆"},
+{name:"Pandaccini Bananini",rarity:"Legendary",income:1250,icon:"🐼"},
+{name:"Bandito Axolito",rarity:"Legendary",income:1230,icon:"🦎"},
+{name:"Cocosini Mama",rarity:"Legendary",income:1200,icon:"🥥"},
+{name:"Strawberrelli Flamingelli",rarity:"Legendary",income:1150,icon:"🦩"},
+{name:"Pipi Potato",rarity:"Legendary",income:1100,icon:"🥔"},
+{name:"Caramello Filtrello",rarity:"Legendary",income:1050,icon:"🍬"},
+{name:"Blueberrinni Octopusini",rarity:"Legendary",income:1000,icon:"🐙"},
+{name:"Clickerino Crabo",rarity:"Legendary",income:1000,icon:"🦀"},
+{name:"Quivioli Ameleonni",rarity:"Legendary",income:900,icon:"🥝"},
+{name:"Glorbo Fruttodrillo",rarity:"Legendary",income:750,icon:"🐊"},
+{name:"Lionel Cactuseli",rarity:"Legendary",income:650,icon:"🌵"},
+{name:"Chef Crabracadabra",rarity:"Legendary",income:600,icon:"🦀"},
+{name:"Ballerina Cappuccina",rarity:"Legendary",income:500,icon:"🩰"},
+{name:"Chimpanzini Bananini",rarity:"Legendary",income:300,icon:"🐒"},
+{name:"Burbaloni Loliloli",rarity:"Legendary",income:200,icon:"🍭"},
 
-{
-name:"Pot Hotspot",
-rarity:"Secret",
-income:2500000,
-icon:"🍲",
-page:""
-},
+/* =========================
+   EPIC — FULL TIER
+========================= */
 
-{
-name:"Las Vaquitas Saturnitas",
-rarity:"Secret",
-income:750000,
-icon:"🐄",
-page:""
-},
+{name:"Mummio Rappitto",rarity:"Epic",income:325,icon:"🧟"},
+{name:"Penguino Cocosino",rarity:"Epic",income:300,icon:"🐧"},
+{name:"Wombo Rollo",rarity:"Epic",income:275,icon:"🌀"},
+{name:"Penguin Tree",rarity:"Epic",income:270,icon:"🐧"},
+{name:"Doi Doi Do",rarity:"Epic",income:260,icon:"🎵"},
+{name:"Gato Celesto",rarity:"Epic",income:250,icon:"🐱"},
+{name:"Salamino Penguino",rarity:"Epic",income:250,icon:"🐧"},
+{name:"Frogato Pirato",rarity:"Epic",income:240,icon:"🐸"},
+{name:"Mangolini Parrocini",rarity:"Epic",income:235,icon:"🥭"},
+{name:"Avocadini Guffo",rarity:"Epic",income:225,icon:"🥑"},
+{name:"Ti Ti Ti Sahur",rarity:"Epic",income:225,icon:"🥁"},
+{name:"Brri Brri Bicus Dicus Bombicus",rarity:"Epic",income:175,icon:"💣"},
+{name:"Perochello Lemonchello",rarity:"Epic",income:160,icon:"🍋"},
+{name:"Bananita Dolphinita",rarity:"Epic",income:150,icon:"🐬"},
+{name:"Malame Amarele",rarity:"Epic",income:140,icon:"🟡"},
+{name:"Bambini Crostini",rarity:"Epic",income:135,icon:"🥖"},
+{name:"Trulimero Trulicina",rarity:"Epic",income:125,icon:"🌊"},
+{name:"Avocadini Antilopini",rarity:"Epic",income:115,icon:"🥑"},
+{name:"Brr Brr Patapim",rarity:"Epic",income:100,icon:"🌲"},
+{name:"Cappuccino Assassino",rarity:"Epic",income:75,icon:"☕"},
 
-{
-name:"Torrtuginni Dragonfrutini",
-rarity:"Secret",
-income:350000,
-icon:"🐢",
-page:""
-},
+/* =========================
+   RARE — FULL TIER
+========================= */
 
-{
-name:"Pop Pop Sahur",
-rarity:"Brainrot God",
-income:295000,
-icon:"🥁",
-page:""
-},
+{name:"Pinealotto Fruttarino",rarity:"Rare",income:75,icon:"🍍"},
+{name:"Pengolino Nuvoletto",rarity:"Rare",income:72,icon:"🐧"},
+{name:"Pipi Avocado",rarity:"Rare",income:70,icon:"🥑"},
+{name:"Frogo Elfo",rarity:"Rare",income:67,icon:"🐸"},
+{name:"Tric Trac Baraboom",rarity:"Rare",income:65,icon:"💥"},
+{name:"Cupcake Koala",rarity:"Rare",income:60,icon:"🐨"},
+{name:"Ta Ta Ta Ta Sahur",rarity:"Rare",income:55,icon:"🥁"},
+{name:"Cacto Hipopotamo",rarity:"Rare",income:50,icon:"🌵"},
+{name:"Boneca Ambalabu",rarity:"Rare",income:40,icon:"🪆"},
+{name:"Bandito Bobritto",rarity:"Rare",income:35,icon:"🦫"},
+{name:"Gangster Footera",rarity:"Rare",income:30,icon:"👟"},
+{name:"Trippi Troppi",rarity:"Rare",income:15,icon:"🐟"},
 
-{
-name:"Mastodontico Telepiedone",
-rarity:"Brainrot God",
-income:275000,
-icon:"🐘",
-page:""
-},
+/* =========================
+   COMMON — FULL TIER
+========================= */
 
-{
-name:"Bulbito Bandito Traktorito",
-rarity:"Brainrot God",
-income:205000,
-icon:"🚜",
-page:""
-},
-
-{
-name:"Orcalero Orcala",
-rarity:"Brainrot God",
-income:100000,
-icon:"🐋",
-page:""
-},
-
-{
-name:"Tigroligre Frutonni",
-rarity:"Brainrot God",
-income:60000,
-icon:"🐯",
-page:""
-},
-
-{
-name:"Bananito Bandito",
-rarity:"Mythic",
-income:16500,
-icon:"🍌",
-page:""
-},
-
-{
-name:"Carrotini Brainini",
-rarity:"Mythic",
-income:15000,
-icon:"🥕",
-page:""
-},
-
-{
-name:"Tigrilini Watermelini",
-rarity:"Mythic",
-income:6500,
-icon:"🍉",
-page:""
-},
-
-{
-name:"Zibra Zubra Zibralini",
-rarity:"Mythic",
-income:6000,
-icon:"🦓",
-page:""
-},
-
-{
-name:"Spioniro Golubiro",
-rarity:"Mythic",
-income:3500,
-icon:"🕵️",
-page:""
-},
-
-{
-name:"Seraphino Gruyero",
-rarity:"Legendary",
-income:1900,
-icon:"🧀",
-page:""
-},
-
-{
-name:"Buho de Fuego",
-rarity:"Legendary",
-income:1850,
-icon:"🔥🦉",
-page:""
-},
-
-{
-name:"Electro Quacko",
-rarity:"Legendary",
-income:1850,
-icon:"⚡🦆",
-page:""
-},
-
-{
-name:"Sealo Regalo",
-rarity:"Legendary",
-income:1820,
-icon:"🦭",
-page:""
-}
+{name:"Holy Arepa",rarity:"Common",income:14,icon:"🫓"},
+{name:"Pipi Corni",rarity:"Common",income:14,icon:"🌽"},
+{name:"Pipi Kiwi",rarity:"Common",income:13,icon:"🥝"},
+{name:"Tartaragno",rarity:"Common",income:13,icon:"🕷️"},
+{name:"Raccooni Jandelini",rarity:"Common",income:12,icon:"🦝"},
+{name:"Noobini Santanini",rarity:"Common",income:11,icon:"🎅"},
+{name:"Svinina Bombardino",rarity:"Common",income:10,icon:"🐷"},
+{name:"Talpa Di Fero",rarity:"Common",income:9,icon:"🐾"},
+{name:"Fluriflura",rarity:"Common",income:7,icon:"🌸"},
+{name:"Tim Cheese",rarity:"Common",income:5,icon:"🧀"},
+{name:"Lirilì Larilà",rarity:"Common",income:3,icon:"🐘"},
+{name:"Noobini Pizzanini",rarity:"Common",income:1,icon:"🍕"}
 
 ];
 
 
-/* MONEY FORMAT */
+/* =========================
+   SETTINGS
+========================= */
+
+const rarityOrder = {
+"OG":8,
+"Secret":7,
+"Brainrot God":6,
+"Mythic":5,
+"Legendary":4,
+"Epic":3,
+"Rare":2,
+"Common":1
+};
+
+let selectedRarity = "all";
+
+
+/* =========================
+   FORMAT MONEY
+========================= */
 
 function formatMoney(number){
 
 if(number >= 1000000000){
-
-return "$" +
-(number / 1000000000)
-.toFixed(2)
-.replace(/\.00$/,"") +
-"B/sec";
-
+return "$" + trimNumber(number / 1000000000) + "B/s";
 }
 
 if(number >= 1000000){
-
-return "$" +
-(number / 1000000)
-.toFixed(2)
-.replace(/\.00$/,"") +
-"M/sec";
-
+return "$" + trimNumber(number / 1000000) + "M/s";
 }
 
 if(number >= 1000){
+return "$" + trimNumber(number / 1000) + "K/s";
+}
 
-return "$" +
-(number / 1000)
+return "$" + number.toLocaleString() + "/s";
+
+}
+
+
+function trimNumber(number){
+
+return number
 .toFixed(2)
-.replace(/\.00$/,"") +
-"K/sec";
-
-}
-
-return "$" +
-number.toLocaleString() +
-"/sec";
+.replace(/\.00$/,"")
+.replace(/(\.\d)0$/,"$1");
 
 }
 
 
-/* RARITY CLASS */
+/* =========================
+   RARITY CSS
+========================= */
 
 function rarityClass(rarity){
 
@@ -591,36 +854,132 @@ if(rarity === "Secret") return "secret";
 if(rarity === "Brainrot God") return "god";
 if(rarity === "Mythic") return "mythic";
 if(rarity === "Legendary") return "legendary";
+if(rarity === "Epic") return "epic";
+if(rarity === "Rare") return "rare";
+if(rarity === "Common") return "common";
 
 return "";
 
 }
 
 
-/* CREATE CALCULATOR URL */
+/* =========================
+   CALCULATOR LINK
+========================= */
 
-function calculatorURL(brainrotName){
+function calculatorURL(brainrot){
 
 return "brainrot-income.html?brainrot=" +
-encodeURIComponent(brainrotName);
+encodeURIComponent(brainrot.name);
 
 }
 
 
-/* RENDER DATABASE */
+/* =========================
+   FILTER + SORT
+========================= */
+
+function updateDatabase(){
+
+const search =
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+const sort =
+document.getElementById("sort").value;
+
+
+let filtered = brainrots.filter(item => {
+
+const matchesSearch =
+item.name.toLowerCase().includes(search);
+
+const matchesRarity =
+selectedRarity === "all" ||
+item.rarity === selectedRarity;
+
+return matchesSearch && matchesRarity;
+
+});
+
+
+if(sort === "income-high"){
+
+filtered.sort((a,b) =>
+b.income - a.income ||
+a.name.localeCompare(b.name)
+);
+
+}
+
+if(sort === "income-low"){
+
+filtered.sort((a,b) =>
+a.income - b.income ||
+a.name.localeCompare(b.name)
+);
+
+}
+
+if(sort === "az"){
+
+filtered.sort((a,b) =>
+a.name.localeCompare(b.name)
+);
+
+}
+
+if(sort === "za"){
+
+filtered.sort((a,b) =>
+b.name.localeCompare(a.name)
+);
+
+}
+
+if(sort === "rarity"){
+
+filtered.sort((a,b) => {
+
+const rarityDifference =
+rarityOrder[b.rarity] -
+rarityOrder[a.rarity];
+
+if(rarityDifference !== 0){
+return rarityDifference;
+}
+
+return b.income - a.income;
+
+});
+
+}
+
+
+renderBrainrots(filtered);
+
+}
+
+
+/* =========================
+   RENDER CARDS
+========================= */
 
 function renderBrainrots(list){
 
 const grid =
 document.getElementById("grid");
 
-const noResults =
-document.getElementById("noResults");
-
 const results =
 document.getElementById("results");
 
+const noResults =
+document.getElementById("noResults");
+
 grid.innerHTML = "";
+
 
 results.textContent =
 list.length +
@@ -639,46 +998,62 @@ return;
 noResults.style.display = "none";
 
 
-list.forEach(brainrot => {
+list.forEach((brainrot,index) => {
 
 const card =
-document.createElement("div");
+document.createElement("article");
 
 card.className = "card";
 
 
-let link = "";
+let actions = "";
 
-
-/*
-If a Brainrot has its own guide page,
-send the visitor there.
-
-Otherwise send them directly to the
-calculator with that Brainrot selected.
-*/
 
 if(brainrot.page){
 
-link =
-'<a href="' +
-brainrot.page +
-'">View Income & Stats →</a>';
+actions = `
+
+<a
+class="guide"
+href="${brainrot.page}">
+View Guide →
+</a>
+
+<a
+class="calculate"
+href="${calculatorURL(brainrot)}">
+Calculator
+</a>
+
+`;
 
 }else{
 
-link =
-'<a href="' +
-calculatorURL(brainrot.name) +
-'">Calculate Income →</a>';
+actions = `
+
+<a
+class="calculate"
+href="${calculatorURL(brainrot)}">
+Calculate Income →
+</a>
+
+`;
 
 }
 
 
 card.innerHTML = `
 
-<div class="rarity ${rarityClass(brainrot.rarity)}">
+<div class="card-top">
+
+<span class="rarity ${rarityClass(brainrot.rarity)}">
 ${brainrot.rarity}
+</span>
+
+<span class="rank">
+#${index + 1}
+</span>
+
 </div>
 
 <div class="icon">
@@ -697,9 +1072,12 @@ BASE INCOME
 ${formatMoney(brainrot.income)}
 </div>
 
-${link}
+<div class="card-actions">
+${actions}
+</div>
 
 `;
+
 
 grid.appendChild(card);
 
@@ -708,46 +1086,97 @@ grid.appendChild(card);
 }
 
 
-/* SEARCH + FILTER */
+/* =========================
+   RARITY BUTTONS
+========================= */
 
-function filterBrainrots(){
+document
+.querySelectorAll(".filter")
+.forEach(button => {
 
-const search =
-document.getElementById("search")
-.value
-.toLowerCase()
-.trim();
+button.addEventListener("click",() => {
 
-const rarity =
-document.getElementById("rarity").value;
+document
+.querySelectorAll(".filter")
+.forEach(item =>
+item.classList.remove("active")
+);
 
+button.classList.add("active");
 
-const filtered =
-brainrots.filter(brainrot => {
+selectedRarity =
+button.dataset.rarity;
 
-const matchesSearch =
-brainrot.name
-.toLowerCase()
-.includes(search);
+updateDatabase();
 
-const matchesRarity =
-rarity === "all" ||
-brainrot.rarity === rarity;
-
-return matchesSearch &&
-matchesRarity;
+});
 
 });
 
 
-renderBrainrots(filtered);
+/* =========================
+   SEARCH + SORT
+========================= */
 
-}
+document
+.getElementById("search")
+.addEventListener(
+"input",
+updateDatabase
+);
 
 
-/* LOAD DATABASE */
+document
+.getElementById("sort")
+.addEventListener(
+"change",
+updateDatabase
+);
 
-renderBrainrots(brainrots);
+
+/* =========================
+   RESET
+========================= */
+
+document
+.getElementById("reset")
+.addEventListener("click",() => {
+
+document.getElementById("search").value = "";
+
+document.getElementById("sort").value =
+"income-high";
+
+selectedRarity = "all";
+
+
+document
+.querySelectorAll(".filter")
+.forEach(item =>
+item.classList.remove("active")
+);
+
+
+document
+.querySelector(
+'[data-rarity="all"]'
+)
+.classList.add("active");
+
+
+updateDatabase();
+
+});
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+document.getElementById("totalCount").textContent =
+brainrots.length;
+
+updateDatabase();
 
 </script>
 
