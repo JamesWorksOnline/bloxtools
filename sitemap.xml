@@ -20,4 +20,10 @@
     <priority>0.9</priority>
   </url>
 
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/strawberry-elephant.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
