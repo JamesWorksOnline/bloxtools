@@ -2,179 +2,278 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Steal a Brainrot Income Calculator | BloxTools</title>
-<meta name="description" content="Calculate Steal a Brainrot income per second, minute, hour and day with mutations, traits, quantity and cash multipliers.">
+
+<meta name="description" content="Free Steal a Brainrot income calculator. Calculate Brainrot earnings per second, minute, hour and day with mutations, traits, quantity and multipliers.">
 <meta name="robots" content="index, follow">
+
 <link rel="canonical" href="https://jamesworksonline.github.io/bloxtools/brainrot-income.html">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0} body{font-family:Arial,sans-serif;background:#0b0d12;color:#fff;min-height:100vh}
-nav{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 7%;background:#10131a;border-bottom:1px solid #252936}
-.logo{font-size:25px;font-weight:800;color:#fff;text-decoration:none} .logo span{color:#7c5cff} nav a{color:#b8bdca;text-decoration:none;margin-left:18px}
-main{width:min(900px,92%);margin:auto;padding:55px 0 90px} .badge{display:inline-block;padding:8px 14px;border-radius:99px;background:#171b25;border:1px solid #303648;color:#a996ff;font-size:12px;margin-bottom:18px}
-h1{font-size:clamp(34px,6vw,56px);margin-bottom:15px} .intro{color:#9ba2b1;line-height:1.7;margin-bottom:30px}
-.panel{background:#10131a;border:1px solid #292e3b;border-radius:18px;padding:25px;margin-bottom:22px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px} label{display:block;color:#aeb4c2;font-size:12px;font-weight:bold;margin-bottom:7px}
-input,select{width:100%;padding:14px;background:#0d1016;border:1px solid #303645;border-radius:10px;color:white;font-size:15px;outline:none}
-input:focus,select:focus{border-color:#7c5cff} .full{grid-column:1/-1}
-.traits{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px} .trait{border:1px solid #303645;background:#151923;color:#b9c0ce;padding:9px 12px;border-radius:99px;cursor:pointer}
-.trait.active{background:#7c5cff;border-color:#7c5cff;color:#fff}
-button.calc{width:100%;padding:16px;border:0;border-radius:11px;background:#7c5cff;color:#fff;font-weight:800;font-size:16px;cursor:pointer;margin-top:20px}
-.results{display:none} .result-main{font-size:35px;font-weight:900;color:#72e6a5;margin:8px 0 20px}
-.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px} .result{background:#0d1016;border:1px solid #292e3b;border-radius:12px;padding:15px}
-.result small{color:#7f8796;display:block;margin-bottom:6px} .result strong{font-size:18px}
-.note{color:#858d9d;font-size:13px;line-height:1.6;margin-top:18px}
-footer{text-align:center;color:#747b89;border-top:1px solid #252936;padding:30px;font-size:13px}
-@media(max-width:650px){.grid,.result-grid{grid-template-columns:1fr}.full{grid-column:auto}nav{padding:0 4%}}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#0b0d12;
+color:white;
+min-height:100vh;
+}
+
+nav{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 8%;
+border-bottom:1px solid #252936;
+background:#10131a;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+}
+
+.logo span{
+color:#7c5cff;
+}
+
+nav a{
+color:#b8bdc9;
+text-decoration:none;
+margin-left:20px;
+font-weight:600;
+}
+
+nav a:hover{
+color:white;
+}
+
+main{
+width:92%;
+max-width:950px;
+margin:50px auto;
+}
+
+.hero{
+text-align:center;
+margin-bottom:35px;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:12px;
+}
+
+.hero p{
+color:#aeb4c2;
+line-height:1.6;
+}
+
+.card{
+background:#12151d;
+border:1px solid #272c3a;
+border-radius:18px;
+padding:28px;
+margin-bottom:25px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+label{
+font-weight:700;
+font-size:14px;
+}
+
+input,select{
+width:100%;
+background:#0c0f15;
+border:1px solid #303646;
+border-radius:10px;
+padding:14px;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+input:focus,select:focus{
+border-color:#7c5cff;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+.traits{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:10px;
+}
+
+.trait{
+background:#0c0f15;
+border:1px solid #303646;
+padding:12px;
+border-radius:10px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+}
+
+.trait input{
+width:auto;
+}
+
+button{
+width:100%;
+margin-top:22px;
+padding:15px;
+border:none;
+border-radius:11px;
+background:#7c5cff;
+color:white;
+font-size:17px;
+font-weight:800;
+cursor:pointer;
+}
+
+button:hover{
+filter:brightness(1.1);
+}
+
+.results{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+
+.result{
+background:#0c0f15;
+border:1px solid #292f3d;
+border-radius:12px;
+padding:18px;
+}
+
+.result span{
+display:block;
+color:#9da5b5;
+font-size:13px;
+margin-bottom:7px;
+}
+
+.result strong{
+font-size:23px;
+}
+
+.highlight{
+border-color:#7c5cff;
+}
+
+.formula{
+color:#aeb4c2;
+font-size:14px;
+line-height:1.6;
+margin-top:20px;
+}
+
+.back{
+display:inline-block;
+margin-bottom:20px;
+color:#9c88ff;
+text-decoration:none;
+font-weight:700;
+}
+
+footer{
+text-align:center;
+padding:35px;
+color:#777f90;
+font-size:13px;
+}
+
+@media(max-width:700px){
+.grid,.results{
+grid-template-columns:1fr;
+}
+
+.traits{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:auto;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+nav{
+padding:0 5%;
+}
+
+nav a{
+margin-left:10px;
+font-size:13px;
+}
+}
 </style>
 </head>
-<body>
-<nav><a class="logo" href="index.html">Blox<span>Tools</span></a><div><a href="brainrots.html">Database</a><a href="index.html">Home</a></div></nav>
-<main>
-<div class="badge">⚡ FREE CALCULATOR</div>
-<h1>Brainrot Income Calculator</h1>
-<p class="intro">Choose a Brainrot or enter your own base income, then add mutation, traits, quantity and your cash multiplier.</p>
 
-<div class="panel">
+<body>
+
+<nav>
+<div class="logo">Blox<span>Tools</span></div>
+<div>
+<a href="index.html">Home</a>
+<a href="brainrots.html">Database</a>
+</div>
+</nav>
+
+<main>
+
+<a class="back" href="index.html">← Back to BloxTools</a>
+
+<section class="hero">
+<h1>Steal a Brainrot Income Calculator</h1>
+<p>Select a Brainrot and calculate its estimated earning power with mutations, traits, quantity and your cash multiplier.</p>
+</section>
+
+<div class="card">
+
 <div class="grid">
-<div class="full"><label>SEARCH / SELECT BRAINROT</label><select id="brainrot"><option value="">Custom / Select a Brainrot</option><option value="0">Spyder Elephant — OG</option>
-<option value="1">Strawberry Elephant — OG</option>
-<option value="2">Headless Horseman — OG</option>
-<option value="3">Meowl — OG</option>
-<option value="4">John Pork — OG</option>
-<option value="5">Skibidi Toilet — OG</option>
-<option value="6">Celestial Pegasus — Secret</option>
-<option value="7">La Secret Combinasion — Secret</option>
-<option value="8">Spaghetti Tualetti — Secret</option>
-<option value="9">Esok Sekolah — Secret</option>
-<option value="10">Pot Hotspot — Secret</option>
-<option value="11">Las Vaquitas Saturnitas — Secret</option>
-<option value="12">Torrtuginni Dragonfrutini — Secret</option>
-<option value="13">Pretzo Robo — Brainrot God</option>
-<option value="14">Tenini Ballini — Brainrot God</option>
-<option value="15">Robo Grafito — Brainrot God</option>
-<option value="16">Tortuginni Sandcastlini — Brainrot God</option>
-<option value="17">Flippo Marino — Brainrot God</option>
-<option value="18">Beavo Potto — Brainrot God</option>
-<option value="19">Dumborino Miracello — Brainrot God</option>
-<option value="20">Eggdin Egg Egg Dun — Brainrot God</option>
-<option value="21">Clovkur Kurkur — Brainrot God</option>
-<option value="22">Appelini — Brainrot God</option>
-<option value="23">Pop Pop Sahur — Brainrot God</option>
-<option value="24">Mastodontico Telepiedone — Brainrot God</option>
-<option value="25">Bulbito Bandito Traktorito — Brainrot God</option>
-<option value="26">Orcalero Orcala — Brainrot God</option>
-<option value="27">Tigroligre Frutonni — Brainrot God</option>
-<option value="28">Tic Tic Ribbit — Mythic</option>
-<option value="29">Orbi Mochi — Mythic</option>
-<option value="30">Bucketoro — Mythic</option>
-<option value="31">Berenjello Angello — Mythic</option>
-<option value="32">Fizzy Soda — Mythic</option>
-<option value="33">Tree Tree Tree Sahur — Mythic</option>
-<option value="34">Bananito Bandito — Mythic</option>
-<option value="35">Jacko Spaventosa — Mythic</option>
-<option value="36">Toiletto Focaccino — Mythic</option>
-<option value="37">Centrucci Nuclucci — Mythic</option>
-<option value="38">Carrotini Brainini — Mythic</option>
-<option value="39">Cocoteddy — Mythic</option>
-<option value="40">Harpuccino — Mythic</option>
-<option value="41">Bee Loco — Mythic</option>
-<option value="42">Carloo — Mythic</option>
-<option value="43">Cachorrito Melonito — Mythic</option>
-<option value="44">Spongini Quackini — Mythic</option>
-<option value="45">Los Noobinis — Mythic</option>
-<option value="46">Jingle Jingle Sahur — Mythic</option>
-<option value="47">Tracoducotulu Delapeladustuz — Mythic</option>
-<option value="48">Magi Ribbitini — Mythic</option>
-<option value="49">Rhino Helicopterino — Mythic</option>
-<option value="50">Te Te Te Sahur — Mythic</option>
-<option value="51">Ganganzelli Trulala — Mythic</option>
-<option value="52">Lerulerulerule — Mythic</option>
-<option value="53">Tob Tobi Tobi — Mythic</option>
-<option value="54">Gorillo Watermelondrillo — Mythic</option>
-<option value="55">Stoppo Luminino — Mythic</option>
-<option value="56">Gorillo Subwoofero — Mythic</option>
-<option value="57">Cavallo Virtuoso — Mythic</option>
-<option value="58">Avocadorilla — Mythic</option>
-<option value="59">Tigrilini Watermelini — Mythic</option>
-<option value="60">Zibra Zubra Zibralini — Mythic</option>
-<option value="61">Bombombini Gusini — Mythic</option>
-<option value="62">Spioniro Golubiro — Mythic</option>
-<option value="63">Brutto Gialutto — Mythic</option>
-<option value="64">Bombardiro Crocodilo — Mythic</option>
-<option value="65">Rhino Toasterino — Mythic</option>
-<option value="66">Orangutini Ananassini — Mythic</option>
-<option value="67">Seraphino Gruyero — Legendary</option>
-<option value="68">Buho de Fuego — Legendary</option>
-<option value="69">Electro Quacko — Legendary</option>
-<option value="70">Sealo Regalo — Legendary</option>
-<option value="71">Sigma Girl — Legendary</option>
-<option value="72">Puffaball — Legendary</option>
-<option value="73">Chocco Bunny — Legendary</option>
-<option value="74">Buho del Cielo — Legendary</option>
-<option value="75">Sigma Boy — Legendary</option>
-<option value="76">Quackula — Legendary</option>
-<option value="77">Pandaccini Bananini — Legendary</option>
-<option value="78">Bandito Axolito — Legendary</option>
-<option value="79">Cocosini Mama — Legendary</option>
-<option value="80">Strawberrelli Flamingelli — Legendary</option>
-<option value="81">Pipi Potato — Legendary</option>
-<option value="82">Caramello Filtrello — Legendary</option>
-<option value="83">Blueberrinni Octopusini — Legendary</option>
-<option value="84">Clickerino Crabo — Legendary</option>
-<option value="85">Quivioli Ameleonni — Legendary</option>
-<option value="86">Glorbo Fruttodrillo — Legendary</option>
-<option value="87">Lionel Cactuseli — Legendary</option>
-<option value="88">Chef Crabracadabra — Legendary</option>
-<option value="89">Ballerina Cappuccina — Legendary</option>
-<option value="90">Chimpanzini Bananini — Legendary</option>
-<option value="91">Burbaloni Loliloli — Legendary</option>
-<option value="92">Mummio Rappitto — Epic</option>
-<option value="93">Penguino Cocosino — Epic</option>
-<option value="94">Wombo Rollo — Epic</option>
-<option value="95">Penguin Tree — Epic</option>
-<option value="96">Doi Doi Do — Epic</option>
-<option value="97">Gato Celesto — Epic</option>
-<option value="98">Salamino Penguino — Epic</option>
-<option value="99">Frogato Pirato — Epic</option>
-<option value="100">Mangolini Parrocini — Epic</option>
-<option value="101">Avocadini Guffo — Epic</option>
-<option value="102">Ti Ti Ti Sahur — Epic</option>
-<option value="103">Brri Brri Bicus Dicus Bombicus — Epic</option>
-<option value="104">Perochello Lemonchello — Epic</option>
-<option value="105">Bananita Dolphinita — Epic</option>
-<option value="106">Malame Amarele — Epic</option>
-<option value="107">Bambini Crostini — Epic</option>
-<option value="108">Trulimero Trulicina — Epic</option>
-<option value="109">Avocadini Antilopini — Epic</option>
-<option value="110">Brr Brr Patapim — Epic</option>
-<option value="111">Cappuccino Assassino — Epic</option>
-<option value="112">Pinealotto Fruttarino — Rare</option>
-<option value="113">Pengolino Nuvoletto — Rare</option>
-<option value="114">Pipi Avocado — Rare</option>
-<option value="115">Frogo Elfo — Rare</option>
-<option value="116">Tric Trac Baraboom — Rare</option>
-<option value="117">Cupcake Koala — Rare</option>
-<option value="118">Ta Ta Ta Ta Sahur — Rare</option>
-<option value="119">Cacto Hipopotamo — Rare</option>
-<option value="120">Boneca Ambalabu — Rare</option>
-<option value="121">Bandito Bobritto — Rare</option>
-<option value="122">Gangster Footera — Rare</option>
-<option value="123">Trippi Troppi — Rare</option>
-<option value="124">Holy Arepa — Common</option>
-<option value="125">Pipi Corni — Common</option>
-<option value="126">Pipi Kiwi — Common</option>
-<option value="127">Tartaragno — Common</option>
-<option value="128">Raccooni Jandelini — Common</option>
-<option value="129">Noobini Santanini — Common</option>
-<option value="130">Svinina Bombardino — Common</option>
-<option value="131">Talpa Di Fero — Common</option>
-<option value="132">Fluriflura — Common</option>
-<option value="133">Tim Cheese — Common</option>
-<option value="134">Lirilì Larilà — Common</option>
-<option value="135">Noobini Pizzanini — Common</option></select></div>
-<div><label>BASE INCOME / SECOND ($)</label><input id="base" type="number" min="0" value="1"></div>
-<div><label>MUTATION</label><select id="mutation">
+
+<div class="field full">
+<label for="brainrot">Brainrot</label>
+<select id="brainrot" onchange="selectBrainrot()"></select>
+</div>
+
+<div class="field">
+<label for="baseIncome">Base Income / Second</label>
+<input id="baseIncome" type="number" min="0" value="1000000000">
+</div>
+
+<div class="field">
+<label for="mutation">Mutation</label>
+<select id="mutation">
 <option value="1">Default — 1×</option>
 <option value="1.25">Gold — 1.25×</option>
 <option value="1.5">Diamond — 1.5×</option>
@@ -190,239 +289,457 @@ footer{text-align:center;color:#747b89;border-top:1px solid #252936;padding:30px
 <option value="11">Cyber — 11×</option>
 <option value="12">Phantom — 12×</option>
 <option value="13">Crystal — 13×</option>
-</select></div>
-<div><label>QUANTITY</label><input id="qty" type="number" min="1" value="1"></div>
-<div><label>CASH / REBIRTH MULTIPLIER</label><input id="cash" type="number" min="0" step="0.1" value="1"></div>
-<div class="full"><label>TRAITS — CLICK TO ADD / REMOVE</label><div class="traits" id="traits">
-<button class="trait" data-v="8">🍓 Strawberry +8×</button>
-<button class="trait" data-v="7">🐱 Meowl +7×</button>
-<button class="trait" data-v="6.5">🐷 John Pork +6.5×</button>
-<button class="trait" data-v="6.5">🎈 Rainbow Balloon +6.5×</button>
-<button class="trait" data-v="6">🍀 Lucky +6×</button>
-<button class="trait" data-v="5">🔥 Fire +5×</button>
-<button class="trait" data-v="5">⚡ Lightning +5×</button>
-<button class="trait" data-v="5">☀️ Sun +5×</button>
-<button class="trait" data-v="4.5">🍔 Burger +4.5×</button>
-<button class="trait" data-v="4">🪩 Disco +4×</button>
-<button class="trait" data-v="4">🧩 Glitched +4×</button>
-<button class="trait" data-v="3.5">🕷️ Spider +3.5×</button>
-<button class="trait" data-v="3">🌌 Galactic +3×</button>
-<button class="trait" data-v="2.5">☄️ Comet +2.5×</button>
-<button class="trait" data-v="2">🛸 UFO +2×</button>
-<button class="trait" data-v="1.5">💧 Wet +1.5×</button>
-</div></div>
-<div><label>EXTRA CUSTOM TRAIT BONUS</label><input id="extra" type="number" min="0" step="0.1" value="0"></div>
-<div><label>OPTIONAL MONEY GOAL ($)</label><input id="goal" type="number" min="0" placeholder="e.g. 1000000000000"></div>
-</div>
-<button class="calc" id="calculate">Calculate Income</button>
-<p class="note">Formula: Base Income × (Mutation + selected trait bonuses + custom trait bonus) × Quantity × Cash Multiplier. Game values can change after updates.</p>
+</select>
 </div>
 
-<div class="panel results" id="results">
-<label>CALCULATED INCOME</label><div class="result-main" id="perSec">$0 / second</div>
-<div class="result-grid">
-<div class="result"><small>PER MINUTE</small><strong id="perMin">$0</strong></div>
-<div class="result"><small>PER HOUR</small><strong id="perHour">$0</strong></div>
-<div class="result"><small>PER DAY</small><strong id="perDay">$0</strong></div>
-<div class="result"><small>TOTAL MULTIPLIER</small><strong id="multi">1×</strong></div>
-<div class="result"><small>TRAIT BONUS</small><strong id="traitBonus">0×</strong></div>
-<div class="result"><small>TIME TO GOAL</small><strong id="goalTime">—</strong></div>
+<div class="field">
+<label for="quantity">Quantity</label>
+<input id="quantity" type="number" min="1" value="1">
+</div>
+
+<div class="field">
+<label for="cashMultiplier">Cash / Rebirth Multiplier</label>
+<input id="cashMultiplier" type="number" min="0" step="0.1" value="1">
+</div>
+
+<div class="field">
+<label for="customTrait">Extra Custom Trait Bonus</label>
+<input id="customTrait" type="number" min="0" step="0.1" value="0" placeholder="Example: 2">
+</div>
+
+<div class="field full">
+<label>Traits</label>
+
+<div class="traits">
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="8">
+Strawberry +8×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="7">
+Meowl +7×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="6.5">
+John Pork +6.5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="6.5">
+Rainbow Balloon +6.5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="6">
+Lucky +6×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="5">
+Fire +5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="5">
+Lightning +5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="5">
+Sun +5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="4.5">
+Burger +4.5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="4">
+Disco +4×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="4">
+Glitched +4×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="3.5">
+Spider +3.5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="3">
+Galactic +3×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="2.5">
+Comet +2.5×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="2">
+UFO +2×
+</label>
+
+<label class="trait">
+<input type="checkbox" class="traitBox" value="1.5">
+Wet +1.5×
+</label>
+
 </div>
 </div>
+
+<div class="field full">
+<label for="goal">Optional Money Goal</label>
+<input id="goal" type="number" min="0" placeholder="Example: 100000000000000">
+</div>
+
+</div>
+
+<button onclick="calculate()">Calculate Income</button>
+
+</div>
+
+<div class="card">
+
+<div class="results">
+
+<div class="result highlight">
+<span>Income / Second</span>
+<strong id="perSecond">$1B</strong>
+</div>
+
+<div class="result">
+<span>Income / Minute</span>
+<strong id="perMinute">$60B</strong>
+</div>
+
+<div class="result">
+<span>Income / Hour</span>
+<strong id="perHour">$3.6T</strong>
+</div>
+
+<div class="result">
+<span>Income / Day</span>
+<strong id="perDay">$86.4T</strong>
+</div>
+
+<div class="result">
+<span>Total Multiplier</span>
+<strong id="totalMultiplier">1×</strong>
+</div>
+
+<div class="result">
+<span>Trait Bonus</span>
+<strong id="traitBonus">0×</strong>
+</div>
+
+<div class="result full">
+<span>Time to Money Goal</span>
+<strong id="goalTime">Enter a goal</strong>
+</div>
+
+</div>
+
+<p class="formula">
+Formula: Base Income × (Mutation + selected trait bonuses + custom trait bonus) × Quantity × Cash Multiplier
+</p>
+
+</div>
+
 </main>
-<footer>BloxTools is an independent fan-made website and is not affiliated with Roblox or the creators of Steal a Brainrot.</footer>
+
+<footer>
+BloxTools is an independent fan-made tool and is not affiliated with Roblox or the creators of Steal a Brainrot.
+</footer>
 
 <script>
-const brainrots=[{name:"Spyder Elephant",rarity:"OG",income:1000000000},
-{name:"Strawberry Elephant",rarity:"OG",income:750000000},
-{name:"Headless Horseman",rarity:"OG",income:600000000},
-{name:"Meowl",rarity:"OG",income:600000000},
-{name:"John Pork",rarity:"OG",income:500000000},
-{name:"Skibidi Toilet",rarity:"OG",income:450000000},
-{name:"Celestial Pegasus",rarity:"Secret",income:175000000},
-{name:"La Secret Combinasion",rarity:"Secret",income:125000000},
-{name:"Spaghetti Tualetti",rarity:"Secret",income:60000000},
-{name:"Esok Sekolah",rarity:"Secret",income:30000000},
-{name:"Pot Hotspot",rarity:"Secret",income:2500000},
-{name:"Las Vaquitas Saturnitas",rarity:"Secret",income:750000},
-{name:"Torrtuginni Dragonfrutini",rarity:"Secret",income:350000},
-{name:"Pretzo Robo",rarity:"Brainrot God",income:320000},
-{name:"Tenini Ballini",rarity:"Brainrot God",income:320000},
-{name:"Robo Grafito",rarity:"Brainrot God",income:318000},
-{name:"Tortuginni Sandcastlini",rarity:"Brainrot God",income:318000},
-{name:"Flippo Marino",rarity:"Brainrot God",income:316000},
-{name:"Beavo Potto",rarity:"Brainrot God",income:315000},
-{name:"Dumborino Miracello",rarity:"Brainrot God",income:315000},
-{name:"Eggdin Egg Egg Dun",rarity:"Brainrot God",income:310000},
-{name:"Clovkur Kurkur",rarity:"Brainrot God",income:305000},
-{name:"Appelini",rarity:"Brainrot God",income:300000},
-{name:"Pop Pop Sahur",rarity:"Brainrot God",income:295000},
-{name:"Mastodontico Telepiedone",rarity:"Brainrot God",income:275000},
-{name:"Bulbito Bandito Traktorito",rarity:"Brainrot God",income:205000},
-{name:"Orcalero Orcala",rarity:"Brainrot God",income:100000},
-{name:"Tigroligre Frutonni",rarity:"Brainrot God",income:60000},
-{name:"Tic Tic Ribbit",rarity:"Mythic",income:18800},
-{name:"Orbi Mochi",rarity:"Mythic",income:18500},
-{name:"Bucketoro",rarity:"Mythic",income:18300},
-{name:"Berenjello Angello",rarity:"Mythic",income:18000},
-{name:"Fizzy Soda",rarity:"Mythic",income:17300},
-{name:"Tree Tree Tree Sahur",rarity:"Mythic",income:17000},
-{name:"Bananito Bandito",rarity:"Mythic",income:16500},
-{name:"Jacko Spaventosa",rarity:"Mythic",income:16300},
-{name:"Toiletto Focaccino",rarity:"Mythic",income:16000},
-{name:"Centrucci Nuclucci",rarity:"Mythic",income:15500},
-{name:"Carrotini Brainini",rarity:"Mythic",income:15000},
-{name:"Cocoteddy",rarity:"Mythic",income:15000},
-{name:"Harpuccino",rarity:"Mythic",income:14000},
-{name:"Bee Loco",rarity:"Mythic",income:13500},
-{name:"Carloo",rarity:"Mythic",income:13500},
-{name:"Cachorrito Melonito",rarity:"Mythic",income:13000},
-{name:"Spongini Quackini",rarity:"Mythic",income:13000},
-{name:"Los Noobinis",rarity:"Mythic",income:12500},
-{name:"Jingle Jingle Sahur",rarity:"Mythic",income:12300},
-{name:"Tracoducotulu Delapeladustuz",rarity:"Mythic",income:12000},
-{name:"Magi Ribbitini",rarity:"Mythic",income:11500},
-{name:"Rhino Helicopterino",rarity:"Mythic",income:11000},
-{name:"Te Te Te Sahur",rarity:"Mythic",income:9500},
-{name:"Ganganzelli Trulala",rarity:"Mythic",income:9000},
-{name:"Lerulerulerule",rarity:"Mythic",income:8750},
-{name:"Tob Tobi Tobi",rarity:"Mythic",income:8500},
-{name:"Gorillo Watermelondrillo",rarity:"Mythic",income:8000},
-{name:"Stoppo Luminino",rarity:"Mythic",income:8000},
-{name:"Gorillo Subwoofero",rarity:"Mythic",income:7750},
-{name:"Cavallo Virtuoso",rarity:"Mythic",income:7500},
-{name:"Avocadorilla",rarity:"Mythic",income:7000},
-{name:"Tigrilini Watermelini",rarity:"Mythic",income:6500},
-{name:"Zibra Zubra Zibralini",rarity:"Mythic",income:6000},
-{name:"Bombombini Gusini",rarity:"Mythic",income:5000},
-{name:"Spioniro Golubiro",rarity:"Mythic",income:3500},
-{name:"Brutto Gialutto",rarity:"Mythic",income:3000},
-{name:"Bombardiro Crocodilo",rarity:"Mythic",income:2500},
-{name:"Rhino Toasterino",rarity:"Mythic",income:2150},
-{name:"Orangutini Ananassini",rarity:"Mythic",income:2100},
-{name:"Seraphino Gruyero",rarity:"Legendary",income:1900},
-{name:"Buho de Fuego",rarity:"Legendary",income:1850},
-{name:"Electro Quacko",rarity:"Legendary",income:1850},
-{name:"Sealo Regalo",rarity:"Legendary",income:1820},
-{name:"Sigma Girl",rarity:"Legendary",income:1800},
-{name:"Puffaball",rarity:"Legendary",income:1500},
-{name:"Chocco Bunny",rarity:"Legendary",income:1400},
-{name:"Buho del Cielo",rarity:"Legendary",income:1350},
-{name:"Sigma Boy",rarity:"Legendary",income:1350},
-{name:"Quackula",rarity:"Legendary",income:1270},
-{name:"Pandaccini Bananini",rarity:"Legendary",income:1250},
-{name:"Bandito Axolito",rarity:"Legendary",income:1230},
-{name:"Cocosini Mama",rarity:"Legendary",income:1200},
-{name:"Strawberrelli Flamingelli",rarity:"Legendary",income:1150},
-{name:"Pipi Potato",rarity:"Legendary",income:1100},
-{name:"Caramello Filtrello",rarity:"Legendary",income:1050},
-{name:"Blueberrinni Octopusini",rarity:"Legendary",income:1000},
-{name:"Clickerino Crabo",rarity:"Legendary",income:1000},
-{name:"Quivioli Ameleonni",rarity:"Legendary",income:900},
-{name:"Glorbo Fruttodrillo",rarity:"Legendary",income:750},
-{name:"Lionel Cactuseli",rarity:"Legendary",income:650},
-{name:"Chef Crabracadabra",rarity:"Legendary",income:600},
-{name:"Ballerina Cappuccina",rarity:"Legendary",income:500},
-{name:"Chimpanzini Bananini",rarity:"Legendary",income:300},
-{name:"Burbaloni Loliloli",rarity:"Legendary",income:200},
-{name:"Mummio Rappitto",rarity:"Epic",income:325},
-{name:"Penguino Cocosino",rarity:"Epic",income:300},
-{name:"Wombo Rollo",rarity:"Epic",income:275},
-{name:"Penguin Tree",rarity:"Epic",income:270},
-{name:"Doi Doi Do",rarity:"Epic",income:260},
-{name:"Gato Celesto",rarity:"Epic",income:250},
-{name:"Salamino Penguino",rarity:"Epic",income:250},
-{name:"Frogato Pirato",rarity:"Epic",income:240},
-{name:"Mangolini Parrocini",rarity:"Epic",income:235},
-{name:"Avocadini Guffo",rarity:"Epic",income:225},
-{name:"Ti Ti Ti Sahur",rarity:"Epic",income:225},
-{name:"Brri Brri Bicus Dicus Bombicus",rarity:"Epic",income:175},
-{name:"Perochello Lemonchello",rarity:"Epic",income:160},
-{name:"Bananita Dolphinita",rarity:"Epic",income:150},
-{name:"Malame Amarele",rarity:"Epic",income:140},
-{name:"Bambini Crostini",rarity:"Epic",income:135},
-{name:"Trulimero Trulicina",rarity:"Epic",income:125},
-{name:"Avocadini Antilopini",rarity:"Epic",income:115},
-{name:"Brr Brr Patapim",rarity:"Epic",income:100},
-{name:"Cappuccino Assassino",rarity:"Epic",income:75},
-{name:"Pinealotto Fruttarino",rarity:"Rare",income:75},
-{name:"Pengolino Nuvoletto",rarity:"Rare",income:72},
-{name:"Pipi Avocado",rarity:"Rare",income:70},
-{name:"Frogo Elfo",rarity:"Rare",income:67},
-{name:"Tric Trac Baraboom",rarity:"Rare",income:65},
-{name:"Cupcake Koala",rarity:"Rare",income:60},
-{name:"Ta Ta Ta Ta Sahur",rarity:"Rare",income:55},
-{name:"Cacto Hipopotamo",rarity:"Rare",income:50},
-{name:"Boneca Ambalabu",rarity:"Rare",income:40},
-{name:"Bandito Bobritto",rarity:"Rare",income:35},
-{name:"Gangster Footera",rarity:"Rare",income:30},
-{name:"Trippi Troppi",rarity:"Rare",income:15},
-{name:"Holy Arepa",rarity:"Common",income:14},
-{name:"Pipi Corni",rarity:"Common",income:14},
-{name:"Pipi Kiwi",rarity:"Common",income:13},
-{name:"Tartaragno",rarity:"Common",income:13},
-{name:"Raccooni Jandelini",rarity:"Common",income:12},
-{name:"Noobini Santanini",rarity:"Common",income:11},
-{name:"Svinina Bombardino",rarity:"Common",income:10},
-{name:"Talpa Di Fero",rarity:"Common",income:9},
-{name:"Fluriflura",rarity:"Common",income:7},
-{name:"Tim Cheese",rarity:"Common",income:5},
-{name:"Lirilì Larilà",rarity:"Common",income:3},
-{name:"Noobini Pizzanini",rarity:"Common",income:1}];
+const brainrots = [
+["Spyder Elephant","OG",1000000000],
+["Strawberry Elephant","OG",750000000],
+["Headless Horseman","OG",600000000],
+["Meowl","OG",600000000],
+["John Pork","OG",500000000],
+["Skibidi Toilet","OG",450000000],
 
-const brainrot=document.getElementById("brainrot");
-const base=document.getElementById("base");
-const traits=[...document.querySelectorAll(".trait")];
+["Celestial Pegasus","Secret",175000000],
+["La Secret Combinasion","Secret",125000000],
+["Spaghetti Tualetti","Secret",60000000],
+["Esok Sekolah","Secret",30000000],
+["Pot Hotspot","Secret",2500000],
+["Las Vaquitas Saturnitas","Secret",750000],
+["Torrtuginni Dragonfrutini","Secret",350000],
 
-brainrot.addEventListener("change",()=>{
- if(brainrot.value!=="") base.value=brainrots[Number(brainrot.value)].income;
+["Pretzo Robo","Brainrot God",320000],
+["Tenini Ballini","Brainrot God",320000],
+["Robo Grafito","Brainrot God",318000],
+["Tortuginni Sandcastlini","Brainrot God",318000],
+["Flippo Marino","Brainrot God",316000],
+["Beavo Potto","Brainrot God",315000],
+["Dumborino Miracello","Brainrot God",315000],
+["Eggdin Egg Egg Dun","Brainrot God",310000],
+["Clovkur Kurkur","Brainrot God",305000],
+["Appelini","Brainrot God",300000],
+["Pop Pop Sahur","Brainrot God",295000],
+["Mastodontico Telepiedone","Brainrot God",275000],
+["Bulbito Bandito Traktorito","Brainrot God",205000],
+["Orcalero Orcala","Brainrot God",100000],
+["Tigroligre Frutonni","Brainrot God",60000],
+
+["Tic Tic Ribbit","Mythic",18800],
+["Orbi Mochi","Mythic",18500],
+["Bucketoro","Mythic",18300],
+["Berenjello Angello","Mythic",18000],
+["Fizzy Soda","Mythic",17300],
+["Tree Tree Tree Sahur","Mythic",17000],
+["Bananito Bandito","Mythic",16500],
+["Jacko Spaventosa","Mythic",16300],
+["Toiletto Focaccino","Mythic",16000],
+["Centrucci Nuclucci","Mythic",15500],
+["Carrotini Brainini","Mythic",15000],
+["Cocoteddy","Mythic",15000],
+["Harpuccino","Mythic",14000],
+["Bee Loco","Mythic",13500],
+["Carloo","Mythic",13500],
+["Cachorrito Melonito","Mythic",13000],
+["Spongini Quackini","Mythic",13000],
+["Los Noobinis","Mythic",12500],
+["Jingle Jingle Sahur","Mythic",12300],
+["Tracoducotulu Delapeladustuz","Mythic",12000],
+["Magi Ribbitini","Mythic",11500],
+["Rhino Helicopterino","Mythic",11000],
+["Te Te Te Sahur","Mythic",9500],
+["Ganganzelli Trulala","Mythic",9000],
+["Lerulerulerule","Mythic",8750],
+["Tob Tobi Tobi","Mythic",8500],
+["Gorillo Watermelondrillo","Mythic",8000],
+["Stoppo Luminino","Mythic",8000],
+["Gorillo Subwoofero","Mythic",7750],
+["Cavallo Virtuoso","Mythic",7500],
+["Avocadorilla","Mythic",7000],
+["Tigrilini Watermelini","Mythic",6500],
+["Zibra Zubra Zibralini","Mythic",6000],
+["Bombombini Gusini","Mythic",5000],
+["Spioniro Golubiro","Mythic",3500],
+["Brutto Gialutto","Mythic",3000],
+["Bombardiro Crocodilo","Mythic",2500],
+["Rhino Toasterino","Mythic",2150],
+["Orangutini Ananassini","Mythic",2100],
+
+["Seraphino Gruyero","Legendary",1900],
+["Buho de Fuego","Legendary",1850],
+["Electro Quacko","Legendary",1850],
+["Sealo Regalo","Legendary",1820],
+["Sigma Girl","Legendary",1800],
+["Puffaball","Legendary",1500],
+["Chocco Bunny","Legendary",1400],
+["Buho del Cielo","Legendary",1350],
+["Sigma Boy","Legendary",1350],
+["Quackula","Legendary",1270],
+["Pandaccini Bananini","Legendary",1250],
+["Bandito Axolito","Legendary",1230],
+["Cocosini Mama","Legendary",1200],
+["Strawberrelli Flamingelli","Legendary",1150],
+["Pipi Potato","Legendary",1100],
+["Caramello Filtrello","Legendary",1050],
+["Blueberrinni Octopusini","Legendary",1000],
+["Clickerino Crabo","Legendary",1000],
+["Quivioli Ameleonni","Legendary",900],
+["Glorbo Fruttodrillo","Legendary",750],
+["Lionel Cactuseli","Legendary",650],
+["Chef Crabracadabra","Legendary",600],
+["Ballerina Cappuccina","Legendary",500],
+["Chimpanzini Bananini","Legendary",300],
+["Burbaloni Loliloli","Legendary",200],
+
+["Mummio Rappitto","Epic",325],
+["Penguino Cocosino","Epic",300],
+["Wombo Rollo","Epic",275],
+["Penguin Tree","Epic",270],
+["Doi Doi Do","Epic",260],
+["Gato Celesto","Epic",250],
+["Salamino Penguino","Epic",250],
+["Frogato Pirato","Epic",240],
+["Mangolini Parrocini","Epic",235],
+["Avocadini Guffo","Epic",225],
+["Ti Ti Ti Sahur","Epic",225],
+["Brri Brri Bicus Dicus Bombicus","Epic",175],
+["Perochello Lemonchello","Epic",160],
+["Bananita Dolphinita","Epic",150],
+["Malame Amarele","Epic",140],
+["Bambini Crostini","Epic",135],
+["Trulimero Trulicina","Epic",125],
+["Avocadini Antilopini","Epic",115],
+["Brr Brr Patapim","Epic",100],
+["Cappuccino Assassino","Epic",75],
+
+["Pinealotto Fruttarino","Rare",75],
+["Pengolino Nuvoletto","Rare",72],
+["Pipi Avocado","Rare",70],
+["Frogo Elfo","Rare",67],
+["Tric Trac Baraboom","Rare",65],
+["Cupcake Koala","Rare",60],
+["Ta Ta Ta Ta Sahur","Rare",55],
+["Cacto Hipopotamo","Rare",50],
+["Boneca Ambalabu","Rare",40],
+["Bandito Bobritto","Rare",35],
+["Gangster Footera","Rare",30],
+["Trippi Troppi","Rare",15],
+
+["Holy Arepa","Common",14],
+["Pipi Corni","Common",14],
+["Pipi Kiwi","Common",13],
+["Tartaragno","Common",13],
+["Raccooni Jandelini","Common",12],
+["Noobini Santanini","Common",11],
+["Svinina Bombardino","Common",10],
+["Talpa Di Fero","Common",9],
+["Fluriflura","Common",7],
+["Tim Cheese","Common",5],
+["Lirilì Larilà","Common",3],
+["Noobini Pizzanini","Common",1]
+];
+
+const brainrotSelect = document.getElementById("brainrot");
+
+brainrots.forEach((b,index)=>{
+const option=document.createElement("option");
+option.value=index;
+option.textContent=`${b[0]} — ${b[1]} — ${money(b[2])}/s`;
+brainrotSelect.appendChild(option);
 });
 
-traits.forEach(b=>b.addEventListener("click",()=>b.classList.toggle("active")));
+function selectBrainrot(){
+const selected=brainrots[Number(brainrotSelect.value)];
+document.getElementById("baseIncome").value=selected[2];
+calculate();
+}
 
-function money(n){
- if(!Number.isFinite(n)) return "$0";
- const units=[["Qi",1e18],["Q",1e15],["T",1e12],["B",1e9],["M",1e6],["K",1e3]];
- for(const [u,v] of units) if(Math.abs(n)>=v) return "$"+(n/v).toFixed(2).replace(/\.00$/,"").replace(/(\.\d)0$/,"$1")+u;
- return "$"+n.toLocaleString(undefined,{maximumFractionDigits:2});
+function money(value){
+if(!Number.isFinite(value)) return "$0";
+
+const abs=Math.abs(value);
+
+const units=[
+[1e18,"Qi"],
+[1e15,"Q"],
+[1e12,"T"],
+[1e9,"B"],
+[1e6,"M"],
+[1e3,"K"]
+];
+
+for(const [size,suffix] of units){
+if(abs>=size){
+let number=value/size;
+let formatted;
+
+if(Math.abs(number)>=100){
+formatted=number.toFixed(0);
+}else if(Math.abs(number)>=10){
+formatted=number.toFixed(1);
+}else{
+formatted=number.toFixed(2);
 }
-function time(s){
- if(!Number.isFinite(s)||s<0) return "—";
- if(s<60) return Math.ceil(s)+" sec";
- const d=Math.floor(s/86400); s%=86400;
- const h=Math.floor(s/3600); s%=3600;
- const m=Math.floor(s/60);
- if(d) return d+"d "+h+"h "+m+"m";
- if(h) return h+"h "+m+"m";
- return m+"m";
+
+formatted=formatted.replace(/\.00$/,"").replace(/(\.\d)0$/,"$1");
+
+return "$"+formatted+suffix;
 }
+}
+
+return "$"+value.toLocaleString(undefined,{maximumFractionDigits:2});
+}
+
+function formatTime(seconds){
+if(!Number.isFinite(seconds)) return "Unable to calculate";
+if(seconds<=0) return "Goal reached";
+
+if(seconds<60){
+return Math.ceil(seconds)+" sec";
+}
+
+const days=Math.floor(seconds/86400);
+seconds%=86400;
+
+const hours=Math.floor(seconds/3600);
+seconds%=3600;
+
+const minutes=Math.floor(seconds/60);
+const secs=Math.floor(seconds%60);
+
+const parts=[];
+
+if(days) parts.push(days+" day"+(days===1?"":"s"));
+if(hours) parts.push(hours+" hr");
+if(minutes) parts.push(minutes+" min");
+if(!days && !hours && secs) parts.push(secs+" sec");
+
+return parts.join(", ");
+}
+
 function calculate(){
- const b=Math.max(0,Number(base.value)||0);
- const mutation=Number(document.getElementById("mutation").value)||1;
- const qty=Math.max(1,Number(document.getElementById("qty").value)||1);
- const cash=Math.max(0,Number(document.getElementById("cash").value)||0);
- const extra=Math.max(0,Number(document.getElementById("extra").value)||0);
- const selected=traits.filter(x=>x.classList.contains("active")).reduce((s,x)=>s+Number(x.dataset.v),0);
- const trait=selected+extra;
- const multiplier=mutation+trait;
- const sec=b*multiplier*qty*cash;
- document.getElementById("perSec").textContent=money(sec)+" / second";
- document.getElementById("perMin").textContent=money(sec*60);
- document.getElementById("perHour").textContent=money(sec*3600);
- document.getElementById("perDay").textContent=money(sec*86400);
- document.getElementById("multi").textContent=multiplier.toFixed(2).replace(/\.00$/,"")+"×";
- document.getElementById("traitBonus").textContent=trait.toFixed(2).replace(/\.00$/,"")+"×";
- const goal=Number(document.getElementById("goal").value)||0;
- document.getElementById("goalTime").textContent=goal>0&&sec>0?time(goal/sec):"—";
- document.getElementById("results").style.display="block";
-}
-document.getElementById("calculate").addEventListener("click",calculate);
 
-const requested=new URLSearchParams(location.search).get("brainrot");
-if(requested){
- const i=brainrots.findIndex(x=>x.name.toLowerCase()===requested.toLowerCase());
- if(i>=0){brainrot.value=String(i);base.value=brainrots[i].income;}
+const base=Math.max(0,Number(document.getElementById("baseIncome").value)||0);
+const mutation=Math.max(0,Number(document.getElementById("mutation").value)||1);
+const quantity=Math.max(1,Number(document.getElementById("quantity").value)||1);
+const cashMultiplier=Math.max(0,Number(document.getElementById("cashMultiplier").value)||1);
+const customTrait=Math.max(0,Number(document.getElementById("customTrait").value)||0);
+
+let traits=0;
+
+document.querySelectorAll(".traitBox:checked").forEach(box=>{
+traits+=Number(box.value)||0;
+});
+
+const combinedMultiplier=mutation+traits+customTrait;
+
+const perSecond=base*combinedMultiplier*quantity*cashMultiplier;
+
+document.getElementById("perSecond").textContent=money(perSecond);
+document.getElementById("perMinute").textContent=money(perSecond*60);
+document.getElementById("perHour").textContent=money(perSecond*3600);
+document.getElementById("perDay").textContent=money(perSecond*86400);
+
+document.getElementById("totalMultiplier").textContent=
+combinedMultiplier.toLocaleString(undefined,{maximumFractionDigits:2})+"×";
+
+document.getElementById("traitBonus").textContent=
+(traits+customTrait).toLocaleString(undefined,{maximumFractionDigits:2})+"×";
+
+const goal=Number(document.getElementById("goal").value);
+
+if(goal>0 && perSecond>0){
+document.getElementById("goalTime").textContent=formatTime(goal/perSecond);
+}else{
+document.getElementById("goalTime").textContent="Enter a goal";
 }
+}
+
+document.querySelectorAll("input,select").forEach(el=>{
+el.addEventListener("input",calculate);
+el.addEventListener("change",calculate);
+});
+
+const params=new URLSearchParams(window.location.search);
+const requested=params.get("brainrot");
+
+if(requested){
+const index=brainrots.findIndex(b=>b[0].toLowerCase()===requested.toLowerCase());
+
+if(index!==-1){
+brainrotSelect.value=index;
+}
+}
+
+selectBrainrot();
 </script>
+
 </body>
 </html>
