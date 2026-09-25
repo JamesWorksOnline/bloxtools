@@ -7,7 +7,7 @@
 <title>BloxTools - Free Roblox Calculators & Tools</title>
 
 <meta name="description"
-content="Free Roblox calculators and tools for Steal a Brainrot. Calculate Brainrot income, compare values and view income and stats for popular Brainrots.">
+content="Free Roblox calculators and tools for Steal a Brainrot. Calculate Brainrot income, compare values and browse income and stats for popular Brainrots.">
 
 <meta name="robots" content="index, follow">
 
@@ -200,6 +200,43 @@ min-height:auto !important;
 margin-top:8px;
 }
 
+.database-box{
+background:linear-gradient(135deg,#17112b,#12151d);
+border:1px solid #6048bd;
+border-radius:18px;
+padding:30px;
+margin-bottom:30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px;
+}
+
+.database-box h3{
+font-size:24px;
+margin-bottom:8px;
+}
+
+.database-box p{
+color:#9ba2b1;
+line-height:1.6;
+}
+
+.database-button{
+display:inline-block;
+background:#7657ff;
+color:white;
+padding:14px 20px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+white-space:nowrap;
+}
+
+.database-button:hover{
+background:#896eff;
+}
+
 footer{
 border-top:1px solid #252936;
 padding:30px;
@@ -207,6 +244,23 @@ text-align:center;
 color:#747b89;
 font-size:13px;
 line-height:1.6;
+}
+
+@media(max-width:700px){
+
+nav{
+padding:0 5%;
+}
+
+nav a{
+margin-left:12px;
+}
+
+.database-box{
+flex-direction:column;
+align-items:flex-start;
+}
+
 }
 
 </style>
@@ -222,7 +276,7 @@ Blox<span>Tools</span>
 
 <div>
 <a href="#tools">Tools</a>
-<a href="#brainrots">Brainrots</a>
+<a href="brainrots.html">Brainrot Database</a>
 <a href="#about">About</a>
 </div>
 
@@ -242,7 +296,7 @@ Roblox calculations made
 
 <p>
 Free calculators and tools for popular Roblox games.
-Compare values, calculate earnings and view stats
+Compare values, calculate earnings and browse stats
 for popular Brainrots.
 </p>
 
@@ -260,7 +314,7 @@ Free calculators for Steal a Brainrot.
 <div class="grid">
 
 
-<!-- TOOL 1 -->
+<!-- INCOME CALCULATOR -->
 
 <div class="card">
 
@@ -288,7 +342,7 @@ Open Calculator →
 </div>
 
 
-<!-- TOOL 2 -->
+<!-- VALUE CALCULATOR -->
 
 <div class="card">
 
@@ -316,7 +370,7 @@ Open Calculator →
 </div>
 
 
-<!-- TOOL 3 -->
+<!-- TIME CALCULATOR -->
 
 <div class="card">
 
@@ -349,6 +403,32 @@ Coming Soon →
 </section>
 
 
+<!-- DATABASE -->
+
+<section class="section">
+
+<div class="database-box">
+
+<div>
+
+<h3>🧠 Browse the Brainrot Database</h3>
+
+<p>
+Search Brainrots by name, filter by rarity and
+quickly check their listed base income.
+</p>
+
+</div>
+
+<a class="database-button" href="brainrots.html">
+Open Database →
+</a>
+
+</div>
+
+</section>
+
+
 <!-- POPULAR BRAINROTS -->
 
 <section class="section" id="brainrots">
@@ -361,6 +441,38 @@ popular Steal a Brainrot characters.
 </p>
 
 <div class="grid">
+
+
+<!-- SPYDER ELEPHANT -->
+
+<div class="card brainrot-card">
+
+<div class="og">
+OG
+</div>
+
+<div class="icon">
+🕷️🐘
+</div>
+
+<h3>
+Spyder Elephant
+</h3>
+
+<p>
+View Spyder Elephant income, rarity and estimated
+earnings in Steal a Brainrot.
+</p>
+
+<p class="income">
+$1B / second
+</p>
+
+<a href="spyder-elephant.html">
+View Income & Stats →
+</a>
+
+</div>
 
 
 <!-- STRAWBERRY ELEPHANT -->
