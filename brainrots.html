@@ -276,10 +276,9 @@ Blox<span>Tools</span>
 
 <p class="intro">
 Search Steal a Brainrot characters and quickly check
-their rarity and listed base income. More Brainrots
-and individual stat pages will be added over time.
+their rarity and listed base income. Click Calculate Income
+to automatically load that Brainrot into the calculator.
 </p>
-
 
 <div class="controls">
 
@@ -304,7 +303,6 @@ oninput="filterBrainrots()"
 
 </div>
 
-
 <div class="results" id="results"></div>
 
 <div class="grid" id="grid"></div>
@@ -315,12 +313,10 @@ No Brainrots found. Try another search.
 
 </main>
 
-
 <footer>
 BloxTools is an independent fan-made website and is not
 affiliated with Roblox or the creators of Steal a Brainrot.
 </footer>
-
 
 <script>
 
@@ -545,38 +541,55 @@ page:""
 ];
 
 
+/* MONEY FORMAT */
+
 function formatMoney(number){
 
 if(number >= 1000000000){
-return "$" + (number / 1000000000).toFixed(2)
-.replace(/\.00$/,"") + "B/sec";
+
+return "$" +
+(number / 1000000000)
+.toFixed(2)
+.replace(/\.00$/,"") +
+"B/sec";
+
 }
 
 if(number >= 1000000){
-return "$" + (number / 1000000).toFixed(2)
-.replace(/\.00$/,"") + "M/sec";
+
+return "$" +
+(number / 1000000)
+.toFixed(2)
+.replace(/\.00$/,"") +
+"M/sec";
+
 }
 
 if(number >= 1000){
-return "$" + (number / 1000).toFixed(2)
-.replace(/\.00$/,"") + "K/sec";
+
+return "$" +
+(number / 1000)
+.toFixed(2)
+.replace(/\.00$/,"") +
+"K/sec";
+
 }
 
-return "$" + number.toLocaleString() + "/sec";
+return "$" +
+number.toLocaleString() +
+"/sec";
 
 }
 
+
+/* RARITY CLASS */
 
 function rarityClass(rarity){
 
 if(rarity === "OG") return "og";
-
 if(rarity === "Secret") return "secret";
-
 if(rarity === "Brainrot God") return "god";
-
 if(rarity === "Mythic") return "mythic";
-
 if(rarity === "Legendary") return "legendary";
 
 return "";
@@ -584,16 +597,34 @@ return "";
 }
 
 
+/* CREATE CALCULATOR URL */
+
+function calculatorURL(brainrotName){
+
+return "brainrot-income.html?brainrot=" +
+encodeURIComponent(brainrotName);
+
+}
+
+
+/* RENDER DATABASE */
+
 function renderBrainrots(list){
 
-const grid = document.getElementById("grid");
-const noResults = document.getElementById("noResults");
-const results = document.getElementById("results");
+const grid =
+document.getElementById("grid");
+
+const noResults =
+document.getElementById("noResults");
+
+const results =
+document.getElementById("results");
 
 grid.innerHTML = "";
 
 results.textContent =
-list.length + " Brainrot" +
+list.length +
+" Brainrot" +
 (list.length === 1 ? "" : "s") +
 " found";
 
@@ -610,12 +641,22 @@ noResults.style.display = "none";
 
 list.forEach(brainrot => {
 
-const card = document.createElement("div");
+const card =
+document.createElement("div");
 
 card.className = "card";
 
 
 let link = "";
+
+
+/*
+If a Brainrot has its own guide page,
+send the visitor there.
+
+Otherwise send them directly to the
+calculator with that Brainrot selected.
+*/
 
 if(brainrot.page){
 
@@ -627,7 +668,9 @@ brainrot.page +
 }else{
 
 link =
-'<a href="brainrot-income.html">Calculate Income →</a>';
+'<a href="' +
+calculatorURL(brainrot.name) +
+'">Calculate Income →</a>';
 
 }
 
@@ -665,6 +708,8 @@ grid.appendChild(card);
 }
 
 
+/* SEARCH + FILTER */
+
 function filterBrainrots(){
 
 const search =
@@ -677,7 +722,8 @@ const rarity =
 document.getElementById("rarity").value;
 
 
-const filtered = brainrots.filter(brainrot => {
+const filtered =
+brainrots.filter(brainrot => {
 
 const matchesSearch =
 brainrot.name
@@ -688,7 +734,8 @@ const matchesRarity =
 rarity === "all" ||
 brainrot.rarity === rarity;
 
-return matchesSearch && matchesRarity;
+return matchesSearch &&
+matchesRarity;
 
 });
 
@@ -697,6 +744,8 @@ renderBrainrots(filtered);
 
 }
 
+
+/* LOAD DATABASE */
 
 renderBrainrots(brainrots);
 
