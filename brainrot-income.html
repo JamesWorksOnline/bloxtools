@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Steal a Brainrot Income Calculator | BloxTools</title>
+<meta name="description" content="Calculate your Steal a Brainrot income per second, minute, hour and day. Find out how long it takes to reach your money goal.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#0b0d12;
+  color:white;
+  min-height:100vh;
+}
+
+nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 8%;
+  border-bottom:1px solid #252936;
+  background:#10131a;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+}
+
+.logo span{color:#7c5cff}
+
+nav a{
+  color:#b8bdca;
+  text-decoration:none;
+}
+
+.container{
+  width:min(750px,92%);
+  margin:60px auto;
+}
+
+.back{
+  color:#9c87ff;
+  text-decoration:none;
+  display:inline-block;
+  margin-bottom:30px;
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.subtitle{
+  color:#9ba2b1;
+  line-height:1.6;
+  margin-bottom:35px;
+}
+
+.calculator{
+  background:#12151d;
+  border:1px solid #292e3b;
+  border-radius:18px;
+  padding:30px;
+}
+
+label{
+  display:block;
+  margin:20px 0 8px;
+  font-weight:bold;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  border-radius:10px;
+  border:1px solid #343a49;
+  background:#0c0f15;
+  color:white;
+  font-size:16px;
+}
+
+input:focus{
+  outline:none;
+  border-color:#7c5cff;
+}
+
+button{
+  width:100%;
+  margin-top:25px;
+  padding:16px;
+  border:0;
+  border-radius:10px;
+  background:#7c5cff;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.results{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:25px;
+}
+
+.result{
+  background:#0c0f15;
+  border:1px solid #292e3b;
+  padding:18px;
+  border-radius:12px;
+}
+
+.result small{
+  color:#8f96a5;
+}
+
+.result strong{
+  display:block;
+  margin-top:8px;
+  font-size:21px;
+  color:#a996ff;
+}
+
+.goal-result{
+  margin-top:15px;
+  background:#171b25;
+  padding:18px;
+  border-radius:12px;
+  line-height:1.6;
+}
+
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:#747b89;
+  font-size:13px;
+}
+
+@media(max-width:550px){
+  h1{font-size:32px}
+  .results{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">Blox<span>Tools</span></div>
+  <a href="index.html">Home</a>
+</nav>
+
+<main class="container">
+
+<a class="back" href="index.html">← Back to all tools</a>
+
+<h1>🧠 Brainrot Income Calculator</h1>
+
+<p class="subtitle">
+Calculate how much your Steal a Brainrot setup earns over time
+and how long it will take you to reach your target amount.
+</p>
+
+<div class="calculator">
+
+<label for="income">Income per second ($)</label>
+<input
+  id="income"
+  type="number"
+  min="0"
+  step="any"
+  placeholder="Example: 250000"
+>
+
+<label for="quantity">How many of this Brainrot?</label>
+<input
+  id="quantity"
+  type="number"
+  min="1"
+  step="1"
+  value="1"
+>
+
+<label for="goal">Money goal ($) — optional</label>
+<input
+  id="goal"
+  type="number"
+  min="0"
+  step="any"
+  placeholder="Example: 1000000000"
+>
+
+<button onclick="calculate()">Calculate Income</button>
+
+<div class="results">
+
+<div class="result">
+  <small>Per Second</small>
+  <strong id="second">$0</strong>
+</div>
+
+<div class="result">
+  <small>Per Minute</small>
+  <strong id="minute">$0</strong>
+</div>
+
+<div class="result">
+  <small>Per Hour</small>
+  <strong id="hour">$0</strong>
+</div>
+
+<div class="result">
+  <small>Per Day</small>
+  <strong id="day">$0</strong>
+</div>
+
+</div>
+
+<div class="goal-result" id="goalResult">
+Enter your income above to calculate your earnings.
+</div>
+
+</div>
+
+</main>
+
+<footer>
+BloxTools is an independent fan-made website and is not affiliated with Roblox.
+</footer>
+
+<script>
+
+function formatMoney(number){
+
+  if(number >= 1e15)
+    return "$" + (number / 1e15).toFixed(2) + "Q";
+
+  if(number >= 1e12)
+    return "$" + (number / 1e12).toFixed(2) + "T";
+
+  if(number >= 1e9)
+    return "$" + (number / 1e9).toFixed(2) + "B";
+
+  if(number >= 1e6)
+    return "$" + (number / 1e6).toFixed(2) + "M";
+
+  if(number >= 1e3)
+    return "$" + (number / 1e3).toFixed(2) + "K";
+
+  return "$" + number.toLocaleString(undefined,{
+    maximumFractionDigits:2
+  });
+}
+
+
+function formatTime(seconds){
+
+  if(seconds < 60)
+    return seconds.toFixed(1) + " seconds";
+
+  if(seconds < 3600)
+    return (seconds / 60).toFixed(1) + " minutes";
+
+  if(seconds < 86400)
+    return (seconds / 3600).toFixed(1) + " hours";
+
+  if(seconds < 31536000)
+    return (seconds / 86400).toFixed(1) + " days";
+
+  return (seconds / 31536000).toFixed(1) + " years";
+}
+
+
+function calculate(){
+
+  const income =
+    parseFloat(document.getElementById("income").value);
+
+  const quantity =
+    parseInt(document.getElementById("quantity").value) || 1;
+
+  const goal =
+    parseFloat(document.getElementById("goal").value);
+
+
+  if(isNaN(income) || income < 0){
+
+    document.getElementById("goalResult").innerHTML =
+      "⚠️ Enter a valid income per second.";
+
+    return;
+  }
+
+
+  const perSecond = income * quantity;
+
+  const perMinute = perSecond * 60;
+
+  const perHour = perSecond * 3600;
+
+  const perDay = perSecond * 86400;
+
+
+  document.getElementById("second").textContent =
+    formatMoney(perSecond);
+
+  document.getElementById("minute").textContent =
+    formatMoney(perMinute);
+
+  document.getElementById("hour").textContent =
+    formatMoney(perHour);
+
+  document.getElementById("day").textContent =
+    formatMoney(perDay);
+
+
+  if(!isNaN(goal) && goal > 0 && perSecond > 0){
+
+    const secondsNeeded = goal / perSecond;
+
+    document.getElementById("goalResult").innerHTML =
+      "🎯 At <strong>" +
+      formatMoney(perSecond) +
+      "/second</strong>, you'll reach <strong>" +
+      formatMoney(goal) +
+      "</strong> in approximately <strong>" +
+      formatTime(secondsNeeded) +
+      "</strong>.";
+
+  }else{
+
+    document.getElementById("goalResult").innerHTML =
+      "💡 Add a money goal above to see how long it will take you to reach it.";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
