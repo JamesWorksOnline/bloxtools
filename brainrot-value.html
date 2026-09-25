@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Steal a Brainrot Value Calculator | BloxTools</title>
+<meta name="description" content="Compare Steal a Brainrot values and calculate the effect of mutations and traits with the free BloxTools value calculator.">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#0b0d12;
+  color:white;
+  min-height:100vh;
+}
+
+nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 8%;
+  background:#10131a;
+  border-bottom:1px solid #252936;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#7c5cff;
+}
+
+nav a{
+  color:#b8bdca;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1000px,92%);
+  margin:55px auto;
+}
+
+.back{
+  color:#9c87ff;
+  text-decoration:none;
+  display:inline-block;
+  margin-bottom:30px;
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:12px;
+}
+
+.subtitle{
+  color:#9ba2b1;
+  line-height:1.6;
+  margin-bottom:35px;
+  max-width:700px;
+}
+
+.compare-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.box{
+  background:#12151d;
+  border:1px solid #292e3b;
+  border-radius:18px;
+  padding:25px;
+}
+
+.box h2{
+  margin-bottom:10px;
+}
+
+.side-label{
+  color:#a996ff;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  margin:18px 0 8px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+input,select{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #343a49;
+  background:#0c0f15;
+  color:white;
+  font-size:16px;
+}
+
+input:focus,select:focus{
+  outline:none;
+  border-color:#7c5cff;
+}
+
+.preview{
+  margin-top:20px;
+  background:#0c0f15;
+  border:1px solid #292e3b;
+  padding:18px;
+  border-radius:12px;
+}
+
+.preview small{
+  color:#8f96a5;
+}
+
+.preview strong{
+  display:block;
+  color:#a996ff;
+  font-size:25px;
+  margin-top:7px;
+}
+
+button{
+  width:100%;
+  padding:17px;
+  margin-top:22px;
+  border:0;
+  border-radius:11px;
+  background:#7c5cff;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.final-result{
+  margin-top:20px;
+  background:#171b25;
+  border:1px solid #303648;
+  border-radius:16px;
+  padding:25px;
+  text-align:center;
+  line-height:1.7;
+  font-size:17px;
+}
+
+.notice{
+  margin-top:20px;
+  color:#7f8797;
+  font-size:13px;
+  line-height:1.5;
+}
+
+footer{
+  border-top:1px solid #252936;
+  text-align:center;
+  color:#747b89;
+  padding:35px 20px;
+  font-size:13px;
+}
+
+@media(max-width:700px){
+  .compare-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:32px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+Blox<span>Tools</span>
+</div>
+
+<a href="index.html">
+Home
+</a>
+
+</nav>
+
+
+<main class="container">
+
+<a class="back" href="index.html">
+← Back to all tools
+</a>
+
+<h1>💰 Brainrot Value Calculator</h1>
+
+<p class="subtitle">
+Enter two Brainrot values and apply mutations or traits to
+quickly compare their estimated adjusted values.
+</p>
+
+
+<div class="compare-grid">
+
+
+<!-- BRAINROT A -->
+
+<div class="box">
+
+<div class="side-label">
+BRAINROT A
+</div>
+
+<h2>Your Brainrot</h2>
+
+<label>
+Brainrot Name
+</label>
+
+<input
+id="nameA"
+type="text"
+placeholder="Example: Brainrot A"
+>
+
+
+<label>
+Base Value ($)
+</label>
+
+<input
+id="valueA"
+type="number"
+min="0"
+placeholder="Example: 10000000"
+>
+
+
+<label>
+Mutation
+</label>
+
+<select id="mutationA">
+
+<option value="1">
+None — 1x
+</option>
+
+<option value="1.25">
+Gold — 1.25x
+</option>
+
+<option value="1.5">
+Diamond — 1.5x
+</option>
+
+<option value="2">
+Rainbow — 2x
+</option>
+
+<option value="3">
+Special — 3x
+</option>
+
+</select>
+
+
+<label>
+Trait Multiplier
+</label>
+
+<input
+id="traitA"
+type="number"
+min="1"
+step="0.1"
+value="1"
+>
+
+
+<div class="preview">
+
+<small>
+Adjusted Value
+</small>
+
+<strong id="adjustedA">
+$0
+</strong>
+
+</div>
+
+</div>
+
+
+
+<!-- BRAINROT B -->
+
+<div class="box">
+
+<div class="side-label">
+BRAINROT B
+</div>
+
+<h2>Other Brainrot</h2>
+
+<label>
+Brainrot Name
+</label>
+
+<input
+id="nameB"
+type="text"
+placeholder="Example: Brainrot B"
+>
+
+
+<label>
+Base Value ($)
+</label>
+
+<input
+id="valueB"
+type="number"
+min="0"
+placeholder="Example: 15000000"
+>
+
+
+<label>
+Mutation
+</label>
+
+<select id="mutationB">
+
+<option value="1">
+None — 1x
+</option>
+
+<option value="1.25">
+Gold — 1.25x
+</option>
+
+<option value="1.5">
+Diamond — 1.5x
+</option>
+
+<option value="2">
+Rainbow — 2x
+</option>
+
+<option value="3">
+Special — 3x
+</option>
+
+</select>
+
+
+<label>
+Trait Multiplier
+</label>
+
+<input
+id="traitB"
+type="number"
+min="1"
+step="0.1"
+value="1"
+>
+
+
+<div class="preview">
+
+<small>
+Adjusted Value
+</small>
+
+<strong id="adjustedB">
+$0
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button onclick="compareBrainrots()">
+Compare Brainrots
+</button>
+
+
+<div
+class="final-result"
+id="finalResult"
+>
+
+Enter both values above to compare them.
+
+</div>
+
+
+<p class="notice">
+Values entered into this calculator are provided by the user.
+BloxTools does not guarantee in-game or trading values.
+</p>
+
+
+</main>
+
+
+<footer>
+
+BloxTools is an independent fan-made website
+and is not affiliated with Roblox.
+
+</footer>
+
+
+<script>
+
+function formatMoney(number){
+
+  if(number >= 1e18)
+    return "$" + (number / 1e18).toFixed(2) + "Qi";
+
+  if(number >= 1e15)
+    return "$" + (number / 1e15).toFixed(2) + "Q";
+
+  if(number >= 1e12)
+    return "$" + (number / 1e12).toFixed(2) + "T";
+
+  if(number >= 1e9)
+    return "$" + (number / 1e9).toFixed(2) + "B";
+
+  if(number >= 1e6)
+    return "$" + (number / 1e6).toFixed(2) + "M";
+
+  if(number >= 1e3)
+    return "$" + (number / 1e3).toFixed(2) + "K";
+
+  return "$" + number.toLocaleString(undefined,{
+    maximumFractionDigits:2
+  });
+
+}
+
+
+function compareBrainrots(){
+
+  const nameA =
+  document.getElementById("nameA").value.trim()
+  || "Brainrot A";
+
+  const nameB =
+  document.getElementById("nameB").value.trim()
+  || "Brainrot B";
+
+
+  const valueA =
+  parseFloat(
+    document.getElementById("valueA").value
+  );
+
+  const valueB =
+  parseFloat(
+    document.getElementById("valueB").value
+  );
+
+
+  const mutationA =
+  parseFloat(
+    document.getElementById("mutationA").value
+  );
+
+  const mutationB =
+  parseFloat(
+    document.getElementById("mutationB").value
+  );
+
+
+  const traitA =
+  parseFloat(
+    document.getElementById("traitA").value
+  ) || 1;
+
+  const traitB =
+  parseFloat(
+    document.getElementById("traitB").value
+  ) || 1;
+
+
+  if(
+    isNaN(valueA) ||
+    isNaN(valueB) ||
+    valueA < 0 ||
+    valueB < 0
+  ){
+
+    document.getElementById(
+      "finalResult"
+    ).innerHTML =
+    "⚠️ Please enter a valid base value for both Brainrots.";
+
+    return;
+
+  }
+
+
+  const adjustedA =
+  valueA * mutationA * traitA;
+
+  const adjustedB =
+  valueB * mutationB * traitB;
+
+
+  document.getElementById(
+    "adjustedA"
+  ).textContent =
+  formatMoney(adjustedA);
+
+
+  document.getElementById(
+    "adjustedB"
+  ).textContent =
+  formatMoney(adjustedB);
+
+
+  const difference =
+  Math.abs(adjustedA - adjustedB);
+
+
+  let result = "";
+
+
+  if(adjustedA > adjustedB){
+
+    const percent =
+    adjustedB > 0
+    ? ((adjustedA-adjustedB)/adjustedB)*100
+    : 100;
+
+    result =
+    "🟣 <strong>" +
+    nameA +
+    "</strong> has the higher calculated value.<br><br>" +
+
+    formatMoney(adjustedA) +
+    " vs " +
+    formatMoney(adjustedB) +
+    "<br><br>Difference: <strong>" +
+    formatMoney(difference) +
+    "</strong> (" +
+    percent.toFixed(1) +
+    "%)";
+
+  }
+
+  else if(adjustedB > adjustedA){
+
+    const percent =
+    adjustedA > 0
+    ? ((adjustedB-adjustedA)/adjustedA)*100
+    : 100;
+
+    result =
+    "🟣 <strong>" +
+    nameB +
+    "</strong> has the higher calculated value.<br><br>" +
+
+    formatMoney(adjustedB) +
+    " vs " +
+    formatMoney(adjustedA) +
+    "<br><br>Difference: <strong>" +
+    formatMoney(difference) +
+    "</strong> (" +
+    percent.toFixed(1) +
+    "%)";
+
+  }
+
+  else{
+
+    result =
+    "⚖️ Both Brainrots have the same calculated value: <strong>" +
+    formatMoney(adjustedA) +
+    "</strong>.";
+
+  }
+
+
+  document.getElementById(
+    "finalResult"
+  ).innerHTML = result;
+
+}
+
+</script>
+
+</body>
+</html>
