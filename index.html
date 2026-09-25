@@ -7,7 +7,7 @@
 <title>BloxTools - Free Roblox Calculators & Tools</title>
 
 <meta name="description"
-content="Free Roblox calculators and tools for Steal a Brainrot. Calculate Brainrot income, compare values and browse income and stats for popular Brainrots.">
+content="Free Roblox calculators and tools for Steal a Brainrot. Calculate Brainrot income, profit, payback time, compare values and browse Brainrot stats.">
 
 <meta name="robots" content="index, follow">
 
@@ -19,6 +19,10 @@ content="Free Roblox calculators and tools for Steal a Brainrot. Calculate Brain
 box-sizing:border-box;
 margin:0;
 padding:0;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -56,6 +60,10 @@ margin-left:25px;
 font-size:14px;
 }
 
+nav a:hover{
+color:white;
+}
+
 .hero{
 text-align:center;
 padding:100px 20px 70px;
@@ -84,11 +92,47 @@ color:#7c5cff;
 }
 
 .hero p{
-max-width:620px;
+max-width:650px;
 margin:25px auto;
 color:#9ba2b1;
 font-size:18px;
 line-height:1.6;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.hero-button{
+display:inline-block;
+padding:14px 20px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+font-size:14px;
+}
+
+.primary{
+background:#7657ff;
+color:white;
+}
+
+.primary:hover{
+background:#896eff;
+}
+
+.secondary{
+background:#171b25;
+border:1px solid #303648;
+color:white;
+}
+
+.secondary:hover{
+border-color:#7c5cff;
 }
 
 .section{
@@ -254,6 +298,11 @@ padding:0 5%;
 
 nav a{
 margin-left:12px;
+font-size:12px;
+}
+
+.hero{
+padding-top:70px;
 }
 
 .database-box{
@@ -276,7 +325,7 @@ Blox<span>Tools</span>
 
 <div>
 <a href="#tools">Tools</a>
-<a href="brainrots.html">Brainrot Database</a>
+<a href="brainrots.html">Database</a>
 <a href="#about">About</a>
 </div>
 
@@ -286,7 +335,7 @@ Blox<span>Tools</span>
 <section class="hero">
 
 <div class="badge">
-⚡ Free Roblox Tools
+⚡ Free Steal a Brainrot Tools
 </div>
 
 <h1>
@@ -295,10 +344,22 @@ Roblox calculations made
 </h1>
 
 <p>
-Free calculators and tools for popular Roblox games.
-Compare values, calculate earnings and browse stats
-for popular Brainrots.
+Free calculators and tools for Steal a Brainrot.
+Calculate income, check profit and payback time,
+compare values and browse the Brainrot database.
 </p>
+
+<div class="hero-buttons">
+
+<a class="hero-button primary" href="brainrot-income.html">
+Calculate Income →
+</a>
+
+<a class="hero-button secondary" href="brainrots.html">
+Browse Database
+</a>
+
+</div>
 
 </section>
 
@@ -308,8 +369,9 @@ for popular Brainrots.
 <h2>Popular Tools</h2>
 
 <p class="section-description">
-Free calculators for Steal a Brainrot.
+Free Steal a Brainrot calculators built to make the numbers easier.
 </p>
+
 
 <div class="grid">
 
@@ -331,12 +393,40 @@ Brainrot Income Calculator
 </h3>
 
 <p>
-Calculate how much your Steal a Brainrot setup earns
-per second, minute, hour and day.
+Calculate earnings per second, minute, hour and day
+with mutations, traits and multipliers.
 </p>
 
 <a href="brainrot-income.html">
 Open Calculator →
+</a>
+
+</div>
+
+
+<!-- PROFIT CALCULATOR -->
+
+<div class="card">
+
+<div class="live">
+● LIVE
+</div>
+
+<div class="icon">
+📈
+</div>
+
+<h3>
+Brainrot Profit Calculator
+</h3>
+
+<p>
+Calculate break-even time, ROI and how much profit
+a Brainrot can generate over time.
+</p>
+
+<a href="brainrot-profit.html">
+Calculate Profit →
 </a>
 
 </div>
@@ -364,7 +454,7 @@ the effect of mutations and traits.
 </p>
 
 <a href="brainrot-value.html">
-Open Calculator →
+Compare Values →
 </a>
 
 </div>
@@ -414,8 +504,9 @@ Coming Soon →
 <h3>🧠 Browse the Brainrot Database</h3>
 
 <p>
-Search Brainrots by name, filter by rarity and
-quickly check their listed base income.
+Search Brainrots by name, filter by rarity,
+sort by income and send any listed Brainrot
+straight into the income calculator.
 </p>
 
 </div>
@@ -439,6 +530,7 @@ Open Database →
 Check income, rarity and earnings information for
 popular Steal a Brainrot characters.
 </p>
+
 
 <div class="grid">
 
@@ -519,7 +611,6 @@ and is not affiliated with Roblox or the creators
 of Steal a Brainrot.
 
 </footer>
-
 
 </body>
 </html>
