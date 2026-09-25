@@ -4,188 +4,269 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Steal a Brainrot Value Calculator | BloxTools</title>
-<meta name="description" content="Compare Steal a Brainrot values and calculate the effect of mutations and traits with the free BloxTools value calculator.">
+<title>Brainrot Comparison Calculator | BloxTools</title>
+
+<meta name="description"
+content="Compare two Steal a Brainrot characters using base income, mutations and custom trait bonuses with the free BloxTools comparison calculator.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://jamesworksonline.github.io/bloxtools/brainrot-value.html">
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-  font-family:Arial,sans-serif;
-  background:#0b0d12;
-  color:white;
-  min-height:100vh;
+font-family:Arial,sans-serif;
+background:#0b0d12;
+color:white;
+min-height:100vh;
 }
 
 nav{
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 8%;
-  background:#10131a;
-  border-bottom:1px solid #252936;
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 8%;
+background:#10131a;
+border-bottom:1px solid #252936;
 }
 
 .logo{
-  font-size:25px;
-  font-weight:800;
+font-size:25px;
+font-weight:800;
+color:white;
+text-decoration:none;
 }
 
 .logo span{
-  color:#7c5cff;
+color:#7c5cff;
 }
 
 nav a{
-  color:#b8bdca;
-  text-decoration:none;
+color:#b8bdca;
+text-decoration:none;
+margin-left:20px;
+}
+
+nav a:hover{
+color:white;
 }
 
 .container{
-  width:min(1000px,92%);
-  margin:55px auto;
+width:min(1000px,92%);
+margin:55px auto;
 }
 
 .back{
-  color:#9c87ff;
-  text-decoration:none;
-  display:inline-block;
-  margin-bottom:30px;
+color:#9c87ff;
+text-decoration:none;
+display:inline-block;
+margin-bottom:30px;
+}
+
+.badge{
+display:inline-block;
+padding:6px 10px;
+border-radius:100px;
+background:#173d2a;
+color:#72e6a5;
+font-size:11px;
+font-weight:bold;
+margin-bottom:15px;
 }
 
 h1{
-  font-size:42px;
-  margin-bottom:12px;
+font-size:clamp(34px,6vw,48px);
+margin-bottom:12px;
 }
 
 .subtitle{
-  color:#9ba2b1;
-  line-height:1.6;
-  margin-bottom:35px;
-  max-width:700px;
+color:#9ba2b1;
+line-height:1.6;
+margin-bottom:35px;
+max-width:750px;
 }
 
 .compare-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
 .box{
-  background:#12151d;
-  border:1px solid #292e3b;
-  border-radius:18px;
-  padding:25px;
+background:#12151d;
+border:1px solid #292e3b;
+border-radius:18px;
+padding:25px;
 }
 
 .box h2{
-  margin-bottom:10px;
+margin-bottom:10px;
 }
 
 .side-label{
-  color:#a996ff;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:20px;
+color:#a996ff;
+font-size:13px;
+font-weight:bold;
+margin-bottom:20px;
 }
 
 label{
-  display:block;
-  margin:18px 0 8px;
-  font-weight:bold;
-  font-size:14px;
+display:block;
+margin:18px 0 8px;
+font-weight:bold;
+font-size:14px;
 }
 
 input,select{
-  width:100%;
-  padding:14px;
-  border-radius:10px;
-  border:1px solid #343a49;
-  background:#0c0f15;
-  color:white;
-  font-size:16px;
+width:100%;
+padding:14px;
+border-radius:10px;
+border:1px solid #343a49;
+background:#0c0f15;
+color:white;
+font-size:16px;
 }
 
 input:focus,select:focus{
-  outline:none;
-  border-color:#7c5cff;
+outline:none;
+border-color:#7c5cff;
+}
+
+.helper{
+color:#777f90;
+font-size:12px;
+line-height:1.5;
+margin-top:7px;
 }
 
 .preview{
-  margin-top:20px;
-  background:#0c0f15;
-  border:1px solid #292e3b;
-  padding:18px;
-  border-radius:12px;
+margin-top:20px;
+background:#0c0f15;
+border:1px solid #292e3b;
+padding:18px;
+border-radius:12px;
 }
 
 .preview small{
-  color:#8f96a5;
+color:#8f96a5;
 }
 
 .preview strong{
-  display:block;
-  color:#a996ff;
-  font-size:25px;
-  margin-top:7px;
+display:block;
+color:#a996ff;
+font-size:25px;
+margin-top:7px;
 }
 
 button{
-  width:100%;
-  padding:17px;
-  margin-top:22px;
-  border:0;
-  border-radius:11px;
-  background:#7c5cff;
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
+width:100%;
+padding:17px;
+margin-top:22px;
+border:0;
+border-radius:11px;
+background:#7c5cff;
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
 }
 
 button:hover{
-  opacity:.9;
+opacity:.9;
 }
 
 .final-result{
-  margin-top:20px;
-  background:#171b25;
-  border:1px solid #303648;
-  border-radius:16px;
-  padding:25px;
-  text-align:center;
-  line-height:1.7;
-  font-size:17px;
+margin-top:20px;
+background:#171b25;
+border:1px solid #303648;
+border-radius:16px;
+padding:25px;
+text-align:center;
+line-height:1.7;
+font-size:17px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:20px;
+}
+
+.stat{
+background:#0c0f15;
+border:1px solid #292e3b;
+border-radius:12px;
+padding:18px;
+text-align:center;
+}
+
+.stat small{
+color:#8f96a5;
+}
+
+.stat strong{
+display:block;
+margin-top:8px;
+font-size:18px;
+color:#72e6a5;
 }
 
 .notice{
-  margin-top:20px;
-  color:#7f8797;
-  font-size:13px;
-  line-height:1.5;
+margin-top:25px;
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:14px;
+padding:20px;
+color:#8f96a5;
+font-size:13px;
+line-height:1.7;
+}
+
+.notice strong{
+color:white;
 }
 
 footer{
-  border-top:1px solid #252936;
-  text-align:center;
-  color:#747b89;
-  padding:35px 20px;
-  font-size:13px;
+border-top:1px solid #252936;
+text-align:center;
+color:#747b89;
+padding:35px 20px;
+font-size:13px;
+margin-top:60px;
+line-height:1.6;
 }
 
 @media(max-width:700px){
-  .compare-grid{
-    grid-template-columns:1fr;
-  }
 
-  h1{
-    font-size:32px;
-  }
+.compare-grid{
+grid-template-columns:1fr;
 }
+
+.stats{
+grid-template-columns:1fr;
+}
+
+nav{
+padding:0 5%;
+}
+
+nav a{
+font-size:12px;
+margin-left:10px;
+}
+
+}
+
 </style>
 </head>
 
@@ -193,16 +274,16 @@ footer{
 
 <nav>
 
-<div class="logo">
+<a class="logo" href="index.html">
 Blox<span>Tools</span>
-</div>
-
-<a href="index.html">
-Home
 </a>
 
-</nav>
+<div>
+<a href="brainrots.html">Database</a>
+<a href="brainrot-income.html">Income Calculator</a>
+</div>
 
+</nav>
 
 <main class="container">
 
@@ -210,16 +291,22 @@ Home
 ← Back to all tools
 </a>
 
-<h1>💰 Brainrot Value Calculator</h1>
+<br>
+
+<div class="badge">
+● UPDATED
+</div>
+
+<h1>⚖️ Brainrot Comparison Calculator</h1>
 
 <p class="subtitle">
-Enter two Brainrot values and apply mutations or traits to
-quickly compare their estimated adjusted values.
+Compare the earning power of two Steal a Brainrot characters.
+Enter each Brainrot's base income, mutation and any extra
+trait bonus to see which setup generates more money.
 </p>
 
 
 <div class="compare-grid">
-
 
 <!-- BRAINROT A -->
 
@@ -238,19 +325,20 @@ Brainrot Name
 <input
 id="nameA"
 type="text"
-placeholder="Example: Brainrot A"
+placeholder="Example: Spyder Elephant"
 >
 
 
 <label>
-Base Value ($)
+Base Income / Second ($)
 </label>
 
 <input
 id="valueA"
 type="number"
 min="0"
-placeholder="Example: 10000000"
+step="any"
+placeholder="Example: 1000000000"
 >
 
 
@@ -261,45 +349,88 @@ Mutation
 <select id="mutationA">
 
 <option value="1">
-None — 1x
+Default — 1×
 </option>
 
 <option value="1.25">
-Gold — 1.25x
+Gold — 1.25×
 </option>
 
 <option value="1.5">
-Diamond — 1.5x
+Diamond — 1.5×
 </option>
 
 <option value="2">
-Rainbow — 2x
+Bloodrot — 2×
 </option>
 
-<option value="3">
-Special — 3x
+<option value="4">
+Candy — 4×
+</option>
+
+<option value="6">
+Lava — 6×
+</option>
+
+<option value="7">
+Galaxy — 7×
+</option>
+
+<option value="7.5">
+Yin Yang — 7.5×
+</option>
+
+<option value="8.5">
+Radioactive — 8.5×
+</option>
+
+<option value="9">
+Cursed — 9×
+</option>
+
+<option value="10">
+Rainbow — 10×
+</option>
+
+<option value="10">
+Divine — 10×
+</option>
+
+<option value="11">
+Cyber — 11×
+</option>
+
+<option value="12">
+Phantom — 12×
+</option>
+
+<option value="13">
+Crystal — 13×
 </option>
 
 </select>
 
 
 <label>
-Trait Multiplier
-</label>
+Extra Trait Bonus</label>
 
 <input
 id="traitA"
 type="number"
-min="1"
+min="0"
 step="0.1"
-value="1"
+value="0"
 >
+
+<div class="helper">
+Optional additional bonus. Enter 0 if you only want to compare the mutation.
+</div>
 
 
 <div class="preview">
 
 <small>
-Adjusted Value
+Calculated Income / Second
 </small>
 
 <strong id="adjustedA">
@@ -309,7 +440,6 @@ $0
 </div>
 
 </div>
-
 
 
 <!-- BRAINROT B -->
@@ -329,19 +459,20 @@ Brainrot Name
 <input
 id="nameB"
 type="text"
-placeholder="Example: Brainrot B"
+placeholder="Example: Strawberry Elephant"
 >
 
 
 <label>
-Base Value ($)
+Base Income / Second ($)
 </label>
 
 <input
 id="valueB"
 type="number"
 min="0"
-placeholder="Example: 15000000"
+step="any"
+placeholder="Example: 750000000"
 >
 
 
@@ -352,45 +483,89 @@ Mutation
 <select id="mutationB">
 
 <option value="1">
-None — 1x
+Default — 1×
 </option>
 
 <option value="1.25">
-Gold — 1.25x
+Gold — 1.25×
 </option>
 
 <option value="1.5">
-Diamond — 1.5x
+Diamond — 1.5×
 </option>
 
 <option value="2">
-Rainbow — 2x
+Bloodrot — 2×
 </option>
 
-<option value="3">
-Special — 3x
+<option value="4">
+Candy — 4×
+</option>
+
+<option value="6">
+Lava — 6×
+</option>
+
+<option value="7">
+Galaxy — 7×
+</option>
+
+<option value="7.5">
+Yin Yang — 7.5×
+</option>
+
+<option value="8.5">
+Radioactive — 8.5×
+</option>
+
+<option value="9">
+Cursed — 9×
+</option>
+
+<option value="10">
+Rainbow — 10×
+</option>
+
+<option value="10">
+Divine — 10×
+</option>
+
+<option value="11">
+Cyber — 11×
+</option>
+
+<option value="12">
+Phantom — 12×
+</option>
+
+<option value="13">
+Crystal — 13×
 </option>
 
 </select>
 
 
 <label>
-Trait Multiplier
+Extra Trait Bonus
 </label>
 
 <input
 id="traitB"
 type="number"
-min="1"
+min="0"
 step="0.1"
-value="1"
+value="0"
 >
+
+<div class="helper">
+Optional additional bonus. Enter 0 if you only want to compare the mutation.
+</div>
 
 
 <div class="preview">
 
 <small>
-Adjusted Value
+Calculated Income / Second
 </small>
 
 <strong id="adjustedB">
@@ -405,7 +580,7 @@ $0
 
 
 <button onclick="compareBrainrots()">
-Compare Brainrots
+⚡ Compare Brainrots
 </button>
 
 
@@ -414,205 +589,418 @@ class="final-result"
 id="finalResult"
 >
 
-Enter both values above to compare them.
+Enter both Brainrots above to compare them.
 
 </div>
 
 
-<p class="notice">
-Values entered into this calculator are provided by the user.
-BloxTools does not guarantee in-game or trading values.
-</p>
+<div class="stats">
 
+<div class="stat">
+<small>Brainrot A / Hour</small>
+<strong id="hourA">$0</strong>
+</div>
+
+<div class="stat">
+<small>Difference / Second</small>
+<strong id="difference">$0</strong>
+</div>
+
+<div class="stat">
+<small>Brainrot B / Hour</small>
+<strong id="hourB">$0</strong>
+</div>
+
+</div>
+
+
+<div class="notice">
+
+<strong>Important:</strong>
+This calculator compares calculated earning power. It does not
+claim to determine an exact player-to-player trading price.
+Trading demand and rarity can differ from raw income.
+
+<br><br>
+
+Mutation data can change when Steal a Brainrot is updated.
+BloxTools is an independent fan-made website.
+
+</div>
 
 </main>
 
 
 <footer>
 
-BloxTools is an independent fan-made website
-and is not affiliated with Roblox.
+BloxTools is an independent fan-made website and is not affiliated
+with Roblox or the creators of Steal a Brainrot.
 
 </footer>
 
 
 <script>
 
+function trimNumber(number){
+
+return number
+.toFixed(2)
+.replace(/\.00$/,"")
+.replace(/(\.\d)0$/,"$1");
+
+}
+
+
 function formatMoney(number){
 
-  if(number >= 1e18)
-    return "$" + (number / 1e18).toFixed(2) + "Qi";
+const value = Math.abs(number);
 
-  if(number >= 1e15)
-    return "$" + (number / 1e15).toFixed(2) + "Q";
+let formatted;
 
-  if(number >= 1e12)
-    return "$" + (number / 1e12).toFixed(2) + "T";
+if(value >= 1e18){
 
-  if(number >= 1e9)
-    return "$" + (number / 1e9).toFixed(2) + "B";
+formatted =
+"$" +
+trimNumber(value / 1e18) +
+"Qi";
 
-  if(number >= 1e6)
-    return "$" + (number / 1e6).toFixed(2) + "M";
+}
 
-  if(number >= 1e3)
-    return "$" + (number / 1e3).toFixed(2) + "K";
+else if(value >= 1e15){
 
-  return "$" + number.toLocaleString(undefined,{
-    maximumFractionDigits:2
-  });
+formatted =
+"$" +
+trimNumber(value / 1e15) +
+"Q";
+
+}
+
+else if(value >= 1e12){
+
+formatted =
+"$" +
+trimNumber(value / 1e12) +
+"T";
+
+}
+
+else if(value >= 1e9){
+
+formatted =
+"$" +
+trimNumber(value / 1e9) +
+"B";
+
+}
+
+else if(value >= 1e6){
+
+formatted =
+"$" +
+trimNumber(value / 1e6) +
+"M";
+
+}
+
+else if(value >= 1e3){
+
+formatted =
+"$" +
+trimNumber(value / 1e3) +
+"K";
+
+}
+
+else{
+
+formatted =
+"$" +
+value.toLocaleString(
+undefined,
+{
+maximumFractionDigits:2
+}
+);
+
+}
+
+return number < 0
+? "-" + formatted
+: formatted;
 
 }
 
 
 function compareBrainrots(){
 
-  const nameA =
-  document.getElementById("nameA").value.trim()
-  || "Brainrot A";
-
-  const nameB =
-  document.getElementById("nameB").value.trim()
-  || "Brainrot B";
-
-
-  const valueA =
-  parseFloat(
-    document.getElementById("valueA").value
-  );
-
-  const valueB =
-  parseFloat(
-    document.getElementById("valueB").value
-  );
+const nameA =
+document
+.getElementById("nameA")
+.value
+.trim()
+|| "Brainrot A";
 
 
-  const mutationA =
-  parseFloat(
-    document.getElementById("mutationA").value
-  );
-
-  const mutationB =
-  parseFloat(
-    document.getElementById("mutationB").value
-  );
+const nameB =
+document
+.getElementById("nameB")
+.value
+.trim()
+|| "Brainrot B";
 
 
-  const traitA =
-  parseFloat(
-    document.getElementById("traitA").value
-  ) || 1;
-
-  const traitB =
-  parseFloat(
-    document.getElementById("traitB").value
-  ) || 1;
+const valueA =
+parseFloat(
+document.getElementById("valueA").value
+);
 
 
-  if(
-    isNaN(valueA) ||
-    isNaN(valueB) ||
-    valueA < 0 ||
-    valueB < 0
-  ){
-
-    document.getElementById(
-      "finalResult"
-    ).innerHTML =
-    "⚠️ Please enter a valid base value for both Brainrots.";
-
-    return;
-
-  }
+const valueB =
+parseFloat(
+document.getElementById("valueB").value
+);
 
 
-  const adjustedA =
-  valueA * mutationA * traitA;
-
-  const adjustedB =
-  valueB * mutationB * traitB;
-
-
-  document.getElementById(
-    "adjustedA"
-  ).textContent =
-  formatMoney(adjustedA);
+const mutationA =
+parseFloat(
+document.getElementById("mutationA").value
+);
 
 
-  document.getElementById(
-    "adjustedB"
-  ).textContent =
-  formatMoney(adjustedB);
+const mutationB =
+parseFloat(
+document.getElementById("mutationB").value
+);
 
 
-  const difference =
-  Math.abs(adjustedA - adjustedB);
+const traitA =
+Math.max(
+0,
+parseFloat(
+document.getElementById("traitA").value
+) || 0
+);
 
 
-  let result = "";
+const traitB =
+Math.max(
+0,
+parseFloat(
+document.getElementById("traitB").value
+) || 0
+);
 
 
-  if(adjustedA > adjustedB){
+if(
+isNaN(valueA) ||
+isNaN(valueB) ||
+valueA < 0 ||
+valueB < 0
+){
 
-    const percent =
-    adjustedB > 0
-    ? ((adjustedA-adjustedB)/adjustedB)*100
-    : 100;
+document.getElementById(
+"finalResult"
+).innerHTML =
+"⚠️ Please enter a valid base income for both Brainrots.";
 
-    result =
-    "🟣 <strong>" +
-    nameA +
-    "</strong> has the higher calculated value.<br><br>" +
-
-    formatMoney(adjustedA) +
-    " vs " +
-    formatMoney(adjustedB) +
-    "<br><br>Difference: <strong>" +
-    formatMoney(difference) +
-    "</strong> (" +
-    percent.toFixed(1) +
-    "%)";
-
-  }
-
-  else if(adjustedB > adjustedA){
-
-    const percent =
-    adjustedA > 0
-    ? ((adjustedB-adjustedA)/adjustedA)*100
-    : 100;
-
-    result =
-    "🟣 <strong>" +
-    nameB +
-    "</strong> has the higher calculated value.<br><br>" +
-
-    formatMoney(adjustedB) +
-    " vs " +
-    formatMoney(adjustedA) +
-    "<br><br>Difference: <strong>" +
-    formatMoney(difference) +
-    "</strong> (" +
-    percent.toFixed(1) +
-    "%)";
-
-  }
-
-  else{
-
-    result =
-    "⚖️ Both Brainrots have the same calculated value: <strong>" +
-    formatMoney(adjustedA) +
-    "</strong>.";
-
-  }
-
-
-  document.getElementById(
-    "finalResult"
-  ).innerHTML = result;
+return;
 
 }
+
+
+/*
+Mutation is the base multiplier.
+
+The optional trait field is treated as an
+additional multiplier bonus.
+
+Example:
+Gold = 1.25
+Extra bonus = 2
+
+Final multiplier = 3.25
+*/
+
+const totalMultiplierA =
+mutationA + traitA;
+
+
+const totalMultiplierB =
+mutationB + traitB;
+
+
+const adjustedA =
+valueA * totalMultiplierA;
+
+
+const adjustedB =
+valueB * totalMultiplierB;
+
+
+document.getElementById(
+"adjustedA"
+).textContent =
+formatMoney(adjustedA) +
+"/s";
+
+
+document.getElementById(
+"adjustedB"
+).textContent =
+formatMoney(adjustedB) +
+"/s";
+
+
+document.getElementById(
+"hourA"
+).textContent =
+formatMoney(
+adjustedA * 3600
+);
+
+
+document.getElementById(
+"hourB"
+).textContent =
+formatMoney(
+adjustedB * 3600
+);
+
+
+const difference =
+Math.abs(
+adjustedA - adjustedB
+);
+
+
+document.getElementById(
+"difference"
+).textContent =
+formatMoney(difference);
+
+
+let result = "";
+
+
+if(adjustedA > adjustedB){
+
+const ratio =
+adjustedB > 0
+? adjustedA / adjustedB
+: 0;
+
+
+result =
+
+"🟣 <strong>" +
+nameA +
+"</strong> generates more calculated income.<br><br>" +
+
+"<strong>" +
+nameA +
+":</strong> " +
+formatMoney(adjustedA) +
+"/second<br>" +
+
+"<strong>" +
+nameB +
+":</strong> " +
+formatMoney(adjustedB) +
+"/second<br><br>" +
+
+"Difference: <strong>" +
+formatMoney(difference) +
+"/second</strong>" +
+
+(
+ratio > 0
+? "<br>" +
+nameA +
+" earns about <strong>" +
+trimNumber(ratio) +
+"×</strong> as much."
+: ""
+);
+
+}
+
+
+else if(adjustedB > adjustedA){
+
+const ratio =
+adjustedA > 0
+? adjustedB / adjustedA
+: 0;
+
+
+result =
+
+"🟣 <strong>" +
+nameB +
+"</strong> generates more calculated income.<br><br>" +
+
+"<strong>" +
+nameB +
+":</strong> " +
+formatMoney(adjustedB) +
+"/second<br>" +
+
+"<strong>" +
+nameA +
+":</strong> " +
+formatMoney(adjustedA) +
+"/second<br><br>" +
+
+"Difference: <strong>" +
+formatMoney(difference) +
+"/second</strong>" +
+
+(
+ratio > 0
+? "<br>" +
+nameB +
+" earns about <strong>" +
+trimNumber(ratio) +
+"×</strong> as much."
+: ""
+);
+
+}
+
+
+else{
+
+result =
+
+"⚖️ <strong>" +
+nameA +
+"</strong> and <strong>" +
+nameB +
+"</strong> generate the same calculated income: <strong>" +
+formatMoney(adjustedA) +
+"/second</strong>.";
+
+}
+
+
+document.getElementById(
+"finalResult"
+).innerHTML =
+result;
+
+}
+
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+compareBrainrots();
+}
+
+}
+);
 
 </script>
 
