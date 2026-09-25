@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meowl Income & Stats - Steal a Brainrot | BloxTools</title>
+
+<meta name="description"
+content="View Meowl income, rarity, cost and earnings in Steal a Brainrot. Calculate Meowl income per second, minute, hour and day with BloxTools.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://jamesworksonline.github.io/bloxtools/meowl.html">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#0b0d12;
+color:white;
+min-height:100vh;
+}
+
+nav{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 8%;
+background:#10131a;
+border-bottom:1px solid #252936;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+color:white;
+text-decoration:none;
+}
+
+.logo span{
+color:#7c5cff;
+}
+
+nav a{
+color:#b8bdca;
+text-decoration:none;
+margin-left:20px;
+font-size:14px;
+}
+
+nav a:hover{
+color:white;
+}
+
+.container{
+width:min(950px,92%);
+margin:55px auto;
+}
+
+.back{
+display:inline-block;
+color:#9c87ff;
+text-decoration:none;
+margin-bottom:30px;
+}
+
+.rarity{
+display:inline-block;
+padding:7px 12px;
+border-radius:100px;
+background:#3a1830;
+color:#ff8fc8;
+font-size:12px;
+font-weight:bold;
+margin-bottom:18px;
+}
+
+h1{
+font-size:clamp(38px,7vw,58px);
+line-height:1.05;
+margin-bottom:15px;
+}
+
+.subtitle{
+color:#9ba2b1;
+font-size:17px;
+line-height:1.7;
+max-width:720px;
+margin-bottom:30px;
+}
+
+.main-stat{
+background:linear-gradient(135deg,#17112b,#12151d);
+border:1px solid #6048bd;
+border-radius:18px;
+padding:30px;
+margin-bottom:20px;
+}
+
+.main-stat small{
+display:block;
+color:#9ba2b1;
+font-size:12px;
+font-weight:bold;
+letter-spacing:1px;
+margin-bottom:8px;
+}
+
+.main-stat strong{
+font-size:clamp(35px,7vw,55px);
+color:#72e6a5;
+}
+
+.main-stat p{
+color:#9ba2b1;
+margin-top:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-bottom:30px;
+}
+
+.stat{
+background:#12151d;
+border:1px solid #292e3b;
+border-radius:14px;
+padding:20px;
+}
+
+.stat small{
+color:#8f96a5;
+font-size:12px;
+}
+
+.stat strong{
+display:block;
+margin-top:8px;
+font-size:20px;
+}
+
+.earnings{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-bottom:30px;
+}
+
+.earning{
+background:#0c0f15;
+border:1px solid #292e3b;
+border-radius:14px;
+padding:20px;
+}
+
+.earning span{
+display:block;
+font-size:12px;
+color:#8f96a5;
+margin-bottom:8px;
+}
+
+.earning strong{
+font-size:20px;
+color:#a996ff;
+}
+
+.buttons{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-bottom:40px;
+}
+
+.button{
+display:inline-block;
+padding:15px 20px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.primary{
+background:#7657ff;
+color:white;
+}
+
+.primary:hover{
+background:#896eff;
+}
+
+.secondary{
+background:#171b25;
+border:1px solid #303648;
+color:white;
+}
+
+.secondary:hover{
+border-color:#7c5cff;
+}
+
+.section{
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:16px;
+padding:25px;
+margin-top:20px;
+}
+
+.section h2{
+margin-bottom:12px;
+}
+
+.section p{
+color:#9ba2b1;
+line-height:1.75;
+font-size:14px;
+}
+
+.section a{
+color:#a996ff;
+text-decoration:none;
+}
+
+.related{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+margin-top:15px;
+}
+
+.related-card{
+background:#0c0f15;
+border:1px solid #292e3b;
+border-radius:12px;
+padding:18px;
+text-decoration:none;
+color:white;
+}
+
+.related-card:hover{
+border-color:#7c5cff;
+}
+
+.related-card small{
+color:#8f96a5;
+display:block;
+margin-bottom:6px;
+}
+
+.related-card strong{
+color:#a996ff;
+}
+
+.notice{
+font-size:12px !important;
+color:#777f90 !important;
+margin-top:15px;
+}
+
+footer{
+border-top:1px solid #252936;
+padding:35px 20px;
+text-align:center;
+color:#747b89;
+font-size:13px;
+margin-top:60px;
+line-height:1.6;
+}
+
+@media(max-width:700px){
+
+nav{
+padding:0 5%;
+}
+
+nav a{
+font-size:12px;
+margin-left:10px;
+}
+
+.stats,
+.earnings{
+grid-template-columns:1fr;
+}
+
+.related{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a class="logo" href="index.html">
+Blox<span>Tools</span>
+</a>
+
+<div>
+<a href="brainrots.html">Database</a>
+<a href="brainrot-income.html">Calculator</a>
+</div>
+
+</nav>
+
+
+<main class="container">
+
+<a class="back" href="brainrots.html">
+← Back to Brainrot Database
+</a>
+
+<br>
+
+<div class="rarity">
+OG
+</div>
+
+<h1>🐱🦉 Meowl</h1>
+
+<p class="subtitle">
+Meowl is an OG Brainrot in Steal a Brainrot.
+Use the stats below to see its listed base income,
+estimated earnings over time and calculator options.
+</p>
+
+
+<div class="main-stat">
+
+<small>BASE INCOME</small>
+
+<strong>
+$600M / second
+</strong>
+
+<p>
+Base income before mutations, traits and other multipliers.
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<small>Rarity</small>
+<strong>OG</strong>
+</div>
+
+<div class="stat">
+<small>Listed Cost</small>
+<strong>$650B</strong>
+</div>
+
+<div class="stat">
+<small>Base Payback</small>
+<strong>~18 min</strong>
+</div>
+
+</div>
+
+
+<h2 style="margin-bottom:15px;">
+Base Earnings
+</h2>
+
+
+<div class="earnings">
+
+<div class="earning">
+<span>Per Minute</span>
+<strong>$36B</strong>
+</div>
+
+<div class="earning">
+<span>Per Hour</span>
+<strong>$2.16T</strong>
+</div>
+
+<div class="earning">
+<span>Per Day</span>
+<strong>$51.84T</strong>
+</div>
+
+</div>
+
+
+<div class="buttons">
+
+<a
+class="button primary"
+href="brainrot-income.html?brainrot=Meowl">
+⚡ Calculate Meowl Income
+</a>
+
+<a
+class="button secondary"
+href="brainrot-profit.html">
+💰 Calculate Profit
+</a>
+
+<a
+class="button secondary"
+href="brainrots.html">
+🧠 Browse Database
+</a>
+
+</div>
+
+
+<div class="section">
+
+<h2>How much does Meowl make?</h2>
+
+<p>
+Using a listed base income of <strong>$600 million per second</strong>,
+Meowl generates approximately <strong>$36 billion per minute</strong>,
+<strong>$2.16 trillion per hour</strong> and
+<strong>$51.84 trillion per day</strong> before additional modifiers.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>Meowl mutations and traits</h2>
+
+<p>
+The numbers above are based on Meowl's base income only.
+Mutations and traits can increase the amount it earns.
+
+For a more specific result, open the
+<a href="brainrot-income.html?brainrot=Meowl">
+BloxTools Income Calculator
+</a>
+with Meowl automatically selected, then choose your mutation,
+traits, quantity and cash multiplier.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>Meowl cost and payback</h2>
+
+<p>
+Using the community-listed cost of <strong>$650 billion</strong>
+and base income of <strong>$600 million per second</strong>,
+the simple cost-to-income payback time is approximately
+<strong>18 minutes</strong>.
+
+Actual results can change when mutations, traits and other
+income modifiers are applied.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>More OG Brainrots</h2>
+
+<div class="related">
+
+<a class="related-card" href="spyder-elephant.html">
+<small>OG Brainrot</small>
+<strong>🕷️🐘 Spyder Elephant</strong>
+</a>
+
+<a class="related-card" href="strawberry-elephant.html">
+<small>OG Brainrot</small>
+<strong>🍓🐘 Strawberry Elephant</strong>
+</a>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>About this data</h2>
+
+<p>
+BloxTools uses community-documented Steal a Brainrot data.
+Game stats can change after updates, so values shown here
+may change over time.
+</p>
+
+<p class="notice">
+BloxTools is an independent fan-made website and is not affiliated
+with Roblox or the creators of Steal a Brainrot.
+</p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+BloxTools is an independent fan-made website and is not affiliated
+with Roblox or the creators of Steal a Brainrot.
+
+</footer>
+
+</body>
+</html>
