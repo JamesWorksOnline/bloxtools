@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jamesworksonline.github.io/bloxtools/sitemap.xml
