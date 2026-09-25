@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Steal a Brainrot Time to Goal Calculator | BloxTools</title>
+
+<meta name="description"
+content="Calculate how long it will take to reach your money goal in Steal a Brainrot. Enter your income per second, current money, target money and quantity.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://jamesworksonline.github.io/bloxtools/brainrot-goal.html">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#0b0d12;
+color:white;
+min-height:100vh;
+}
+
+nav{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 8%;
+background:#10131a;
+border-bottom:1px solid #252936;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+color:white;
+text-decoration:none;
+}
+
+.logo span{
+color:#7c5cff;
+}
+
+nav a{
+color:#b8bdca;
+text-decoration:none;
+margin-left:20px;
+font-size:14px;
+}
+
+nav a:hover{
+color:white;
+}
+
+.container{
+width:min(900px,92%);
+margin:55px auto 80px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 13px;
+border-radius:100px;
+background:#171b25;
+border:1px solid #303648;
+color:#72e6a5;
+font-size:12px;
+font-weight:bold;
+margin-bottom:18px;
+}
+
+h1{
+font-size:clamp(36px,7vw,58px);
+line-height:1.05;
+margin-bottom:15px;
+}
+
+.intro{
+color:#9ba2b1;
+font-size:16px;
+line-height:1.7;
+max-width:720px;
+margin-bottom:35px;
+}
+
+.calculator{
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:18px;
+padding:28px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.field{
+margin-bottom:18px;
+}
+
+.field.full{
+grid-column:1 / -1;
+}
+
+label{
+display:block;
+font-size:12px;
+font-weight:bold;
+color:#aeb4c2;
+margin-bottom:8px;
+letter-spacing:.4px;
+}
+
+input{
+width:100%;
+background:#0c0f15;
+border:1px solid #303645;
+border-radius:10px;
+padding:15px;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+input:focus{
+border-color:#7c5cff;
+}
+
+.hint{
+font-size:11px;
+color:#6f7787;
+margin-top:7px;
+line-height:1.5;
+}
+
+button{
+width:100%;
+border:0;
+background:#7657ff;
+color:white;
+padding:16px;
+font-size:16px;
+font-weight:bold;
+border-radius:11px;
+cursor:pointer;
+transition:.2s;
+margin-top:4px;
+}
+
+button:hover{
+background:#896eff;
+transform:translateY(-1px);
+}
+
+.error{
+display:none;
+margin-top:18px;
+padding:14px;
+border-radius:10px;
+background:#30181d;
+border:1px solid #5c2a34;
+color:#ff9ca8;
+font-size:13px;
+line-height:1.5;
+}
+
+.results{
+display:none;
+margin-top:25px;
+}
+
+.main-result{
+background:linear-gradient(135deg,#17112b,#11151c);
+border:1px solid #6048bd;
+border-radius:16px;
+padding:25px;
+margin-bottom:14px;
+}
+
+.main-result small{
+display:block;
+color:#9ba2b1;
+font-size:11px;
+font-weight:bold;
+letter-spacing:1px;
+margin-bottom:9px;
+}
+
+.main-result strong{
+font-size:clamp(30px,6vw,45px);
+color:#72e6a5;
+}
+
+.main-result p{
+color:#8f96a5;
+font-size:13px;
+margin-top:10px;
+line-height:1.5;
+}
+
+.result-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.result-card{
+background:#0c0f15;
+border:1px solid #292e3b;
+border-radius:13px;
+padding:18px;
+}
+
+.result-card span{
+display:block;
+color:#858d9d;
+font-size:11px;
+margin-bottom:7px;
+}
+
+.result-card strong{
+font-size:18px;
+}
+
+.section{
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:16px;
+padding:24px;
+margin-top:22px;
+}
+
+.section h2{
+font-size:21px;
+margin-bottom:10px;
+}
+
+.section p{
+color:#969dab;
+font-size:14px;
+line-height:1.75;
+}
+
+.section a{
+color:#a996ff;
+text-decoration:none;
+}
+
+footer{
+border-top:1px solid #252936;
+padding:35px 20px;
+text-align:center;
+color:#747b89;
+font-size:13px;
+line-height:1.6;
+}
+
+@media(max-width:650px){
+
+nav{
+padding:0 5%;
+}
+
+nav a{
+margin-left:10px;
+font-size:12px;
+}
+
+.grid,
+.result-grid{
+grid-template-columns:1fr;
+}
+
+.field.full{
+grid-column:auto;
+}
+
+.calculator{
+padding:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a class="logo" href="index.html">
+Blox<span>Tools</span>
+</a>
+
+<div>
+<a href="brainrots.html">Database</a>
+<a href="brainrot-income.html">Income</a>
+<a href="brainrot-profit.html">Profit</a>
+</div>
+
+</nav>
+
+
+<main class="container">
+
+<div class="badge">
+🎯 FREE CALCULATOR
+</div>
+
+<h1>
+Time to Goal Calculator
+</h1>
+
+<p class="intro">
+Enter how much money you're currently making and your target amount.
+BloxTools will calculate approximately how long it will take you to
+reach your goal.
+</p>
+
+
+<div class="calculator">
+
+<div class="grid">
+
+<div class="field full">
+
+<label for="income">
+INCOME PER SECOND ($)
+</label>
+
+<input
+id="income"
+type="number"
+min="0"
+step="any"
+placeholder="Example: 600000000"
+>
+
+<div class="hint">
+Enter your income from one Brainrot before quantity, or enter your
+already-calculated income and leave quantity at 1.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label for="quantity">
+QUANTITY
+</label>
+
+<input
+id="quantity"
+type="number"
+min="1"
+step="1"
+value="1"
+>
+
+</div>
+
+
+<div class="field">
+
+<label for="multiplier">
+EXTRA INCOME MULTIPLIER
+</label>
+
+<input
+id="multiplier"
+type="number"
+min="0"
+step="any"
+value="1"
+>
+
+<div class="hint">
+Leave this at 1 if your income already includes all multipliers.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label for="current">
+CURRENT MONEY ($)
+</label>
+
+<input
+id="current"
+type="number"
+min="0"
+step="any"
+value="0"
+placeholder="Example: 1000000000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label for="goal">
+TARGET MONEY ($)
+</label>
+
+<input
+id="goal"
+type="number"
+min="0"
+step="any"
+placeholder="Example: 100000000000000"
+>
+
+</div>
+
+</div>
+
+
+<button id="calculate">
+Calculate Time to Goal →
+</button>
+
+
+<div class="error" id="error"></div>
+
+
+<div class="results" id="results">
+
+<div class="main-result">
+
+<small>ESTIMATED TIME TO GOAL</small>
+
+<strong id="timeResult">
+-
+</strong>
+
+<p id="summary">
+-
+</p>
+
+</div>
+
+
+<div class="result-grid">
+
+<div class="result-card">
+<span>TOTAL INCOME / SECOND</span>
+<strong id="secondResult">-</strong>
+</div>
+
+<div class="result-card">
+<span>INCOME / MINUTE</span>
+<strong id="minuteResult">-</strong>
+</div>
+
+<div class="result-card">
+<span>INCOME / HOUR</span>
+<strong id="hourResult">-</strong>
+</div>
+
+<div class="result-card">
+<span>MONEY STILL NEEDED</span>
+<strong id="neededResult">-</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>How does the calculator work?</h2>
+
+<p>
+The calculator subtracts your current money from your target,
+then divides the remaining amount by your total income per second.
+
+Your total income is calculated as:
+
+<strong>
+Income per second × Quantity × Extra Multiplier
+</strong>.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>Need your Brainrot income first?</h2>
+
+<p>
+If you don't know your exact income, use the
+<a href="brainrot-income.html">
+BloxTools Brainrot Income Calculator
+</a>
+first. You can calculate your Brainrot's income using its base
+income, mutation, traits, quantity and cash multiplier, then enter
+the final result here.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>Example</h2>
+
+<p>
+If you're earning <strong>$600 million per second</strong> and
+starting from $0, reaching <strong>$100 trillion</strong> would take
+about <strong>1 day, 22 hours and 18 minutes</strong> if your income
+remained constant.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>Important</h2>
+
+<p>
+This is a mathematical estimate. Your actual time can differ if
+your income changes while playing, you spend money, gain additional
+Brainrots, change multipliers or the game updates its mechanics.
+</p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+BloxTools is an independent fan-made website and is not affiliated
+with Roblox or the creators of Steal a Brainrot.
+
+</footer>
+
+
+<script>
+
+const incomeInput =
+document.getElementById("income");
+
+const quantityInput =
+document.getElementById("quantity");
+
+const multiplierInput =
+document.getElementById("multiplier");
+
+const currentInput =
+document.getElementById("current");
+
+const goalInput =
+document.getElementById("goal");
+
+const calculateButton =
+document.getElementById("calculate");
+
+const errorBox =
+document.getElementById("error");
+
+const results =
+document.getElementById("results");
+
+
+function trimNumber(number){
+
+return number
+.toFixed(2)
+.replace(/\.00$/,"")
+.replace(/(\.\d)0$/,"$1");
+
+}
+
+
+function formatMoney(number){
+
+if(!Number.isFinite(number)){
+return "$0";
+}
+
+if(number >= 1e18){
+return "$" + trimNumber(number / 1e18) + "Qi";
+}
+
+if(number >= 1e15){
+return "$" + trimNumber(number / 1e15) + "Q";
+}
+
+if(number >= 1e12){
+return "$" + trimNumber(number / 1e12) + "T";
+}
+
+if(number >= 1e9){
+return "$" + trimNumber(number / 1e9) + "B";
+}
+
+if(number >= 1e6){
+return "$" + trimNumber(number / 1e6) + "M";
+}
+
+if(number >= 1e3){
+return "$" + trimNumber(number / 1e3) + "K";
+}
+
+return "$" + trimNumber(number);
+
+}
+
+
+function formatTime(seconds){
+
+if(!Number.isFinite(seconds) || seconds < 0){
+return "Unable to calculate";
+}
+
+if(seconds < 1){
+return "Less than 1 second";
+}
+
+let remaining =
+Math.floor(seconds);
+
+const years =
+Math.floor(remaining / 31536000);
+
+remaining %= 31536000;
+
+const days =
+Math.floor(remaining / 86400);
+
+remaining %= 86400;
+
+const hours =
+Math.floor(remaining / 3600);
+
+remaining %= 3600;
+
+const minutes =
+Math.floor(remaining / 60);
+
+const secs =
+remaining % 60;
+
+
+const parts = [];
+
+
+if(years){
+parts.push(
+years + (years === 1 ? " year" : " years")
+);
+}
+
+if(days){
+parts.push(
+days + (days === 1 ? " day" : " days")
+);
+}
+
+if(hours){
+parts.push(
+hours + (hours === 1 ? " hour" : " hours")
+);
+}
+
+if(minutes){
+parts.push(
+minutes + (minutes === 1 ? " minute" : " minutes")
+);
+}
+
+if(secs && parts.length < 3){
+parts.push(
+secs + (secs === 1 ? " second" : " seconds")
+);
+}
+
+
+return parts.slice(0,3).join(", ");
+
+}
+
+
+function showError(message){
+
+errorBox.textContent = message;
+errorBox.style.display = "block";
+results.style.display = "none";
+
+}
+
+
+function calculateGoal(){
+
+errorBox.style.display = "none";
+
+
+const income =
+Number(incomeInput.value);
+
+const quantity =
+Number(quantityInput.value);
+
+const multiplier =
+Number(multiplierInput.value);
+
+const current =
+Number(currentInput.value);
+
+const goal =
+Number(goalInput.value);
+
+
+if(!Number.isFinite(income) || income <= 0){
+
+showError(
+"Enter an income per second greater than 0."
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(quantity) ||
+quantity < 1
+){
+
+showError(
+"Quantity must be at least 1."
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(multiplier) ||
+multiplier <= 0
+){
+
+showError(
+"Your multiplier must be greater than 0."
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(current) ||
+current < 0
+){
+
+showError(
+"Current money cannot be negative."
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(goal) ||
+goal <= 0
+){
+
+showError(
+"Enter a target money amount greater than 0."
+);
+
+return;
+
+}
+
+
+const totalIncome =
+income * quantity * multiplier;
+
+
+const needed =
+Math.max(goal - current,0);
+
+
+if(needed === 0){
+
+document.getElementById("timeResult")
+.textContent =
+"Goal already reached 🎉";
+
+document.getElementById("summary")
+.textContent =
+"Your current money is already equal to or higher than your target.";
+
+document.getElementById("secondResult")
+.textContent =
+formatMoney(totalIncome);
+
+document.getElementById("minuteResult")
+.textContent =
+formatMoney(totalIncome * 60);
+
+document.getElementById("hourResult")
+.textContent =
+formatMoney(totalIncome * 3600);
+
+document.getElementById("neededResult")
+.textContent =
+"$0";
+
+results.style.display = "block";
+
+return;
+
+}
+
+
+const seconds =
+needed / totalIncome;
+
+
+document.getElementById("timeResult")
+.textContent =
+formatTime(seconds);
+
+
+document.getElementById("summary")
+.textContent =
+"You need " +
+formatMoney(needed) +
+" more while earning " +
+formatMoney(totalIncome) +
+" per second.";
+
+
+document.getElementById("secondResult")
+.textContent =
+formatMoney(totalIncome);
+
+
+document.getElementById("minuteResult")
+.textContent =
+formatMoney(totalIncome * 60);
+
+
+document.getElementById("hourResult")
+.textContent =
+formatMoney(totalIncome * 3600);
+
+
+document.getElementById("neededResult")
+.textContent =
+formatMoney(needed);
+
+
+results.style.display = "block";
+
+}
+
+
+calculateButton.addEventListener(
+"click",
+calculateGoal
+);
+
+
+document.addEventListener(
+"keydown",
+event => {
+
+if(event.key === "Enter"){
+calculateGoal();
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
