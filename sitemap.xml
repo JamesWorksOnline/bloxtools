@@ -44,4 +44,10 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/meowl.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
