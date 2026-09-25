@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Brainrot Profit Calculator - Payback Time | BloxTools</title>
+
+<meta name="description"
+content="Calculate Brainrot profit, payback time and earnings over time for Steal a Brainrot. Enter purchase cost and income per second to see when you break even.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://jamesworksonline.github.io/bloxtools/brainrot-profit.html">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#0b0d12;
+color:white;
+min-height:100vh;
+}
+
+nav{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 8%;
+background:#10131a;
+border-bottom:1px solid #252936;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+color:white;
+text-decoration:none;
+}
+
+.logo span{
+color:#7c5cff;
+}
+
+nav a{
+color:#b8bdca;
+text-decoration:none;
+margin-left:20px;
+font-size:14px;
+}
+
+nav a:hover{
+color:white;
+}
+
+.container{
+width:min(950px,92%);
+margin:55px auto;
+}
+
+.back{
+display:inline-block;
+color:#9c87ff;
+text-decoration:none;
+margin-bottom:30px;
+}
+
+.badge{
+display:inline-block;
+padding:7px 12px;
+border-radius:100px;
+background:#173d2a;
+color:#72e6a5;
+font-size:11px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+h1{
+font-size:clamp(36px,6vw,52px);
+margin-bottom:14px;
+line-height:1.1;
+}
+
+.subtitle{
+color:#9ba2b1;
+line-height:1.7;
+max-width:750px;
+margin-bottom:30px;
+}
+
+.calculator{
+background:#12151d;
+border:1px solid #292e3b;
+border-radius:18px;
+padding:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
+.field{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-size:14px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:15px;
+border-radius:10px;
+border:1px solid #343a49;
+background:#0c0f15;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+input:focus{
+border-color:#7c5cff;
+}
+
+.helper{
+font-size:12px;
+color:#777f90;
+margin-top:7px;
+line-height:1.5;
+}
+
+.calculate{
+width:100%;
+padding:17px;
+border:0;
+border-radius:11px;
+background:#7c5cff;
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+margin-top:4px;
+}
+
+.calculate:hover{
+opacity:.9;
+}
+
+.hero-result{
+margin-top:22px;
+background:#171b25;
+border:1px solid #303648;
+border-radius:14px;
+padding:24px;
+}
+
+.hero-result small{
+display:block;
+color:#8f96a5;
+font-size:12px;
+font-weight:bold;
+letter-spacing:.8px;
+margin-bottom:8px;
+}
+
+.hero-result strong{
+font-size:30px;
+color:#72e6a5;
+}
+
+.hero-result p{
+color:#aeb5c3;
+line-height:1.6;
+margin-top:10px;
+}
+
+.results{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.result{
+background:#0c0f15;
+border:1px solid #292e3b;
+padding:18px;
+border-radius:12px;
+}
+
+.result small{
+color:#8f96a5;
+}
+
+.result strong{
+display:block;
+margin-top:8px;
+font-size:19px;
+color:#a996ff;
+word-break:break-word;
+}
+
+.section-title{
+margin-top:30px;
+margin-bottom:8px;
+}
+
+.section-subtitle{
+color:#8f96a5;
+font-size:13px;
+margin-bottom:15px;
+}
+
+.profit-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.profit-card{
+background:#171b25;
+border:1px solid #303648;
+border-radius:12px;
+padding:18px;
+}
+
+.profit-card span{
+display:block;
+font-size:12px;
+color:#8f96a5;
+margin-bottom:7px;
+}
+
+.profit-card strong{
+font-size:19px;
+}
+
+.positive{
+color:#72e6a5;
+}
+
+.negative{
+color:#ff8181;
+}
+
+.breakdown{
+background:#10131a;
+border:1px solid #292e3b;
+border-radius:14px;
+padding:22px;
+margin-top:25px;
+line-height:1.8;
+color:#aeb5c3;
+}
+
+.breakdown strong{
+color:white;
+}
+
+.info{
+margin-top:30px;
+background:#10131a;
+border:1px solid #252936;
+border-radius:14px;
+padding:24px;
+}
+
+.info h2{
+margin-bottom:10px;
+}
+
+.info p{
+color:#9ba2b1;
+line-height:1.7;
+font-size:14px;
+}
+
+footer{
+border-top:1px solid #252936;
+padding:35px 20px;
+text-align:center;
+color:#747b89;
+font-size:13px;
+margin-top:60px;
+}
+
+@media(max-width:700px){
+
+nav{
+padding:0 5%;
+}
+
+nav a{
+margin-left:10px;
+font-size:12px;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.results{
+grid-template-columns:1fr 1fr;
+}
+
+.profit-grid{
+grid-template-columns:1fr;
+}
+
+.calculator{
+padding:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a class="logo" href="index.html">
+Blox<span>Tools</span>
+</a>
+
+<div>
+<a href="brainrots.html">Database</a>
+<a href="brainrot-income.html">Income Calculator</a>
+</div>
+
+</nav>
+
+<main class="container">
+
+<a class="back" href="index.html">
+← Back to all tools
+</a>
+
+<br>
+
+<div class="badge">
+● NEW TOOL
+</div>
+
+<h1>💰 Brainrot Profit Calculator</h1>
+
+<p class="subtitle">
+Enter how much a Brainrot costs and how much it earns per second.
+BloxTools will calculate how long it takes to earn your money back,
+plus your profit after different amounts of time.
+</p>
+
+<div class="calculator">
+
+<div class="grid">
+
+<div class="field">
+
+<label>Brainrot Name — Optional</label>
+
+<input
+id="brainrotName"
+type="text"
+placeholder="Example: Spyder Elephant">
+
+</div>
+
+
+<div class="field">
+
+<label>Purchase Cost ($)</label>
+
+<input
+id="cost"
+type="number"
+min="0"
+step="any"
+placeholder="Example: 1000000000000">
+
+<div class="helper">
+How much the Brainrot costs to obtain.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Income Per Second ($)</label>
+
+<input
+id="income"
+type="number"
+min="0"
+step="any"
+placeholder="Example: 1000000000">
+
+<div class="helper">
+Use base income or your calculated income after modifiers.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Quantity</label>
+
+<input
+id="quantity"
+type="number"
+min="1"
+step="1"
+value="1">
+
+<div class="helper">
+Calculate multiple identical Brainrots at once.
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="calculate"
+onclick="calculateProfit()">
+⚡ Calculate Profit
+</button>
+
+
+<div class="hero-result">
+
+<small>BREAK-EVEN TIME</small>
+
+<strong id="breakEven">
+—
+</strong>
+
+<p id="breakEvenText">
+Enter a purchase cost and income to calculate how long
+it takes to earn your money back.
+</p>
+
+</div>
+
+
+<div class="results">
+
+<div class="result">
+<small>Income / Minute</small>
+<strong id="minute">$0</strong>
+</div>
+
+<div class="result">
+<small>Income / Hour</small>
+<strong id="hour">$0</strong>
+</div>
+
+<div class="result">
+<small>Income / Day</small>
+<strong id="day">$0</strong>
+</div>
+
+<div class="result">
+<small>ROI / Hour</small>
+<strong id="roi">0%</strong>
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+Profit Over Time
+</h2>
+
+<p class="section-subtitle">
+Profit = total earnings minus purchase cost.
+</p>
+
+
+<div class="profit-grid">
+
+<div class="profit-card">
+<span>After 1 Minute</span>
+<strong id="profit1m">$0</strong>
+</div>
+
+<div class="profit-card">
+<span>After 10 Minutes</span>
+<strong id="profit10m">$0</strong>
+</div>
+
+<div class="profit-card">
+<span>After 1 Hour</span>
+<strong id="profit1h">$0</strong>
+</div>
+
+<div class="profit-card">
+<span>After 24 Hours</span>
+<strong id="profit24h">$0</strong>
+</div>
+
+</div>
+
+
+<div class="breakdown" id="breakdown">
+
+Enter your numbers above to see the full profit breakdown.
+
+</div>
+
+</div>
+
+
+<div class="info">
+
+<h2>How does the profit calculator work?</h2>
+
+<p>
+The calculator divides the total purchase cost by total income per
+second to estimate break-even time. Profit is calculated by subtracting
+the purchase cost from the money earned during each time period.
+Actual in-game results can vary if your income changes because of
+mutations, traits, rebirths or other modifiers.
+</p>
+
+</div>
+
+</main>
+
+
+<footer>
+BloxTools is an independent fan-made website and is not affiliated
+with Roblox or the creators of Steal a Brainrot.
+</footer>
+
+
+<script>
+
+function trimNumber(number){
+
+return number
+.toFixed(2)
+.replace(/\.00$/,"")
+.replace(/(\.\d)0$/,"$1");
+
+}
+
+
+function formatMoney(number){
+
+const negative = number < 0;
+
+const value = Math.abs(number);
+
+let formatted;
+
+
+if(value >= 1e18){
+
+formatted =
+"$" +
+trimNumber(value / 1e18) +
+"Qi";
+
+}
+
+else if(value >= 1e15){
+
+formatted =
+"$" +
+trimNumber(value / 1e15) +
+"Q";
+
+}
+
+else if(value >= 1e12){
+
+formatted =
+"$" +
+trimNumber(value / 1e12) +
+"T";
+
+}
+
+else if(value >= 1e9){
+
+formatted =
+"$" +
+trimNumber(value / 1e9) +
+"B";
+
+}
+
+else if(value >= 1e6){
+
+formatted =
+"$" +
+trimNumber(value / 1e6) +
+"M";
+
+}
+
+else if(value >= 1e3){
+
+formatted =
+"$" +
+trimNumber(value / 1e3) +
+"K";
+
+}
+
+else{
+
+formatted =
+"$" +
+value.toLocaleString(undefined,{
+maximumFractionDigits:2
+});
+
+}
+
+
+return negative
+? "-" + formatted
+: formatted;
+
+}
+
+
+function formatTime(seconds){
+
+if(!isFinite(seconds)){
+return "Never";
+}
+
+if(seconds < 1){
+return seconds.toFixed(2) + " seconds";
+}
+
+if(seconds < 60){
+return trimNumber(seconds) + " seconds";
+}
+
+if(seconds < 3600){
+return trimNumber(seconds / 60) + " minutes";
+}
+
+if(seconds < 86400){
+return trimNumber(seconds / 3600) + " hours";
+}
+
+if(seconds < 604800){
+return trimNumber(seconds / 86400) + " days";
+}
+
+if(seconds < 31536000){
+return trimNumber(seconds / 604800) + " weeks";
+}
+
+return trimNumber(seconds / 31536000) + " years";
+
+}
+
+
+function setProfit(id,value){
+
+const element =
+document.getElementById(id);
+
+element.textContent =
+formatMoney(value);
+
+element.classList.remove(
+"positive",
+"negative"
+);
+
+if(value >= 0){
+
+element.classList.add(
+"positive"
+);
+
+}else{
+
+element.classList.add(
+"negative"
+);
+
+}
+
+}
+
+
+function calculateProfit(){
+
+const name =
+document.getElementById("brainrotName")
+.value
+.trim() ||
+"Your Brainrot";
+
+
+const cost =
+parseFloat(
+document.getElementById("cost").value
+);
+
+
+const income =
+parseFloat(
+document.getElementById("income").value
+);
+
+
+const quantity =
+Math.max(
+1,
+parseInt(
+document.getElementById("quantity").value
+) || 1
+);
+
+
+if(
+isNaN(cost) ||
+cost < 0 ||
+isNaN(income) ||
+income <= 0
+){
+
+document.getElementById(
+"breakEven"
+).textContent =
+"Check your numbers";
+
+
+document.getElementById(
+"breakEvenText"
+).textContent =
+"Enter a valid purchase cost and an income greater than $0 per second.";
+
+return;
+
+}
+
+
+/*
+If quantity is greater than 1,
+both total cost and total income increase.
+*/
+
+const totalCost =
+cost * quantity;
+
+
+const totalIncome =
+income * quantity;
+
+
+const breakEvenSeconds =
+totalCost / totalIncome;
+
+
+const minuteIncome =
+totalIncome * 60;
+
+
+const hourIncome =
+totalIncome * 3600;
+
+
+const dayIncome =
+totalIncome * 86400;
+
+
+const roiPerHour =
+totalCost > 0
+? (hourIncome / totalCost) * 100
+: 0;
+
+
+document.getElementById(
+"breakEven"
+).textContent =
+formatTime(breakEvenSeconds);
+
+
+document.getElementById(
+"breakEvenText"
+).innerHTML =
+
+"<strong>" +
+name +
+"</strong> earns back its total cost of <strong>" +
+formatMoney(totalCost) +
+"</strong> after approximately <strong>" +
+formatTime(breakEvenSeconds) +
+"</strong>.";
+
+
+document.getElementById(
+"minute"
+).textContent =
+formatMoney(minuteIncome);
+
+
+document.getElementById(
+"hour"
+).textContent =
+formatMoney(hourIncome);
+
+
+document.getElementById(
+"day"
+).textContent =
+formatMoney(dayIncome);
+
+
+document.getElementById(
+"roi"
+).textContent =
+trimNumber(roiPerHour) +
+"%";
+
+
+const profit1m =
+(totalIncome * 60) -
+totalCost;
+
+
+const profit10m =
+(totalIncome * 600) -
+totalCost;
+
+
+const profit1h =
+(totalIncome * 3600) -
+totalCost;
+
+
+const profit24h =
+(totalIncome * 86400) -
+totalCost;
+
+
+setProfit(
+"profit1m",
+profit1m
+);
+
+
+setProfit(
+"profit10m",
+profit10m
+);
+
+
+setProfit(
+"profit1h",
+profit1h
+);
+
+
+setProfit(
+"profit24h",
+profit24h
+);
+
+
+document.getElementById(
+"breakdown"
+).innerHTML =
+
+"🧠 <strong>" +
+name +
+"</strong><br><br>" +
+
+"Quantity: <strong>" +
+quantity +
+"</strong><br>" +
+
+"Cost each: <strong>" +
+formatMoney(cost) +
+"</strong><br>" +
+
+"Total cost: <strong>" +
+formatMoney(totalCost) +
+"</strong><br>" +
+
+"Income each: <strong>" +
+formatMoney(income) +
+"/second</strong><br>" +
+
+"Total income: <strong>" +
+formatMoney(totalIncome) +
+"/second</strong><br>" +
+
+"Break-even: <strong>" +
+formatTime(breakEvenSeconds) +
+"</strong>";
+
+}
+
+
+/*
+Allow Enter to calculate.
+*/
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+calculateProfit();
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
