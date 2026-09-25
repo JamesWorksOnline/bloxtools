@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Steal a Brainrot Income Calculator | BloxTools</title>
-<meta name="description" content="Calculate Steal a Brainrot income with mutations, traits, quantity and cash multipliers. See earnings per second, minute, hour and day.">
+<meta name="description" content="Search for a Steal a Brainrot character and calculate income with mutations, traits, quantity and multipliers.">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -27,11 +27,7 @@ nav{
   border-bottom:1px solid #252936;
 }
 
-.logo{
-  font-size:25px;
-  font-weight:800;
-}
-
+.logo{font-size:25px;font-weight:800}
 .logo span{color:#7c5cff}
 
 nav a{
@@ -70,7 +66,7 @@ h1{
 .subtitle{
   color:#9ba2b1;
   line-height:1.6;
-  max-width:700px;
+  max-width:720px;
   margin-bottom:30px;
 }
 
@@ -81,21 +77,13 @@ h1{
   padding:30px;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
+.field{margin-bottom:20px}
 
 label{
   display:block;
   margin-bottom:8px;
   font-weight:bold;
   font-size:14px;
-}
-
-.field{
-  margin-bottom:20px;
 }
 
 input,select{
@@ -113,9 +101,76 @@ input:focus,select:focus{
   border-color:#7c5cff;
 }
 
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.search-wrap{
+  position:relative;
+}
+
+.search-results{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  z-index:50;
+  background:#10131a;
+  border:1px solid #343a49;
+  border-radius:10px;
+  margin-top:5px;
+  max-height:280px;
+  overflow-y:auto;
+  box-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+
+.search-item{
+  padding:13px;
+  border-bottom:1px solid #252936;
+  cursor:pointer;
+}
+
+.search-item:last-child{
+  border-bottom:0;
+}
+
+.search-item:hover{
+  background:#1b1f2a;
+}
+
+.search-item strong{
+  display:block;
+}
+
+.search-item small{
+  color:#9ba2b1;
+}
+
+.selected{
+  display:none;
+  margin-top:10px;
+  background:#171b25;
+  border:1px solid #303648;
+  border-radius:10px;
+  padding:14px;
+  line-height:1.6;
+}
+
+.selected strong{
+  color:#a996ff;
+}
+
 .section-title{
-  margin:15px 0;
-  font-size:20px;
+  margin:20px 0 8px;
+}
+
+.helper{
+  color:#8f96a5;
+  font-size:13px;
+  margin-bottom:15px;
 }
 
 .traits{
@@ -162,21 +217,21 @@ input:focus,select:focus{
   font-size:17px;
   font-weight:bold;
   cursor:pointer;
-  margin-top:5px;
 }
 
 .calculate:hover{opacity:.9}
 
-.multiplier-box{
+.breakdown{
   background:#171b25;
   border:1px solid #303648;
   border-radius:12px;
-  padding:15px;
+  padding:18px;
   margin-top:20px;
   color:#b9c0ce;
+  line-height:1.7;
 }
 
-.multiplier-box strong{
+.breakdown strong{
   color:#a996ff;
 }
 
@@ -194,9 +249,7 @@ input:focus,select:focus{
   border-radius:12px;
 }
 
-.result small{
-  color:#8f96a5;
-}
+.result small{color:#8f96a5}
 
 .result strong{
   display:block;
@@ -216,10 +269,10 @@ input:focus,select:focus{
 
 .info{
   margin-top:30px;
-  padding:22px;
   background:#10131a;
   border:1px solid #252936;
   border-radius:14px;
+  padding:22px;
 }
 
 .info h2{
@@ -232,15 +285,6 @@ input:focus,select:focus{
   font-size:14px;
 }
 
-.formula{
-  margin-top:12px;
-  padding:12px;
-  background:#0b0d12;
-  border-radius:8px;
-  color:#a996ff;
-  font-family:monospace;
-}
-
 footer{
   border-top:1px solid #252936;
   padding:35px 20px;
@@ -251,6 +295,7 @@ footer{
 }
 
 @media(max-width:700px){
+
   h1{font-size:32px}
 
   .grid{
@@ -265,6 +310,7 @@ footer{
     grid-template-columns:1fr 1fr;
   }
 }
+
 </style>
 </head>
 
@@ -277,7 +323,9 @@ footer{
 
 <main class="container">
 
-<a class="back" href="index.html">← Back to all tools</a>
+<a class="back" href="index.html">
+← Back to all tools
+</a>
 
 <br>
 
@@ -286,69 +334,145 @@ footer{
 <h1>🧠 Steal a Brainrot Income Calculator</h1>
 
 <p class="subtitle">
-Calculate your Brainrot's estimated income using its base
-income, mutation, traits, quantity and cash multiplier.
+Search for your Brainrot, automatically load its base income,
+then add mutations, traits and other multipliers to calculate
+your earnings.
 </p>
 
 <div class="calculator">
 
-<div class="grid">
+<div class="field search-wrap">
 
-  <div class="field">
-    <label>Brainrot Name</label>
-    <input id="brainrotName" type="text"
-    placeholder="Example: Strawberry Elephant">
-  </div>
+<label>🔎 Search Brainrot</label>
 
-  <div class="field">
-    <label>Base Income Per Second ($)</label>
-    <input id="baseIncome" type="number"
-    min="0" step="any"
-    placeholder="Example: 1000000">
-  </div>
+<input
+id="brainrotSearch"
+type="text"
+placeholder="Try: Strawberry Elephant"
+autocomplete="off"
+oninput="searchBrainrots()"
+onclick="searchBrainrots()"
+>
 
-  <div class="field">
-    <label>Mutation</label>
+<div
+id="searchResults"
+class="search-results">
+</div>
 
-    <select id="mutation">
-      <option value="1">Normal — 1x</option>
-      <option value="1.25">Gold — 1.25x</option>
-      <option value="1.5">Diamond — 1.5x</option>
-      <option value="2">Blood — 2x</option>
-      <option value="3">Rainbow — 3x</option>
-      <option value="4">Lava — 4x</option>
-      <option value="6">Galaxy — 6x</option>
-      <option value="10">Yin Yang — 10x</option>
-      <option value="custom">Custom Multiplier</option>
-    </select>
-  </div>
-
-  <div class="field">
-    <label>Custom Mutation Multiplier</label>
-    <input id="customMutation" type="number"
-    min="0" step="0.01"
-    placeholder="Only if Custom is selected">
-  </div>
-
-  <div class="field">
-    <label>Quantity</label>
-    <input id="quantity" type="number"
-    min="1" step="1" value="1">
-  </div>
-
-  <div class="field">
-    <label>Base / Cash Multiplier</label>
-    <input id="cashMultiplier" type="number"
-    min="0" step="0.5" value="1">
-  </div>
+<div
+id="selectedBrainrot"
+class="selected">
+</div>
 
 </div>
 
 
-<h2 class="section-title">Traits</h2>
+<div class="grid">
 
-<p style="color:#8f96a5;font-size:13px;margin-bottom:15px;">
-Select any traits your Brainrot has. Multiple traits can stack.
+<div class="field">
+
+<label>Base Income Per Second ($)</label>
+
+<input
+id="baseIncome"
+type="number"
+min="0"
+step="any"
+placeholder="Automatically filled or enter manually">
+
+</div>
+
+
+<div class="field">
+
+<label>Mutation</label>
+
+<select id="mutation">
+
+<option value="1">
+Normal — 1x
+</option>
+
+<option value="1.25">
+Gold — 1.25x
+</option>
+
+<option value="1.5">
+Diamond — 1.5x
+</option>
+
+<option value="custom">
+Custom Mutation
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Custom Mutation Multiplier</label>
+
+<input
+id="customMutation"
+type="number"
+min="0"
+step="0.01"
+placeholder="Only used with Custom">
+
+</div>
+
+
+<div class="field">
+
+<label>Quantity</label>
+
+<input
+id="quantity"
+type="number"
+min="1"
+step="1"
+value="1">
+
+</div>
+
+
+<div class="field">
+
+<label>Cash / Rebirth Multiplier</label>
+
+<input
+id="cashMultiplier"
+type="number"
+min="0"
+step="0.5"
+value="1">
+
+</div>
+
+
+<div class="field">
+
+<label>Money Goal — Optional</label>
+
+<input
+id="goal"
+type="number"
+min="0"
+placeholder="Example: 1000000000000">
+
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+Traits
+</h2>
+
+<p class="helper">
+Click every trait that applies to your Brainrot.
 </p>
 
 
@@ -372,6 +496,11 @@ Select any traits your Brainrot has. Multiple traits can stack.
 <button class="trait" data-value="6.5">
 <strong>🎈 Rainbow Balloon</strong>
 <small>+6.5x</small>
+</button>
+
+<button class="trait" data-value="6">
+<strong>🍀 Lucky</strong>
+<small>+6x</small>
 </button>
 
 <button class="trait" data-value="5">
@@ -432,32 +561,37 @@ Select any traits your Brainrot has. Multiple traits can stack.
 </div>
 
 
-<div class="grid">
-
 <div class="field">
-<label>Money Goal ($) — Optional</label>
-<input id="goal" type="number"
+
+<label>
+Extra Trait Bonus — Optional
+</label>
+
+<input
+id="customTrait"
+type="number"
 min="0"
-placeholder="Example: 1000000000">
-</div>
-
-<div class="field">
-<label>Extra Trait Bonus — Optional</label>
-<input id="customTrait" type="number"
-min="0" step="0.1"
-placeholder="Enter another trait multiplier">
-</div>
+step="0.1"
+placeholder="For a trait not listed above">
 
 </div>
 
 
-<button class="calculate" onclick="calculateIncome()">
+<button
+class="calculate"
+onclick="calculateIncome()">
+
 ⚡ Calculate Income
+
 </button>
 
 
-<div class="multiplier-box" id="breakdown">
-Your multiplier breakdown will appear here.
+<div
+class="breakdown"
+id="breakdown">
+
+Select a Brainrot or enter a base income to begin.
+
 </div>
 
 
@@ -486,8 +620,12 @@ Your multiplier breakdown will appear here.
 </div>
 
 
-<div class="goal" id="goalResult">
-💡 Add a money goal to calculate how long it will take.
+<div
+class="goal"
+id="goalResult">
+
+💡 Add a money goal to see how long it will take.
+
 </div>
 
 </div>
@@ -495,22 +633,13 @@ Your multiplier breakdown will appear here.
 
 <div class="info">
 
-<h2>How the calculator works</h2>
+<h2>About the database</h2>
 
 <p>
-Start with the Brainrot's normal base income. Select its mutation
-and any traits it currently has. BloxTools combines those bonuses
-and then applies your quantity and cash multiplier.
-</p>
-
-<div class="formula">
-Income = Base Income × (Mutation + Trait Bonuses) × Quantity × Cash Multiplier
-</div>
-
-<p style="margin-top:15px;">
-Steal a Brainrot changes over time, so the custom multiplier fields
-let you calculate newer mutations and traits that may not yet be
-listed here.
+We're building BloxTools' searchable Brainrot database gradually
+so values can be checked instead of filling the site with
+unverified numbers. You can always manually enter a base income
+if your Brainrot isn't listed yet.
 </p>
 
 </div>
@@ -525,249 +654,713 @@ BloxTools is an independent fan-made website and is not affiliated with Roblox.
 
 <script>
 
-const traitButtons = document.querySelectorAll(".trait");
+/* ==========================================
+   BRAINROT DATABASE
+   Base income per second
+========================================== */
 
-traitButtons.forEach(button => {
+const brainrots = [
 
-  button.addEventListener("click", function(e){
+{
+name:"Spyder Elephant",
+rarity:"OG",
+income:1000000000
+},
 
-    e.preventDefault();
+{
+name:"Strawberry Elephant",
+rarity:"OG",
+income:750000000
+},
 
-    this.classList.toggle("active");
+{
+name:"Headless Horseman",
+rarity:"OG",
+income:600000000
+},
 
-  });
+{
+name:"Meowl",
+rarity:"OG",
+income:600000000
+},
+
+{
+name:"John Pork",
+rarity:"OG",
+income:500000000
+},
+
+{
+name:"Skibidi Toilet",
+rarity:"OG",
+income:450000000
+},
+
+{
+name:"Celestial Pegasus",
+rarity:"Secret",
+income:175000000
+},
+
+{
+name:"La Secret Combinasion",
+rarity:"Secret",
+income:125000000
+},
+
+{
+name:"Spaghetti Tualetti",
+rarity:"Secret",
+income:60000000
+},
+
+{
+name:"Esok Sekolah",
+rarity:"Secret",
+income:30000000
+},
+
+{
+name:"Pot Hotspot",
+rarity:"Secret",
+income:2500000
+},
+
+{
+name:"Las Vaquitas Saturnitas",
+rarity:"Secret",
+income:750000
+},
+
+{
+name:"Torrtuginni Dragonfrutini",
+rarity:"Secret",
+income:350000
+},
+
+{
+name:"Pop Pop Sahur",
+rarity:"Brainrot God",
+income:295000
+},
+
+{
+name:"Mastodontico Telepiedone",
+rarity:"Brainrot God",
+income:275000
+},
+
+{
+name:"Bulbito Bandito Traktorito",
+rarity:"Brainrot God",
+income:205000
+},
+
+{
+name:"Orcalero Orcala",
+rarity:"Brainrot God",
+income:100000
+},
+
+{
+name:"Tigroligre Frutonni",
+rarity:"Brainrot God",
+income:60000
+},
+
+{
+name:"Bananito Bandito",
+rarity:"Mythic",
+income:16500
+},
+
+{
+name:"Carrotini Brainini",
+rarity:"Mythic",
+income:15000
+},
+
+{
+name:"Tigrilini Watermelini",
+rarity:"Mythic",
+income:6500
+},
+
+{
+name:"Zibra Zubra Zibralini",
+rarity:"Mythic",
+income:6000
+},
+
+{
+name:"Spioniro Golubiro",
+rarity:"Mythic",
+income:3500
+},
+
+{
+name:"Seraphino Gruyero",
+rarity:"Legendary",
+income:1900
+},
+
+{
+name:"Buho de Fuego",
+rarity:"Legendary",
+income:1850
+},
+
+{
+name:"Electro Quacko",
+rarity:"Legendary",
+income:1850
+},
+
+{
+name:"Sealo Regalo",
+rarity:"Legendary",
+income:1820
+}
+
+];
+
+
+let selectedName = "";
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+function searchBrainrots(){
+
+const input =
+document
+.getElementById("brainrotSearch")
+.value
+.toLowerCase()
+.trim();
+
+const results =
+document.getElementById("searchResults");
+
+
+let matches;
+
+
+if(input === ""){
+
+matches = brainrots.slice(0,8);
+
+}else{
+
+matches =
+brainrots.filter(brainrot =>
+brainrot.name
+.toLowerCase()
+.includes(input)
+);
+
+}
+
+
+results.innerHTML = "";
+
+
+if(matches.length === 0){
+
+results.innerHTML =
+'<div class="search-item">' +
+'<strong>No Brainrot found</strong>' +
+'<small>You can still enter the base income manually.</small>' +
+'</div>';
+
+results.style.display = "block";
+
+return;
+
+}
+
+
+matches
+.slice(0,10)
+.forEach(brainrot => {
+
+const item =
+document.createElement("div");
+
+item.className =
+"search-item";
+
+
+item.innerHTML =
+
+"<strong>" +
+brainrot.name +
+"</strong>" +
+
+"<small>" +
+brainrot.rarity +
+" • " +
+formatMoney(brainrot.income) +
+"/s</small>";
+
+
+item.onclick =
+function(){
+
+selectBrainrot(brainrot);
+
+};
+
+
+results.appendChild(item);
 
 });
 
 
-function getMutation(){
-
-  const mutation =
-  document.getElementById("mutation").value;
-
-  if(mutation === "custom"){
-
-    const custom =
-    parseFloat(
-      document.getElementById("customMutation").value
-    );
-
-    return !isNaN(custom) ? custom : 1;
-
-  }
-
-  return parseFloat(mutation);
+results.style.display =
+"block";
 
 }
 
+
+/* ==========================================
+   SELECT BRAINROT
+========================================== */
+
+function selectBrainrot(brainrot){
+
+selectedName =
+brainrot.name;
+
+
+document
+.getElementById("brainrotSearch")
+.value =
+brainrot.name;
+
+
+document
+.getElementById("baseIncome")
+.value =
+brainrot.income;
+
+
+document
+.getElementById("searchResults")
+.style.display =
+"none";
+
+
+const selected =
+document.getElementById(
+"selectedBrainrot"
+);
+
+
+selected.style.display =
+"block";
+
+
+selected.innerHTML =
+
+"✅ Selected <strong>" +
+brainrot.name +
+"</strong><br>" +
+
+brainrot.rarity +
+" • Base income: <strong>" +
+formatMoney(brainrot.income) +
+"/second</strong>";
+
+}
+
+
+/* ==========================================
+   TRAIT BUTTONS
+========================================== */
+
+document
+.querySelectorAll(".trait")
+.forEach(button => {
+
+button.addEventListener(
+"click",
+function(event){
+
+event.preventDefault();
+
+this.classList.toggle(
+"active"
+);
+
+});
+
+});
+
+
+/* ==========================================
+   MUTATION
+========================================== */
+
+function getMutation(){
+
+const mutation =
+document
+.getElementById("mutation")
+.value;
+
+
+if(mutation === "custom"){
+
+const custom =
+parseFloat(
+document
+.getElementById("customMutation")
+.value
+);
+
+return !isNaN(custom)
+? custom
+: 1;
+
+}
+
+
+return parseFloat(mutation);
+
+}
+
+
+/* ==========================================
+   TRAITS
+========================================== */
 
 function getTraits(){
 
-  let total = 0;
-
-  document
-  .querySelectorAll(".trait.active")
-  .forEach(button => {
-
-    total +=
-    parseFloat(button.dataset.value);
-
-  });
+let total = 0;
 
 
-  const custom =
-  parseFloat(
-    document.getElementById("customTrait").value
-  );
+document
+.querySelectorAll(".trait.active")
+.forEach(button => {
 
-  if(!isNaN(custom)){
-    total += custom;
-  }
+total +=
+parseFloat(
+button.dataset.value
+);
 
-  return total;
+});
+
+
+const custom =
+parseFloat(
+document
+.getElementById("customTrait")
+.value
+);
+
+
+if(!isNaN(custom)){
+
+total += custom;
 
 }
 
+
+return total;
+
+}
+
+
+/* ==========================================
+   MONEY FORMAT
+========================================== */
 
 function formatMoney(number){
 
-  if(number >= 1e18)
-    return "$" + (number/1e18).toFixed(2) + "Qi";
+if(number >= 1e18)
+return "$" +
+(number/1e18).toFixed(2) +
+"Qi";
 
-  if(number >= 1e15)
-    return "$" + (number/1e15).toFixed(2) + "Q";
+if(number >= 1e15)
+return "$" +
+(number/1e15).toFixed(2) +
+"Q";
 
-  if(number >= 1e12)
-    return "$" + (number/1e12).toFixed(2) + "T";
+if(number >= 1e12)
+return "$" +
+(number/1e12).toFixed(2) +
+"T";
 
-  if(number >= 1e9)
-    return "$" + (number/1e9).toFixed(2) + "B";
+if(number >= 1e9)
+return "$" +
+(number/1e9).toFixed(2) +
+"B";
 
-  if(number >= 1e6)
-    return "$" + (number/1e6).toFixed(2) + "M";
+if(number >= 1e6)
+return "$" +
+(number/1e6).toFixed(2) +
+"M";
 
-  if(number >= 1e3)
-    return "$" + (number/1e3).toFixed(2) + "K";
+if(number >= 1e3)
+return "$" +
+(number/1e3).toFixed(2) +
+"K";
 
-  return "$" +
-  number.toLocaleString(undefined,{
-    maximumFractionDigits:2
-  });
+
+return "$" +
+number.toLocaleString(
+undefined,
+{
+maximumFractionDigits:2
+}
+);
 
 }
 
+
+/* ==========================================
+   TIME FORMAT
+========================================== */
 
 function formatTime(seconds){
 
-  if(seconds < 60)
-    return seconds.toFixed(1) + " seconds";
+if(seconds < 60)
+return seconds.toFixed(1) +
+" seconds";
 
-  if(seconds < 3600)
-    return (seconds/60).toFixed(1) + " minutes";
+if(seconds < 3600)
+return (seconds/60).toFixed(1) +
+" minutes";
 
-  if(seconds < 86400)
-    return (seconds/3600).toFixed(1) + " hours";
+if(seconds < 86400)
+return (seconds/3600).toFixed(1) +
+" hours";
 
-  if(seconds < 604800)
-    return (seconds/86400).toFixed(1) + " days";
+if(seconds < 604800)
+return (seconds/86400).toFixed(1) +
+" days";
 
-  if(seconds < 31536000)
-    return (seconds/604800).toFixed(1) + " weeks";
+if(seconds < 31536000)
+return (seconds/604800).toFixed(1) +
+" weeks";
 
-  return (seconds/31536000).toFixed(1) + " years";
+
+return (seconds/31536000)
+.toFixed(1) +
+" years";
 
 }
 
+
+/* ==========================================
+   CALCULATE
+========================================== */
 
 function calculateIncome(){
 
-  const base =
-  parseFloat(
-    document.getElementById("baseIncome").value
-  );
-
-  const quantity =
-  parseInt(
-    document.getElementById("quantity").value
-  ) || 1;
-
-  const cash =
-  parseFloat(
-    document.getElementById("cashMultiplier").value
-  ) || 1;
-
-  const goal =
-  parseFloat(
-    document.getElementById("goal").value
-  );
-
-  const name =
-  document.getElementById("brainrotName").value.trim()
-  || "Your Brainrot";
+const base =
+parseFloat(
+document
+.getElementById("baseIncome")
+.value
+);
 
 
-  if(isNaN(base) || base < 0){
-
-    document.getElementById("goalResult").innerHTML =
-    "⚠️ Enter a valid base income.";
-
-    return;
-
-  }
+const quantity =
+parseInt(
+document
+.getElementById("quantity")
+.value
+) || 1;
 
 
-  const mutation = getMutation();
-
-  const traits = getTraits();
-
-  const combinedMultiplier =
-  mutation + traits;
-
-
-  const perSecond =
-  base *
-  combinedMultiplier *
-  quantity *
-  cash;
+const cash =
+parseFloat(
+document
+.getElementById("cashMultiplier")
+.value
+) || 1;
 
 
-  const perMinute =
-  perSecond * 60;
-
-  const perHour =
-  perSecond * 3600;
-
-  const perDay =
-  perSecond * 86400;
+const goal =
+parseFloat(
+document
+.getElementById("goal")
+.value
+);
 
 
-  document.getElementById("second").textContent =
-  formatMoney(perSecond);
+if(isNaN(base) || base < 0){
 
-  document.getElementById("minute").textContent =
-  formatMoney(perMinute);
+document
+.getElementById("goalResult")
+.innerHTML =
 
-  document.getElementById("hour").textContent =
-  formatMoney(perHour);
+"⚠️ Select a Brainrot or enter a valid base income.";
 
-  document.getElementById("day").textContent =
-  formatMoney(perDay);
-
-
-  document.getElementById("breakdown").innerHTML =
-
-  "🧠 <strong>" + name + "</strong><br><br>" +
-
-  "Base income: <strong>" +
-  formatMoney(base) +
-  "/s</strong><br>" +
-
-  "Mutation: <strong>" +
-  mutation.toFixed(2) +
-  "x</strong><br>" +
-
-  "Trait bonuses: <strong>+" +
-  traits.toFixed(2) +
-  "x</strong><br>" +
-
-  "Combined: <strong>" +
-  combinedMultiplier.toFixed(2) +
-  "x</strong><br>" +
-
-  "Quantity: <strong>" +
-  quantity +
-  "</strong><br>" +
-
-  "Cash multiplier: <strong>" +
-  cash +
-  "x</strong>";
-
-
-  if(!isNaN(goal) && goal > 0 && perSecond > 0){
-
-    const secondsNeeded =
-    goal / perSecond;
-
-    document.getElementById("goalResult").innerHTML =
-
-    "🎯 At <strong>" +
-    formatMoney(perSecond) +
-    "/second</strong>, you'll reach <strong>" +
-    formatMoney(goal) +
-    "</strong> in approximately <strong>" +
-    formatTime(secondsNeeded) +
-    "</strong>.";
-
-  }
-
-  else{
-
-    document.getElementById("goalResult").innerHTML =
-    "💡 Add a money goal above to calculate how long it will take.";
-
-  }
+return;
 
 }
+
+
+const mutation =
+getMutation();
+
+
+const traits =
+getTraits();
+
+
+const combined =
+mutation + traits;
+
+
+const perSecond =
+base *
+combined *
+quantity *
+cash;
+
+
+const perMinute =
+perSecond * 60;
+
+
+const perHour =
+perSecond * 3600;
+
+
+const perDay =
+perSecond * 86400;
+
+
+document
+.getElementById("second")
+.textContent =
+formatMoney(perSecond);
+
+
+document
+.getElementById("minute")
+.textContent =
+formatMoney(perMinute);
+
+
+document
+.getElementById("hour")
+.textContent =
+formatMoney(perHour);
+
+
+document
+.getElementById("day")
+.textContent =
+formatMoney(perDay);
+
+
+const displayName =
+selectedName ||
+document
+.getElementById("brainrotSearch")
+.value ||
+"Custom Brainrot";
+
+
+document
+.getElementById("breakdown")
+.innerHTML =
+
+"🧠 <strong>" +
+displayName +
+"</strong><br><br>" +
+
+"Base income: <strong>" +
+formatMoney(base) +
+"/s</strong><br>" +
+
+"Mutation: <strong>" +
+mutation.toFixed(2) +
+"x</strong><br>" +
+
+"Trait bonuses: <strong>+" +
+traits.toFixed(2) +
+"x</strong><br>" +
+
+"Combined modifier: <strong>" +
+combined.toFixed(2) +
+"x</strong><br>" +
+
+"Quantity: <strong>" +
+quantity +
+"</strong><br>" +
+
+"Cash multiplier: <strong>" +
+cash +
+"x</strong>";
+
+
+if(
+!isNaN(goal) &&
+goal > 0 &&
+perSecond > 0
+){
+
+const secondsNeeded =
+goal / perSecond;
+
+
+document
+.getElementById("goalResult")
+.innerHTML =
+
+"🎯 At <strong>" +
+formatMoney(perSecond) +
+"/second</strong>, you reach <strong>" +
+formatMoney(goal) +
+"</strong> in approximately <strong>" +
+formatTime(secondsNeeded) +
+"</strong>.";
+
+}else{
+
+document
+.getElementById("goalResult")
+.innerHTML =
+
+"💡 Add a money goal to see how long it will take.";
+
+}
+
+}
+
+
+/* CLOSE SEARCH WHEN CLICKING ELSEWHERE */
+
+document.addEventListener(
+"click",
+function(event){
+
+if(
+!event.target.closest(
+".search-wrap"
+)
+){
+
+document
+.getElementById(
+"searchResults"
+)
+.style.display =
+"none";
+
+}
+
+});
 
 </script>
 
