@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Steal a Brainrot Database - Income & Stats | BloxTools</title>
+
+<meta name="description"
+content="Search the BloxTools Steal a Brainrot database. Browse Brainrots by name and rarity and check base income, stats and calculators.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical"
+href="https://jamesworksonline.github.io/bloxtools/brainrots.html">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#0b0d12;
+color:white;
+min-height:100vh;
+}
+
+nav{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 8%;
+border-bottom:1px solid #252936;
+background:#10131a;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+color:white;
+text-decoration:none;
+}
+
+.logo span{
+color:#7c5cff;
+}
+
+nav a{
+color:#b8bdca;
+text-decoration:none;
+margin-left:22px;
+font-size:14px;
+}
+
+main{
+width:min(1100px,90%);
+margin:auto;
+padding:70px 0 100px;
+}
+
+.badge{
+display:inline-block;
+background:#171b25;
+border:1px solid #303648;
+padding:8px 14px;
+border-radius:100px;
+color:#a996ff;
+font-size:13px;
+margin-bottom:20px;
+}
+
+h1{
+font-size:clamp(38px,6vw,62px);
+margin-bottom:18px;
+}
+
+.intro{
+color:#9ba2b1;
+font-size:17px;
+line-height:1.6;
+max-width:700px;
+margin-bottom:35px;
+}
+
+.controls{
+display:flex;
+gap:12px;
+margin-bottom:30px;
+flex-wrap:wrap;
+}
+
+.search{
+flex:1;
+min-width:240px;
+padding:16px 18px;
+background:#12151d;
+border:1px solid #303645;
+border-radius:10px;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+.search:focus{
+border-color:#7c5cff;
+}
+
+select{
+padding:16px;
+background:#12151d;
+border:1px solid #303645;
+border-radius:10px;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+.results{
+color:#858d9d;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
+}
+
+.card{
+background:#12151d;
+border:1px solid #292e3b;
+border-radius:16px;
+padding:24px;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:#7c5cff;
+}
+
+.rarity{
+display:inline-block;
+padding:5px 9px;
+border-radius:100px;
+font-size:11px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.og{
+background:#3a1830;
+color:#ff8fc8;
+}
+
+.secret{
+background:#271d42;
+color:#bba6ff;
+}
+
+.god{
+background:#3c3015;
+color:#ffd86b;
+}
+
+.mythic{
+background:#381b28;
+color:#ff91b4;
+}
+
+.legendary{
+background:#3b2c13;
+color:#ffc760;
+}
+
+.icon{
+font-size:38px;
+margin-bottom:14px;
+}
+
+.card h2{
+font-size:21px;
+margin-bottom:10px;
+}
+
+.income-label{
+color:#858d9d;
+font-size:12px;
+margin-top:15px;
+}
+
+.income{
+font-size:20px;
+font-weight:bold;
+color:#72e6a5;
+margin-top:4px;
+}
+
+.card a{
+display:inline-block;
+margin-top:20px;
+color:#9c87ff;
+text-decoration:none;
+font-weight:bold;
+}
+
+.card a:hover{
+color:white;
+}
+
+.no-results{
+display:none;
+background:#12151d;
+border:1px solid #292e3b;
+padding:30px;
+border-radius:14px;
+color:#9ba2b1;
+text-align:center;
+}
+
+footer{
+border-top:1px solid #252936;
+padding:30px;
+text-align:center;
+color:#747b89;
+font-size:13px;
+}
+
+@media(max-width:600px){
+
+nav{
+padding:0 5%;
+}
+
+nav .links a{
+margin-left:10px;
+}
+
+main{
+padding-top:45px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a class="logo" href="index.html">
+Blox<span>Tools</span>
+</a>
+
+<div class="links">
+<a href="index.html">Home</a>
+<a href="brainrot-income.html">Calculator</a>
+</div>
+
+</nav>
+
+<main>
+
+<div class="badge">
+🧠 STEAL A BRAINROT DATABASE
+</div>
+
+<h1>Brainrot Database</h1>
+
+<p class="intro">
+Search Steal a Brainrot characters and quickly check
+their rarity and listed base income. More Brainrots
+and individual stat pages will be added over time.
+</p>
+
+
+<div class="controls">
+
+<input
+id="search"
+class="search"
+type="text"
+placeholder="Search Brainrots..."
+oninput="filterBrainrots()"
+>
+
+<select id="rarity" onchange="filterBrainrots()">
+
+<option value="all">All Rarities</option>
+<option value="OG">OG</option>
+<option value="Secret">Secret</option>
+<option value="Brainrot God">Brainrot God</option>
+<option value="Mythic">Mythic</option>
+<option value="Legendary">Legendary</option>
+
+</select>
+
+</div>
+
+
+<div class="results" id="results"></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="no-results" id="noResults">
+No Brainrots found. Try another search.
+</div>
+
+</main>
+
+
+<footer>
+BloxTools is an independent fan-made website and is not
+affiliated with Roblox or the creators of Steal a Brainrot.
+</footer>
+
+
+<script>
+
+const brainrots = [
+
+{
+name:"Spyder Elephant",
+rarity:"OG",
+income:1000000000,
+icon:"🕷️🐘",
+page:"spyder-elephant.html"
+},
+
+{
+name:"Strawberry Elephant",
+rarity:"OG",
+income:750000000,
+icon:"🍓🐘",
+page:"strawberry-elephant.html"
+},
+
+{
+name:"Headless Horseman",
+rarity:"OG",
+income:600000000,
+icon:"🎃🐎",
+page:""
+},
+
+{
+name:"Meowl",
+rarity:"OG",
+income:600000000,
+icon:"🐱",
+page:""
+},
+
+{
+name:"John Pork",
+rarity:"OG",
+income:500000000,
+icon:"🐷",
+page:""
+},
+
+{
+name:"Skibidi Toilet",
+rarity:"OG",
+income:450000000,
+icon:"🚽",
+page:""
+},
+
+{
+name:"Celestial Pegasus",
+rarity:"Secret",
+income:175000000,
+icon:"🪽",
+page:""
+},
+
+{
+name:"La Secret Combinasion",
+rarity:"Secret",
+income:125000000,
+icon:"❓",
+page:""
+},
+
+{
+name:"Spaghetti Tualetti",
+rarity:"Secret",
+income:60000000,
+icon:"🍝",
+page:""
+},
+
+{
+name:"Esok Sekolah",
+rarity:"Secret",
+income:30000000,
+icon:"🎒",
+page:""
+},
+
+{
+name:"Pot Hotspot",
+rarity:"Secret",
+income:2500000,
+icon:"🍲",
+page:""
+},
+
+{
+name:"Las Vaquitas Saturnitas",
+rarity:"Secret",
+income:750000,
+icon:"🐄",
+page:""
+},
+
+{
+name:"Torrtuginni Dragonfrutini",
+rarity:"Secret",
+income:350000,
+icon:"🐢",
+page:""
+},
+
+{
+name:"Pop Pop Sahur",
+rarity:"Brainrot God",
+income:295000,
+icon:"🥁",
+page:""
+},
+
+{
+name:"Mastodontico Telepiedone",
+rarity:"Brainrot God",
+income:275000,
+icon:"🐘",
+page:""
+},
+
+{
+name:"Bulbito Bandito Traktorito",
+rarity:"Brainrot God",
+income:205000,
+icon:"🚜",
+page:""
+},
+
+{
+name:"Orcalero Orcala",
+rarity:"Brainrot God",
+income:100000,
+icon:"🐋",
+page:""
+},
+
+{
+name:"Tigroligre Frutonni",
+rarity:"Brainrot God",
+income:60000,
+icon:"🐯",
+page:""
+},
+
+{
+name:"Bananito Bandito",
+rarity:"Mythic",
+income:16500,
+icon:"🍌",
+page:""
+},
+
+{
+name:"Carrotini Brainini",
+rarity:"Mythic",
+income:15000,
+icon:"🥕",
+page:""
+},
+
+{
+name:"Tigrilini Watermelini",
+rarity:"Mythic",
+income:6500,
+icon:"🍉",
+page:""
+},
+
+{
+name:"Zibra Zubra Zibralini",
+rarity:"Mythic",
+income:6000,
+icon:"🦓",
+page:""
+},
+
+{
+name:"Spioniro Golubiro",
+rarity:"Mythic",
+income:3500,
+icon:"🕵️",
+page:""
+},
+
+{
+name:"Seraphino Gruyero",
+rarity:"Legendary",
+income:1900,
+icon:"🧀",
+page:""
+},
+
+{
+name:"Buho de Fuego",
+rarity:"Legendary",
+income:1850,
+icon:"🔥🦉",
+page:""
+},
+
+{
+name:"Electro Quacko",
+rarity:"Legendary",
+income:1850,
+icon:"⚡🦆",
+page:""
+},
+
+{
+name:"Sealo Regalo",
+rarity:"Legendary",
+income:1820,
+icon:"🦭",
+page:""
+}
+
+];
+
+
+function formatMoney(number){
+
+if(number >= 1000000000){
+return "$" + (number / 1000000000).toFixed(2)
+.replace(/\.00$/,"") + "B/sec";
+}
+
+if(number >= 1000000){
+return "$" + (number / 1000000).toFixed(2)
+.replace(/\.00$/,"") + "M/sec";
+}
+
+if(number >= 1000){
+return "$" + (number / 1000).toFixed(2)
+.replace(/\.00$/,"") + "K/sec";
+}
+
+return "$" + number.toLocaleString() + "/sec";
+
+}
+
+
+function rarityClass(rarity){
+
+if(rarity === "OG") return "og";
+
+if(rarity === "Secret") return "secret";
+
+if(rarity === "Brainrot God") return "god";
+
+if(rarity === "Mythic") return "mythic";
+
+if(rarity === "Legendary") return "legendary";
+
+return "";
+
+}
+
+
+function renderBrainrots(list){
+
+const grid = document.getElementById("grid");
+const noResults = document.getElementById("noResults");
+const results = document.getElementById("results");
+
+grid.innerHTML = "";
+
+results.textContent =
+list.length + " Brainrot" +
+(list.length === 1 ? "" : "s") +
+" found";
+
+
+if(list.length === 0){
+
+noResults.style.display = "block";
+return;
+
+}
+
+noResults.style.display = "none";
+
+
+list.forEach(brainrot => {
+
+const card = document.createElement("div");
+
+card.className = "card";
+
+
+let link = "";
+
+if(brainrot.page){
+
+link =
+'<a href="' +
+brainrot.page +
+'">View Income & Stats →</a>';
+
+}else{
+
+link =
+'<a href="brainrot-income.html">Calculate Income →</a>';
+
+}
+
+
+card.innerHTML = `
+
+<div class="rarity ${rarityClass(brainrot.rarity)}">
+${brainrot.rarity}
+</div>
+
+<div class="icon">
+${brainrot.icon}
+</div>
+
+<h2>
+${brainrot.name}
+</h2>
+
+<div class="income-label">
+BASE INCOME
+</div>
+
+<div class="income">
+${formatMoney(brainrot.income)}
+</div>
+
+${link}
+
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+function filterBrainrots(){
+
+const search =
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+const rarity =
+document.getElementById("rarity").value;
+
+
+const filtered = brainrots.filter(brainrot => {
+
+const matchesSearch =
+brainrot.name
+.toLowerCase()
+.includes(search);
+
+const matchesRarity =
+rarity === "all" ||
+brainrot.rarity === rarity;
+
+return matchesSearch && matchesRarity;
+
+});
+
+
+renderBrainrots(filtered);
+
+}
+
+
+renderBrainrots(brainrots);
+
+</script>
+
+</body>
+</html>
