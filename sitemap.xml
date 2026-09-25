@@ -56,4 +56,34 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/headless-horseman.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/john-pork.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/skibidi-toilet.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/celestial-pegasus.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jamesworksonline.github.io/bloxtools/la-secret-combinasion.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
